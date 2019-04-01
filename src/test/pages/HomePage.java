@@ -22,22 +22,20 @@ public class HomePage extends BasePage {
     }
 
     public void signIn(User user) {
-        sendKeys(this.username, user.getUsername());
-        sendKeys(this.password, user.getPassword());
-        click(this.submit);
+        getElement(this.username).sendKeys(user.getUsername());
+        getElement(this.password).sendKeys(user.getPassword());
+        getElement(this.submit).click();
     }
 
-    // Getters are for the Imperative example; you shouldn't need to have getters on elements
+
+    // These are here for previous exercises
     public WebElement getUsername() {
-        return driver.findElement(this.username);
+        return driver.findElement(By.id("user-name"));
     }
-
     public WebElement getPassword() {
-        return driver.findElement(this.password);
+        return driver.findElement(By.id("password"));
     }
-
     public WebElement getSubmit() {
-        return driver.findElement(this.submit);
+        return driver.findElement(By.className("btn_action"));
     }
-
 }
