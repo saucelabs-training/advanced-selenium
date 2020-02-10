@@ -11,6 +11,13 @@ public class User {
         return user;
     }
 
+    public static User locked_out() {
+        User user = new User();
+        user.username = "standard_user";
+        user.password = "secret_sauce";
+        return user;
+    }
+
     public String getUsername() {
         return username;
     }
