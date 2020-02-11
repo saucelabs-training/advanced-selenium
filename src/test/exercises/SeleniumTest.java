@@ -1,13 +1,13 @@
 package test.exercises;
 
-import test.base.Base;
+import test.base.SauceBase;
 import org.openqa.selenium.By;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class SeleniumTest extends Base {
+class SeleniumTest extends SauceBase {
 
     @Test
     @DisplayName("Basic Test")
