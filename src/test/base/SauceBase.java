@@ -1,6 +1,6 @@
 package test.base;
 
-import test.extensions.StdoutTestWatcher;
+import test.extensions.SauceTestWatcher;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -8,14 +8,16 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestInfo;
-import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.api.extension.RegisterExtension;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
-@ExtendWith(StdoutTestWatcher.class)
 public class SauceBase {
     protected WebDriver driver;
+
+    @RegisterExtension
+    static SauceTestWatcher testWatcher = new SauceTestWatcher();
 
     private static String username = "yourusername";
     private static String accessKey = "00000000-0000-0000-0000-000000000000";
@@ -37,12 +39,8 @@ public class SauceBase {
 
         driver = new RemoteWebDriver(url, browserOptions);
 
+        testWatcher.setDriver(driver);
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-    }
-
-    @AfterEach
-    public void teardown() {
-        driver.quit();
     }
 
     private static String getUsername() {
