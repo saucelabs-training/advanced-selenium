@@ -23,6 +23,10 @@ public class SauceBase {
     @BeforeEach
     public void setup(TestInfo testInfo) throws MalformedURLException {
         MutableCapabilities sauceOptions = new MutableCapabilities();
+        sauceOptions.setCapability("name", testInfo.getDisplayName());
+        sauceOptions.setCapability("build", "Sauce Day Charlotte Example: 1");
+        sauceOptions.setCapability("extendedDebugging", true);
+        sauceOptions.setCapability("capturePerformance", true);
 
         ChromeOptions browserOptions = new ChromeOptions();
         browserOptions.setCapability("platformName", "Windows 10");
