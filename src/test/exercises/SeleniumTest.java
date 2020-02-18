@@ -1,7 +1,7 @@
 package test.exercises;
 
-import org.openqa.selenium.By;
 import test.base.Base;
+import org.openqa.selenium.By;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -18,5 +18,9 @@ class SeleniumTest extends Base {
         driver.findElement(By.id("user-name")).sendKeys(email);
         driver.findElement(By.id("password")).sendKeys(password);
         driver.findElement(By.className("btn_action")).click();
+
+        // Add an assertion to make this a Test
+
+
     }
 }
