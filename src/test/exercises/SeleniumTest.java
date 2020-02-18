@@ -5,6 +5,8 @@ import org.openqa.selenium.By;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 class SeleniumTest extends Base {
 
     @Test
@@ -21,6 +23,6 @@ class SeleniumTest extends Base {
 
         // Add an assertion to make this a Test
 
-
+        assertEquals("https://www.saucedemo.com/inventory.html", driver.getCurrentUrl());
     }
 }
