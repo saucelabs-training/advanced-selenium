@@ -23,16 +23,16 @@ class LocateElement extends Base {
 
         // Fill in the correct String values to find the Zip Code field using each of the advanced methods discussed
 
-        String cssDescendant = "";
-        String cssDirectChild = "";
-        String cssLastChild = "";
-        String cssChildFromEnd = "";
-        String cssChildFromBeginning = "";
-        String cssAttributeStartsWith = "";
-        String cssAttributeEndsWith = "";
-        String cssAttributeContains = "";
-        String cssNextSibling = "";
-        String cssSubsequentSibling = "";
+        String cssDescendant = "#checkout_info_container #postal-code";
+        String cssDirectChild = ".checkout_info > #postal-code";
+        String cssLastChild = "input:last-child";
+        String cssChildFromEnd = "input:nth-last-child(1)";
+        String cssChildFromBeginning = "input:nth-child(3)";
+        String cssAttributeStartsWith = "[data-test^=post]";
+        String cssAttributeEndsWith = "[data-test$=ode]";
+        String cssAttributeContains = "[data-test*=alC]";
+        String cssNextSibling = "[data-test=lastName] + [data-test=postalCode]";
+        String cssSubsequentSibling = "[data-test=firstName] ~ [data-test=postalCode]";
 
 
 
