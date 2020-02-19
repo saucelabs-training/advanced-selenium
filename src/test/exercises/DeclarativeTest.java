@@ -30,5 +30,12 @@ class DeclarativeTest extends Base {
     @Test
     @DisplayName("Declarative Example of Locked Out User")
     void lockedOutUserCanNotLogInDeclarative() {
+        HomePage homePage = HomePage.visit(driver);
+        User user = User.locked_out();
+
+        homePage.signIn(user);
+
+        InventoryPage inventoryPage = new InventoryPage(driver);
+        assertFalse(inventoryPage.onPage());
     }
 }
