@@ -1,5 +1,6 @@
 package test.exercises;
 
+import org.junit.jupiter.api.Assertions;
 import test.base.Base;
 import test.data.Person;
 import test.pages.CartPage;
@@ -15,11 +16,12 @@ public class UserInformationTest extends Base {
         InformationPage page = InformationPage.visit(driver);
 
         // Use the Beverly Hills Person
-        Person person = new Person();
+        Person person = Person.beverlyHills();
 
         page.provideInformation(person);
 
         // Assert on the Cart Page
-
+        CartPage cartPage = new CartPage(driver);
+        Assertions.assertTrue(cartPage.onPage());
     }
 }
