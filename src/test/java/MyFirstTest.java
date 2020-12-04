@@ -5,12 +5,12 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
     public class MyFirstTest {
-        int answer;
+        MyNumbers numbers = new MyNumbers();
 
         @Test
         public void canAddTwoPlusTwo() {
-            answer = add(2, 2);
-            assertEquals("2+2=4", 4, answer);
+            numbers.setAnswer(add(2, 2));
+            assertEquals("2+2=4", 4, numbers.getAnswer());
         }
 
         public int add(int first, int second) {
@@ -20,8 +20,8 @@ import static org.junit.Assert.assertEquals;
         // Exercise: Write Test to subtract 2 from 2
         @Test
         public void canSubtractTwoFromTwo() {
-            answer = 2-2;
-            assertEquals("2-2=0", 0, answer);
+            numbers.setAnswer(2-2);
+            assertEquals("2-2=0", 0, numbers.getAnswer());
         }
 
     }
