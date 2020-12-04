@@ -15,10 +15,10 @@ public class ExerciseBaisicLocatorTest extends SauceTestBase {
         // Locate User Name Text Field
 
         // ID
-        WebElement element1 = driver.findElement(By.id(""));
+        WebElement element1 = driver.findElement(By.id("password"));
 
         // Name
-        WebElement element2 = driver.findElement(By.name(""));
+        WebElement element2 = driver.findElement(By.name("password"));
 
 
         Assert.assertTrue(validPassword(element1));
@@ -32,10 +32,10 @@ public class ExerciseBaisicLocatorTest extends SauceTestBase {
         // Locate Black T-Shirt Link
 
         // Link Text
-        WebElement element1 = driver.findElement(By.linkText(""));
+        WebElement element1 = driver.findElement(By.linkText("Sauce Labs Bolt T-Shirt"));
 
         // Partial Link Text
-        WebElement element2 = driver.findElement(By.partialLinkText(""));
+        WebElement element2 = driver.findElement(By.partialLinkText("Bolt"));
 
 
         Assert.assertTrue(validBlackShirt(element1));
@@ -49,10 +49,10 @@ public class ExerciseBaisicLocatorTest extends SauceTestBase {
         // Locate Element For Adding Bike Light to the cart
 
         // Class Name
-        WebElement element1 = driver.findElements(By.className("")).get(0);
+        WebElement element1 = driver.findElements(By.className("btn_inventory")).get(1);
 
         // Tag Name
-        WebElement element2 = driver.findElements(By.tagName("")).get(0);
+        WebElement element2 = driver.findElements(By.tagName("button")).get(3);
 
 
         Assert.assertTrue(validLight(element1));
