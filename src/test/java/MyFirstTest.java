@@ -13,5 +13,10 @@ public class MyFirstTest {
     }
 
     // Exercise: Write Test to subtract 2 from 2
+    @Test
+    public void canSubtractTwoFromTwo() {
+        int answer = 2-2;
+        assertEquals("2-2=0", 0, answer);
+    }
 
 }
