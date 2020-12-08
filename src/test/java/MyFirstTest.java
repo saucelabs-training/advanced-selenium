@@ -9,20 +9,27 @@ import static org.junit.Assert.assertEquals;
 
         @Test
         public void canAddTwoPlusTwo() {
-            numbers.setAnswer(add(2, 2));
+            Integer result = operate("add", 2, 2);
+            numbers.setAnswer(result);
             assertEquals("2+2=4", 4, numbers.getAnswer());
-        }
-
-        public int add(int first, int second) {
-            return first + second;
         }
 
         // Exercise: Write Test to subtract 2 from 2
         @Test
         public void canSubtractTwoFromTwo() {
-            numbers.setAnswer(2-2);
+            Integer result = operate("subtract", 2, 2);
+            numbers.setAnswer(result);
             assertEquals("2-2=0", 0, numbers.getAnswer());
         }
 
+        public Integer operate(String operation, int first, int second) {
+            if ("add".equals(operation)) {
+                return first + second;
+            } else if ("subtract".equals(operation)) {
+                return first - second;
+            } else {
+                return null;
+            }
+        }
     }
 
