@@ -13,7 +13,7 @@ public class ExerciseCSSBasicsTest extends SauceTestBase {
         driver.get("http://watir.com/examples/forms_with_input_elements.html");
 
         // Locate the Reset Button by ID
-        WebElement element = driver.findElement(By.cssSelector(""));
+        WebElement element = driver.findElement(By.cssSelector("#new_user_reset"));
 
         Assert.assertTrue(validResetButton(element));
     }
@@ -23,7 +23,7 @@ public class ExerciseCSSBasicsTest extends SauceTestBase {
         driver.get("http://watir.com/examples/forms_with_input_elements.html");
 
         // Locate Developer Text Field by class Name
-        WebElement element = driver.findElement(By.cssSelector(""));
+        WebElement element = driver.findElement(By.cssSelector(".c"));
 
         Assert.assertTrue(validDeveloperField(element));
     }
@@ -33,7 +33,7 @@ public class ExerciseCSSBasicsTest extends SauceTestBase {
         driver.get("http://watir.com/examples/forms_with_input_elements.html");
 
         // Locate Element with id "there" using multiple class names
-        WebElement element = driver.findElement(By.cssSelector(""));
+        WebElement element = driver.findElement(By.cssSelector(".multiple.there"));
 
         Assert.assertTrue(validMultipleTwo(element));
     }
@@ -43,7 +43,7 @@ public class ExerciseCSSBasicsTest extends SauceTestBase {
         driver.get("http://watir.com/examples/forms_with_input_elements.html");
 
         // Locate the New User Form by Tag Name
-        WebElement element = driver.findElement(By.cssSelector(""));
+        WebElement element = driver.findElement(By.cssSelector("form"));
 
         Assert.assertTrue(validNewUserForm(element));
     }
@@ -53,7 +53,7 @@ public class ExerciseCSSBasicsTest extends SauceTestBase {
         driver.get("http://watir.com/examples/forms_with_input_elements.html");
 
         // Locate Developer Text Field by data- attribute
-        WebElement element = driver.findElement(By.cssSelector(""));
+        WebElement element = driver.findElement(By.cssSelector("[data-locator=dev]"));
 
         Assert.assertTrue(validDeveloperField(element));
     }
@@ -63,7 +63,7 @@ public class ExerciseCSSBasicsTest extends SauceTestBase {
         driver.get("http://watir.com/examples/forms_with_input_elements.html");
 
         // Locate Personal Code Text Field with Multiple Attributes
-        WebElement element = driver.findElement(By.cssSelector(""));
+        WebElement element = driver.findElement(By.cssSelector("[name=new_user_code][readonly=readonly]"));
 
         Assert.assertTrue(validPersonalCode(element));
     }
@@ -73,7 +73,7 @@ public class ExerciseCSSBasicsTest extends SauceTestBase {
         driver.get("http://watir.com/examples/forms_with_input_elements.html");
 
         // Locate Portrait file upload button with multiple locators (id, class, name attribute & title attribute
-        String locator = "";
+        String locator = "input#new_user_portrait.portrait[name=new_user_portrait][title='Smile!']";
         WebElement element = driver.findElement(By.cssSelector(locator));
 
         Assert.assertTrue(validPortraitInput(element));
@@ -95,7 +95,7 @@ public class ExerciseCSSBasicsTest extends SauceTestBase {
     }
 
     private boolean validNewUserForm(WebElement element) {
-        return "post_to_me".equals(element.getAttribute("action"));
+        return "post".equals(element.getAttribute("method"));
     }
 
     private boolean validPortraitInput(WebElement element) {
