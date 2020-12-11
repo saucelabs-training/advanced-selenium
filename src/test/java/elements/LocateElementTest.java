@@ -59,6 +59,19 @@ public class LocateElementTest extends SauceTestBase {
         Assert.assertTrue(validAddOnesie(element2));
     }
 
+    @Test
+    public void nestedElements() {
+        driver.get("https://www.saucedemo.com/inventory.html");
+
+        // Get the Price Bar Div for the Onesie
+        WebElement parentElement = driver.findElements(By.className("pricebar")).get(4);
+
+        // Find the button element nested under the pricebar
+        WebElement element = parentElement.findElement(By.tagName("button"));
+
+        Assert.assertTrue(validAddOnesie(element));
+    }
+
 
     // Ignore The following validations:
 
