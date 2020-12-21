@@ -1,7 +1,6 @@
 package test.java;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.rules.TestWatcher;
@@ -22,22 +21,36 @@ public class LocalTestBase {
         ChromeOptions chromeOptions = new ChromeOptions();
 
         driver = new ChromeDriver(chromeOptions);
-    }
-
-    @After
-    public void shutDown() {
-        driver.quit();
+        localTestWatcher.setDriver(driver);
     }
 
     private static class LocalTestWatcher extends TestWatcher {
+        private RemoteWebDriver driver;
+
         @Override
         protected void failed(Throwable e, Description description) {
             System.out.println("Failed :(");
+            try {
+                doSomethingWithResults(description);
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+            driver.quit();
         }
 
         @Override
         protected void succeeded(Description description) {
             System.out.println("Passed! :) :)");;
+            driver.quit();
+        }
+
+        public void setDriver(RemoteWebDriver driver) {
+            this.driver = driver;
+        }
+
+        private void doSomethingWithResults(Description description) throws Exception {
+            // Something that might fail
         }
     }
 }
+
