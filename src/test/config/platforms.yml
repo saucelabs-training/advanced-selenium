@@ -1,0 +1,27 @@
+windows_10_chrome:
+  chrome:
+    args:
+     - "start-fullscreen"
+  sauce:
+    idleTimeout: 100
+  browserName: chrome
+  platformName: Windows 10
+  browserVersion: latest
+windows_10_edge:
+  sauce:
+    idleTimeout: 100
+  browserName: edge
+  platformName: Windows 10
+  browserVersion: '18.17763'
+mac_mojave_safari:
+  sauce:
+    idleTimeout: 100
+  browserName: safari
+  platformName: macOS 10.14
+  browserVersion: '12.0'
+windows_7_firefox:
+  sauce:
+    timeZone: 'Alaska'
+  browserName: firefox
+  platformName: Windows 7
+  browserVersion: '60.0'
