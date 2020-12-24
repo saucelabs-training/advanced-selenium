@@ -9,6 +9,7 @@ import org.junit.rules.TestWatcher;
 import org.junit.runner.Description;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import test.java.pages.BasePage;
 
 public class SauceTestBase {
     public RemoteWebDriver driver = null;
@@ -34,6 +35,7 @@ public class SauceTestBase {
         session = new SauceSession(sauceOptions);
         sauceTestWatcher.setSession(session);
         driver = session.start();
+        BasePage.setDriver(driver);
     }
 
     private static class SauceTestWatcher extends TestWatcher {

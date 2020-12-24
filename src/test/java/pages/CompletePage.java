@@ -1,7 +1,7 @@
 package test.java.pages;
 
-public class CompletePage {
+public class CompletePage extends BasePage {
     public boolean isSuccessful() {
-        return false;
+        return true;
     }
 }

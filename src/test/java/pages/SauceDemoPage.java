@@ -2,7 +2,7 @@ package test.java.pages;
 
 import test.java.data.User;
 
-public class SauceDemoPage {
+public class SauceDemoPage extends BasePage {
     public static SauceDemoPage visit() {
         return new SauceDemoPage();
     }

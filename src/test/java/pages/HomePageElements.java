@@ -1,19 +1,12 @@
 package test.java.pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class HomePageElements {
-    private static WebDriver driver;
-
+public class HomePageElements extends BasePage {
     private static final By USERNAME = By.id("user-name");
     private static final By PASSWORD = By.id("password");
     private static final By SUBMIT = By.id("login-button");
-
-    public HomePageElements(WebDriver driver) {
-        HomePageElements.driver = driver;
-    }
 
     public WebElement getUsername() {
         return driver.findElement(USERNAME);

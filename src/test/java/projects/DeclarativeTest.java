@@ -14,7 +14,7 @@ public class DeclarativeTest extends SauceTestBase {
         SauceDemoPage sauceDemoPage = SauceDemoPage.visit();
         sauceDemoPage.login(User.valid());
 
-        InventoryPage inventoryPage = new InventoryPage(driver);
+        InventoryPage inventoryPage = new InventoryPage();
         Assert.assertTrue(inventoryPage.isOnPage());
     }
 }

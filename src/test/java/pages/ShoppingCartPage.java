@@ -1,6 +1,6 @@
 package test.java.pages;
 
-public class ShoppingCartPage {
+public class ShoppingCartPage extends BasePage {
     public void checkOut() {
     }
 }

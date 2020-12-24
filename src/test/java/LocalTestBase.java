@@ -8,6 +8,7 @@ import org.junit.runner.Description;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import test.java.pages.BasePage;
 
 public class LocalTestBase {
     public RemoteWebDriver driver = null;
@@ -21,12 +22,10 @@ public class LocalTestBase {
         ChromeOptions chromeOptions = new ChromeOptions();
 
         driver = new ChromeDriver(chromeOptions);
-        localTestWatcher.setDriver(driver);
+        BasePage.setDriver(driver);
     }
 
     private static class LocalTestWatcher extends TestWatcher {
-        private RemoteWebDriver driver;
-
         @Override
         protected void failed(Throwable e, Description description) {
             System.out.println("Failed :(");
@@ -35,17 +34,13 @@ public class LocalTestBase {
             } catch (Exception exception) {
                 exception.printStackTrace();
             }
-            driver.quit();
+            BasePage.getDriver().quit();
         }
 
         @Override
         protected void succeeded(Description description) {
-            System.out.println("Passed! :) :)");;
-            driver.quit();
-        }
-
-        public void setDriver(RemoteWebDriver driver) {
-            this.driver = driver;
+            System.out.println("Passed! :) :)");
+            BasePage.getDriver().quit();
         }
 
         private void doSomethingWithResults(Description description) throws Exception {

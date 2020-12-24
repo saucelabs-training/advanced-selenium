@@ -1,6 +1,6 @@
 package test.java.pages;
 
-public class InformationPage {
+public class InformationPage extends BasePage {
     public void addInformation() {
     }
 }

@@ -1,6 +1,6 @@
 package test.java.pages;
 
-public class OverviewPage {
+public class OverviewPage extends BasePage {
     public void finish() {
     }
 }

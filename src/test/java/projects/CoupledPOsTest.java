@@ -2,18 +2,18 @@ package test.java.projects;
 
 import org.junit.Assert;
 import org.junit.Test;
-import test.java.LocalTestBase;
+import test.java.SauceTestBase;
 import test.java.pages.*;
 
-public class CoupledPOsTest extends LocalTestBase {
+public class CoupledPOsTest extends SauceTestBase {
 
     @Test
     public void decoupled() {
-        HomePage homePage = new HomePage(driver);
+        HomePage homePage = new HomePage();
         homePage.navigateTo();
         homePage.login("standard_user", "secret_sauce");
 
-        InventoryPage inventoryPage = new InventoryPage(driver);
+        InventoryPage inventoryPage = new InventoryPage();
         inventoryPage.selectProduct("Sauce Labs Bolt T-Shirt");
         inventoryPage.selectProduct("Sauce Labs Fleece Jacket");
         inventoryPage.navigateToShoppingCart();

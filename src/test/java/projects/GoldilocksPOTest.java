@@ -33,7 +33,7 @@ public class GoldilocksPOTest extends SauceTestBase {
     public void imperativeLogin() {
         driver.get("https://www.saucedemo.com/");
 
-        HomePageElements homePageElements = new HomePageElements(driver);
+        HomePageElements homePageElements = new HomePageElements();
         homePageElements.getUsername().sendKeys("standard_user");
         homePageElements.getPassword().sendKeys("secret_sauce");
         homePageElements.getSubmit().click();
@@ -44,7 +44,7 @@ public class GoldilocksPOTest extends SauceTestBase {
 
     @Test
     public void singleResponsibilityLogin() {
-        HomePageMethods homePageMethods = new HomePageMethods(driver);
+        HomePageMethods homePageMethods = new HomePageMethods();
         homePageMethods.navigateTo();
         InventoryPage inventoryPage = homePageMethods
                 .login("standard_user", "secret_sauce");
@@ -54,11 +54,11 @@ public class GoldilocksPOTest extends SauceTestBase {
 
     @Test
     public void justRightLogin() {
-        HomePage homePage = new HomePage(driver);
+        HomePage homePage = new HomePage();
         homePage.navigateTo();
         homePage.login("standard_user", "secret_sauce");
 
-        InventoryPage inventoryPage = new InventoryPage(driver);
+        InventoryPage inventoryPage = new InventoryPage();
         Assert.assertTrue(inventoryPage.isOnPage());
     }
 }
