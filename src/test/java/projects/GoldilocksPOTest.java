@@ -56,9 +56,9 @@ public class GoldilocksPOTest extends SauceTestBase {
     public void justRightLogin() {
         HomePage homePage = new HomePage(driver);
         homePage.navigateTo();
-        InventoryPage inventoryPage = homePage
-                .login("standard_user", "secret_sauce");
+        homePage.login("standard_user", "secret_sauce");
 
+        InventoryPage inventoryPage = new InventoryPage(driver);
         Assert.assertTrue(inventoryPage.isOnPage());
     }
 }

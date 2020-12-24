@@ -14,15 +14,13 @@ public class HomePage {
         HomePage.driver = driver;
     }
 
-    public HomePage navigateTo() {
+    public void navigateTo() {
         driver.get("https://www.saucedemo.com");
-        return this;
     }
 
-    public InventoryPage login(String username, String password) {
+    public void login(String username, String password) {
         driver.findElement(USERNAME).sendKeys(username);
         driver.findElement(PASSWORD).sendKeys(password);
         driver.findElement(SUBMIT).click();
-        return new InventoryPage(driver);
     }
 }

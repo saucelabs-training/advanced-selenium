@@ -13,15 +13,9 @@ public class InventoryPage {
         return driver.getCurrentUrl().equals("https://www.saucedemo.com/inventory.html");
     }
 
-    public InventoryPage selectProduct(String s) {
-        return this;
+    public void selectProduct(String s) {
     }
 
-    public ShoppingCartPage shoppingCart() {
-        return new ShoppingCartPage();
-    }
-
-    public InventoryPage navigateTo() {
-        return this;
+    public void navigateToShoppingCart() {
     }
 }
