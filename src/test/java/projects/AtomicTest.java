@@ -10,8 +10,7 @@ public class AtomicTest extends SauceTestBase {
 
     @Test
     public void login() {
-        HomePage homePage = new HomePage();
-        homePage.navigateTo();
+        HomePage homePage = HomePage.visit();
         homePage.login("standard_user", "secret_sauce");
 
         InventoryPage inventoryPage = new InventoryPage();
