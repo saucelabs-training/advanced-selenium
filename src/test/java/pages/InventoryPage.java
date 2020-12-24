@@ -12,4 +12,16 @@ public class InventoryPage {
     public boolean isOnPage() {
         return driver.getCurrentUrl().equals("https://www.saucedemo.com/inventory.html");
     }
+
+    public InventoryPage selectProduct(String s) {
+        return this;
+    }
+
+    public ShoppingCartPage shoppingCart() {
+        return new ShoppingCartPage();
+    }
+
+    public InventoryPage navigateTo() {
+        return this;
+    }
 }
