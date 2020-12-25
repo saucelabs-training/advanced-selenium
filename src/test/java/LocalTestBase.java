@@ -21,6 +21,9 @@ public class LocalTestBase {
         WebDriverManager.chromedriver().setup();
         ChromeOptions chromeOptions = new ChromeOptions();
 
+//        toggle on for examples as needed
+//        chromeOptions.setPageLoadStrategy(PageLoadStrategy.NONE);
+
         driver = new ChromeDriver(chromeOptions);
         BasePage.setDriver(driver);
     }

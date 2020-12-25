@@ -32,6 +32,9 @@ public class SauceTestBase {
         SauceOptions sauceOptions = new SauceOptions(chromeOptions);
         sauceOptions.setName(System.getenv("SAUCE_USERNAME") + " - " + name.getMethodName());
 
+//        toggle on for examples as needed
+//        sauceOptions.setPageLoadStrategy(PageLoadStrategy.NONE);
+
         session = new SauceSession(sauceOptions);
         sauceTestWatcher.setSession(session);
         driver = session.start();
