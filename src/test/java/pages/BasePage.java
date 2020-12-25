@@ -1,5 +1,6 @@
 package test.java.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class BasePage {
@@ -11,5 +12,9 @@ public class BasePage {
 
     public static WebDriver getDriver() {
         return driver;
+    }
+
+    public boolean doesElementExist(By locator) {
+        return driver.findElements(locator).size() > 0;
     }
 }
