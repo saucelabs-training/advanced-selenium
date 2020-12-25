@@ -1,6 +1,7 @@
 package test.java.pages;
 
 import org.openqa.selenium.By;
+import test.java.exceptions.PageValidationException;
 
 public class HomePage extends BasePage {
     private static final String URL = "https://www.saucedemo.com/";
@@ -37,7 +38,8 @@ public class HomePage extends BasePage {
 
     public void validateSuccessfulLogin() {
         if (!loginSuccessful()) {
-            throw new RuntimeException();
+            String message = driver.findElement(ERROR).getText();
+            throw new PageValidationException("Login was not successful: " + message);
         }
     }
 }

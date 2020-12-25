@@ -2,6 +2,7 @@ package test.java;
 
 import org.junit.Assert;
 import org.junit.Test;
+import test.java.exceptions.PageValidationException;
 import test.java.pages.HomePage;
 
 public class SuccessHandlingTest extends SauceTestBase {
@@ -37,6 +38,18 @@ public class SuccessHandlingTest extends SauceTestBase {
             homePage.validateSuccessfulLogin();
         } catch (RuntimeException e) {
             Assert.fail("Login Unsuccessful");
+        }
+    }
+
+    @Test
+    public void testValidatesPOExceptionCustomError() {
+        HomePage homePage = HomePage.visit();
+        homePage.login("locked_out_user", "secret_sauce");
+
+        try {
+            homePage.validateSuccessfulLogin();
+        } catch (PageValidationException e) {
+            Assert.fail(e.toString());
         }
     }
 }

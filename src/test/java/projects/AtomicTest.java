@@ -3,6 +3,7 @@ package test.java.projects;
 import org.junit.Assert;
 import org.junit.Test;
 import test.java.SauceTestBase;
+import test.java.exceptions.PageValidationException;
 import test.java.pages.HomePage;
 
 public class AtomicTest extends SauceTestBase {
@@ -14,8 +15,8 @@ public class AtomicTest extends SauceTestBase {
 
         try {
             homePage.validateSuccessfulLogin();
-        } catch (RuntimeException e) {
-            Assert.fail("Login Unsuccessful");
+        } catch (PageValidationException e) {
+            Assert.fail(e.toString());
         }
     }
 }
