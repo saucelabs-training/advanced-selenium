@@ -18,9 +18,9 @@ public class CoupledPOsTest extends SauceTestBase {
         inventoryPage.selectProduct("Sauce Labs Fleece Jacket");
         inventoryPage.navigateToShoppingCart();
 
-        new ShoppingCartPage().checkOut();
+        new ShoppingCartPage().checkOutSuccessfully();
         new InformationPage().addInformation();
-        new OverviewPage().finish();
+        new OverviewPage().finishSuccessfully();
 
         Assert.assertTrue(new CompletePage().isSuccessful());
     }

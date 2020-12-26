@@ -2,6 +2,9 @@ package test.java.pages;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import test.java.exceptions.PageValidationException;
+
+import java.util.List;
 
 public class BasePage {
     protected static WebDriver driver;
@@ -48,5 +51,16 @@ public class BasePage {
             String msg = "Attempted to locate '" + name + "' element in " + callingMethod.getClassName() + ", but ";
             throw new NoSuchElementException(msg + e.getMessage());
         }
+    }
+
+    protected WebElement partialStringMatch(By locator, String string)  {
+        List<WebElement> elements = driver.findElements(locator);
+        for (WebElement element : elements){
+            if(element.getText().contains(string)) {
+                return element;
+            }
+        }
+        throw new PageValidationException("Can not find an element matching "
+                + string + " with the locator " + locator.toString());
     }
 }
