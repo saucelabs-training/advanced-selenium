@@ -1,7 +1,11 @@
 package test.java.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
 import test.java.exceptions.PageValidationException;
+
+import java.util.function.Function;
 
 public class HomePage extends BasePage {
     private static final String URL = "https://www.saucedemo.com/";
@@ -26,13 +30,6 @@ public class HomePage extends BasePage {
         validateSuccessfulLogin();
     }
 
-    public void validateSuccessfulLogin() {
-        if (!loginSuccessful()) {
-            String message = driver.findElement(ERROR).getText();
-            throw new PageValidationException("Login was not successful: " + message);
-        }
-    }
-
     public void login(String username, String password) {
         driver.findElement(USERNAME).sendKeys(username);
         driver.findElement(PASSWORD).sendKeys(password);
@@ -46,5 +43,14 @@ public class HomePage extends BasePage {
     public boolean badLoginSuccessful() throws InterruptedException {
         Thread.sleep(5000);
         return !doesElementExist(ERROR);
+    }
+
+    public void validateSuccessfulLogin() {
+        try {
+            wait.until((Function<WebDriver, Object>) driver -> loginSuccessful());
+        } catch (TimeoutException e) {
+            String message = driver.findElement(ERROR).getText();
+            throw new PageValidationException("Login was not successful after 5 seconds: " + message);
+        }
     }
 }

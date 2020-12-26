@@ -11,10 +11,9 @@ public class AtomicTest extends SauceTestBase {
     @Test
     public void login() {
         HomePage homePage = HomePage.visit();
-        homePage.login("standard_user", "secret_sauce");
 
         try {
-            homePage.validateSuccessfulLogin();
+            homePage.login("standard_user", "secret_sauce");
         } catch (PageValidationException e) {
             Assert.fail(e.toString());
         }
