@@ -21,6 +21,18 @@ public class HomePage extends BasePage {
         driver.get(URL);
     }
 
+    public void loginSuccessfully(String username, String password) {
+        login(username, password);
+        validateSuccessfulLogin();
+    }
+
+    public void validateSuccessfulLogin() {
+        if (!loginSuccessful()) {
+            String message = driver.findElement(ERROR).getText();
+            throw new PageValidationException("Login was not successful: " + message);
+        }
+    }
+
     public void login(String username, String password) {
         driver.findElement(USERNAME).sendKeys(username);
         driver.findElement(PASSWORD).sendKeys(password);
@@ -34,12 +46,5 @@ public class HomePage extends BasePage {
     public boolean badLoginSuccessful() throws InterruptedException {
         Thread.sleep(5000);
         return !doesElementExist(ERROR);
-    }
-
-    public void validateSuccessfulLogin() {
-        if (!loginSuccessful()) {
-            String message = driver.findElement(ERROR).getText();
-            throw new PageValidationException("Login was not successful: " + message);
-        }
     }
 }
