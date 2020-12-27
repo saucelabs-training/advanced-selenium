@@ -1,14 +1,21 @@
 package test.java.pages;
 
+import org.openqa.selenium.By;
 import test.java.exceptions.PageValidationException;
 
 public class ShoppingCartPage extends BasePage {
+    private static final String URL = "https://www.saucedemo.com/cart.html";
+    private static final By INVENTORY_ITEM_NAME = By.className("inventory_item_name");
+    private static final By CHECKOUT_PAGE = By.className("checkout_button");
+
     public static ShoppingCartPage visit() {
-        return new ShoppingCartPage();
+        ShoppingCartPage shoppingCartPage = new ShoppingCartPage();
+        driver.navigate().to(URL);
+        return shoppingCartPage;
     }
 
     public void checkOutSuccessfully() {
-        throw new PageValidationException("Need to implement checking out");
+        locateDisplayedElement("Checkout Page Button", CHECKOUT_PAGE).click();
     }
 
     public boolean isOnPage() {
@@ -16,6 +23,10 @@ public class ShoppingCartPage extends BasePage {
     }
 
     public void validateItem(String product) {
-        throw new PageValidationException("Need to implement validating items in cart");
+        try {
+            partialStringMatch(INVENTORY_ITEM_NAME, product);
+        } catch (PageValidationException e) {
+            throw new PageValidationException("Unable to find this product in the cart: " + product);
+        }
     }
 }
