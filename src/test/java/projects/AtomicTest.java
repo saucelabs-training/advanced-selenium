@@ -3,6 +3,7 @@ package test.java.projects;
 import org.junit.Assert;
 import org.junit.Test;
 import test.java.SauceTestBase;
+import test.java.data.Person;
 import test.java.data.Product;
 import test.java.data.User;
 import test.java.exceptions.PageValidationException;
@@ -67,7 +68,8 @@ public class AtomicTest extends SauceTestBase {
         // Can skip the shopping cart and go directly to Info Page
         InformationPage informationPage = InformationPage.visit();
         try {
-            informationPage.addInformationSuccessfully("Brandon", "Walsh", "90210");
+            Person person = Person.beverlyHills();
+            informationPage.addInformationSuccessfully(person);
         } catch (PageValidationException e) {
             Assert.fail(e.toString());
         }
@@ -81,7 +83,7 @@ public class AtomicTest extends SauceTestBase {
 
         // Can't skip information page before getting to overview page
         InformationPage informationPage = InformationPage.visit();
-        informationPage.addInformationSuccessfully("Brandon", "Walsh", "90210");
+        informationPage.addInformationSuccessfully(new Person());
 
         OverviewPage overviewPage = new OverviewPage();
         try {

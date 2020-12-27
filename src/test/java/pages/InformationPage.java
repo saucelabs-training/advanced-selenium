@@ -3,6 +3,7 @@ package test.java.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import test.java.data.Person;
 import test.java.exceptions.PageValidationException;
 
 import java.util.function.Function;
@@ -49,5 +50,9 @@ public class InformationPage extends BasePage {
 
     public void addInformation() {
         // Don't use this one
+    }
+
+    public void addInformationSuccessfully(Person person) {
+        throw new PageValidationException("Implement adding information with Person instance");
     }
 }
