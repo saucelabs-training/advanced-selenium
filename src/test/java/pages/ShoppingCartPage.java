@@ -1,6 +1,7 @@
 package test.java.pages;
 
 import org.openqa.selenium.By;
+import test.java.data.Product;
 import test.java.exceptions.PageValidationException;
 
 public class ShoppingCartPage extends BasePage {
@@ -28,5 +29,9 @@ public class ShoppingCartPage extends BasePage {
         } catch (PageValidationException e) {
             throw new PageValidationException("Unable to find this product in the cart: " + product);
         }
+    }
+
+    public void validateItem(Product swag1) {
+        validateItem(swag1.getName());
     }
 }

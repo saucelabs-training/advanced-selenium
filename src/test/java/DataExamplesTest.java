@@ -1,6 +1,8 @@
 package test.java;
 
+import org.junit.Assert;
 import org.junit.Test;
+import test.java.data.Product;
 import test.java.data.User;
 import test.java.pages.HomePage;
 
@@ -46,5 +48,33 @@ public class DataExamplesTest extends SauceTestBase {
 
         HomePage homePage = new HomePage();
         homePage.loginUnsuccessfully(blankPassword);
+    }
+
+    @Test
+    public void specificProduct() {
+        Product product = new Product(Product.Swag.ONESIE);
+        Assert.assertEquals(product.getName(), "Sauce Labs Onesie");
+    }
+
+    @Test
+    public void constructorProvidesRandomDefault() {
+        Product product = new Product();
+
+        try {
+            product.getName();
+        } catch (NullPointerException e) {
+            Assert.fail("Expected product not to be Null");
+        }
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void doesNotAllowRepeats() {
+        new Product();
+        new Product();
+        new Product();
+        new Product();
+        new Product();
+        new Product();
+        new Product();
     }
 }

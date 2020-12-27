@@ -2,6 +2,7 @@ package test.java.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import test.java.data.Product;
 import test.java.exceptions.PageValidationException;
 
 public class InventoryPage extends BasePage {
@@ -39,5 +40,9 @@ public class InventoryPage extends BasePage {
             String msg = "Navigation away from InventoryPage was not successful; Current URL: " + currentUrl;
             throw new PageValidationException(msg);
         }
+    }
+
+    public void selectProduct(Product product) {
+        selectProduct(product.getName());
     }
 }
