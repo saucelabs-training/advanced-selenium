@@ -56,4 +56,10 @@ public class InformationPage extends BasePage {
         addInformationSuccessfully(person.getFirstName(), person.getLastName(), person.getPostalCode());
         validateSuccessfulInformationAddition();
     }
+
+    public Person addInformationSuccessfully() {
+        Person person = new Person();
+        addInformationSuccessfully(person);
+        return person;
+    }
 }

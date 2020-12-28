@@ -45,4 +45,10 @@ public class InventoryPage extends BasePage {
     public void selectProduct(Product product) {
         selectProduct(product.getName());
     }
+
+    public Product selectProduct() {
+        Product product = new Product();
+        selectProduct(product);
+        return product;
+    }
 }

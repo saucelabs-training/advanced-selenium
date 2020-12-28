@@ -26,6 +26,10 @@ public class HomePage extends BasePage {
         driver.get(URL);
     }
 
+    public void loginSuccessfully() {
+        loginSuccessfully(User.valid());
+    }
+
     public void loginSuccessfully(User user) {
         login(user.getUsername(), user.getPassword());
         validateSuccessfulLogin();

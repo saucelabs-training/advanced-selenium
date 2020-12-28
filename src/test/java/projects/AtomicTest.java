@@ -5,13 +5,10 @@ import org.junit.Test;
 import test.java.SauceTestBase;
 import test.java.data.Person;
 import test.java.data.Product;
-import test.java.data.User;
 import test.java.exceptions.PageValidationException;
 import test.java.pages.*;
 
 public class AtomicTest extends SauceTestBase {
-    public static Product swagBoltShirt = new Product(Product.Swag.BOLT_SHIRT);
-    public static Product swagFleece = new Product(Product.Swag.FLEECE);
     public static Product swag1 = new Product();
     public static Product swag2 = new Product();
 
@@ -20,7 +17,7 @@ public class AtomicTest extends SauceTestBase {
         HomePage homePage = HomePage.visit();
 
         try {
-            homePage.loginSuccessfully(User.valid());
+            homePage.loginSuccessfully();
         } catch (PageValidationException e) {
             Assert.fail(e.toString());
         }
@@ -33,13 +30,13 @@ public class AtomicTest extends SauceTestBase {
 
         InventoryPage inventoryPage = InventoryPage.visit();
 
-        inventoryPage.selectProduct(swagBoltShirt);
-        inventoryPage.selectProduct(swagFleece);
+        Product product1 = inventoryPage.selectProduct();
+        Product product2 = inventoryPage.selectProduct();
 
         ShoppingCartPage shoppingCartPage = new ShoppingCartPage();
         try {
-            shoppingCartPage.validateItem(swagBoltShirt);
-            shoppingCartPage.validateItem(swagFleece);
+            shoppingCartPage.validateItem(product1);
+            shoppingCartPage.validateItem(product2);
         } catch (PageValidationException e) {
             Assert.fail(e.toString());
         }
@@ -83,7 +80,7 @@ public class AtomicTest extends SauceTestBase {
 
         // Can't skip information page before getting to overview page
         InformationPage informationPage = InformationPage.visit();
-        informationPage.addInformationSuccessfully(new Person());
+        informationPage.addInformationSuccessfully();
 
         OverviewPage overviewPage = new OverviewPage();
         try {
