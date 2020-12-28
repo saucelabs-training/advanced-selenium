@@ -53,6 +53,7 @@ public class InformationPage extends BasePage {
     }
 
     public void addInformationSuccessfully(Person person) {
-        throw new PageValidationException("Implement adding information with Person instance");
+        addInformationSuccessfully(person.getFirstName(), person.getLastName(), person.getPostalCode());
+        validateSuccessfulInformationAddition();
     }
 }
