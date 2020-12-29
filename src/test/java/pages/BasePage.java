@@ -5,6 +5,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import test.java.exceptions.PageValidationException;
 
 import java.util.List;
+import java.util.function.Function;
 
 public class BasePage {
     protected static WebDriver driver;
@@ -54,11 +55,13 @@ public class BasePage {
     }
 
     protected WebElement partialStringMatch(By locator, String string)  {
-        List<WebElement> elements = driver.findElements(locator);
-
-        if (elements.size() == 0) {
+        try {
+            wait.until((Function<WebDriver, Object>) driver -> doesElementExist(locator));
+        } catch (TimeoutException e) {
             throw new PageValidationException("Unable to find any elements with the locator " + locator.toString());
         }
+
+        List<WebElement> elements = driver.findElements(locator);
 
         for (WebElement element : elements){
             if(element.getText().contains(string)) {

@@ -5,8 +5,6 @@ import org.openqa.selenium.WebElement;
 import test.java.data.Product;
 import test.java.exceptions.PageValidationException;
 
-import java.util.concurrent.TimeUnit;
-
 public class InventoryPage extends BasePage {
     private static final String URL = "https://www.saucedemo.com/inventory.html";
 
@@ -49,8 +47,6 @@ public class InventoryPage extends BasePage {
     }
 
     public Product selectProduct() {
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
         Product product = new Product();
         WebElement parent = partialStringMatch(INVENTORY_ITEM, product.getName());
         parent.findElement(BUTTON).click();
