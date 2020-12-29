@@ -46,7 +46,9 @@ public class InventoryPage extends BasePage {
         selectProduct(product.getName());
     }
 
-    public Product selectProduct() {
+    public Product selectProduct() throws InterruptedException {
+        Thread.sleep(5000);
+
         Product product = new Product();
         WebElement parent = partialStringMatch(INVENTORY_ITEM, product.getName());
         parent.findElement(BUTTON).click();
