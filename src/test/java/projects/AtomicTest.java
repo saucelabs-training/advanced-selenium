@@ -24,7 +24,7 @@ public class AtomicTest extends SauceTestSynchBase {
     }
 
     @Test
-    public void addItemsToCart() throws InterruptedException {
+    public void addItemsToCart() {
         // Assume signing in is optional in this app,
         // so visiting Inventory page directly
 
