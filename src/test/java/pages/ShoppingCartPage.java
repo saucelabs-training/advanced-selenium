@@ -2,6 +2,7 @@ package test.java.pages;
 
 import org.openqa.selenium.By;
 import test.java.data.Product;
+import test.java.element.ElementCollection;
 import test.java.exceptions.PageValidationException;
 
 public class ShoppingCartPage extends BasePage {
@@ -16,7 +17,7 @@ public class ShoppingCartPage extends BasePage {
     }
 
     public void checkOutSuccessfully() {
-        locateDisplayedElement("Checkout Page Button", CHECKOUT_PAGE).click();
+        getElement("Checkout Page Button", CHECKOUT_PAGE).click();
     }
 
     public boolean isOnPage() {
@@ -25,9 +26,11 @@ public class ShoppingCartPage extends BasePage {
 
     public void validateItem(String product) {
         try {
-            partialStringMatch(INVENTORY_ITEM_NAME, product);
+            ElementCollection inventoryItems = getElements("Inventory Item", INVENTORY_ITEM_NAME);
+            inventoryItems.findMatchingSubstring(product);
         } catch (PageValidationException e) {
-            throw new PageValidationException("Unable to find this product in the cart: " + product);
+            throw new PageValidationException("Unable to find this product in the cart: "
+                    + product + "; " + e.toString());
         }
     }
 

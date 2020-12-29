@@ -24,10 +24,10 @@ public class InformationPage extends BasePage {
     }
 
     public void submitInformation(String first, String last, String postal) {
-        sendKeys("First Name", FIRST_NAME, first);
-        sendKeys("Last Name", LAST_NAME, last);
-        sendKeys("Postal Code", POSTAL_CODE, postal);
-        click("Submit Button", SUBMIT);
+        getElement("First Name", FIRST_NAME).sendKeys(first);
+        getElement("Last Name", LAST_NAME).sendKeys(last);
+        getElement("Postal Code", POSTAL_CODE).sendKeys(postal);
+        getElement("Submit Button", SUBMIT).click();
     }
 
     public void addInformationSuccessfully(String first, String last, String postal) {

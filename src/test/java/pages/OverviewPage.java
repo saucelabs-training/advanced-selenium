@@ -8,7 +8,7 @@ public class OverviewPage extends BasePage {
     private static final By FINISH_BUTTON = By.className("cart_button");
 
     public void finishSuccessfully() {
-        locateDisplayedElement("Finish Button", FINISH_BUTTON).click();
+        getElement("Finish Button", FINISH_BUTTON).click();
         validateSuccessfulNavigation();
     }
 

@@ -41,9 +41,9 @@ public class HomePage extends BasePage {
     }
 
     public void login(String username, String password) {
-        sendKeys("User Name", USERNAME, username);
-        sendKeys("Password", PASSWORD, password);
-        click("Submit Button", SUBMIT);
+        getElement("User Name", USERNAME).sendKeys(username);
+        getElement("Password", PASSWORD).sendKeys(password);
+        getElement("Submit Button", SUBMIT).click();
     }
 
     public boolean loginSuccessful() {
@@ -51,12 +51,12 @@ public class HomePage extends BasePage {
     }
 
     public boolean isLoginUnsuccessful() {
-        return !doesElementExist(ERROR);
+        return !getElement("Error Message", ERROR).doesExist();
     }
 
     public boolean badLoginSuccessful() throws InterruptedException {
         Thread.sleep(5000);
-        return !doesElementExist(ERROR);
+        return !getElement("Error Message", ERROR).doesExist();
     }
 
     public void validateSuccessfulLogin() {

@@ -1,8 +1,9 @@
 package test.java.pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import test.java.data.Product;
+import test.java.element.Element;
+import test.java.element.ElementCollection;
 import test.java.exceptions.PageValidationException;
 
 public class InventoryPage extends BasePage {
@@ -24,13 +25,13 @@ public class InventoryPage extends BasePage {
     }
 
     public void selectProduct(String product) {
-        WebElement parent = partialStringMatch(INVENTORY_ITEM, product);
-        WebElement button = parent.findElement(BUTTON);
-        button.click();
+        ElementCollection inventoryItems = getElements("Inventory Item", INVENTORY_ITEM);
+        Element matchingSubstring = inventoryItems.findMatchingSubstring(product);
+        matchingSubstring.findElement("Select Button", BUTTON).click();
     }
 
     public void navigateToShoppingCart() {
-        click("Shopping Cart Button", SHOPPING_CART);
+        getElement("Shopping Cart Button", SHOPPING_CART).click();
         validateSuccessfulNavigation();
     }
 
@@ -48,9 +49,7 @@ public class InventoryPage extends BasePage {
 
     public Product selectProduct() {
         Product product = new Product();
-        WebElement parent = partialStringMatch(INVENTORY_ITEM, product.getName());
-        parent.findElement(BUTTON).click();
-
+        selectProduct(product);
         return product;
     }
 }
