@@ -1,6 +1,6 @@
 package test.java.pages;
 
-public class HomePageMethods extends BasePage {
+public class HomePageMethods extends OldBasePage {
     private final HomePageElements elements;
 
     public HomePageMethods() {

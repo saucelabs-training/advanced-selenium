@@ -2,7 +2,7 @@ package test.java.pages;
 
 import org.openqa.selenium.By;
 
-public class MagicInventoryPage extends BasePage {
+public class MagicInventoryPage extends OldBasePage {
     private static final String URL = "https://www.saucedemo.com/inventory.html";
 
     private static final By USERNAME = By.id("user-name");

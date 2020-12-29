@@ -3,7 +3,7 @@ package test.java.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-public class HomePageElements extends BasePage {
+public class HomePageElements extends OldBasePage {
     private static final By USERNAME = By.id("user-name");
     private static final By PASSWORD = By.id("password");
     private static final By SUBMIT = By.id("login-button");

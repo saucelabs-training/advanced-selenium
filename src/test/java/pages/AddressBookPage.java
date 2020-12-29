@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import test.java.exceptions.PageValidationException;
 
-public class AddressBookPage extends BasePage {
+public class AddressBookPage extends OldBasePage {
     protected static final String URL = "http://a.testaddressbook.com/";
     protected static final By SIGN_IN_LINK = By.id("sign-in");
     protected static final By HAMBURGER = By.cssSelector("button.navbar-toggler");

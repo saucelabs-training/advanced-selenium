@@ -3,7 +3,7 @@ package test.java.pages;
 import org.openqa.selenium.By;
 import test.java.data.User;
 
-public class SauceDemoPage extends BasePage {
+public class SauceDemoPage extends OldBasePage {
     public static SauceDemoPage visit() {
         return new SauceDemoPage();
     }

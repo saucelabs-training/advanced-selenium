@@ -3,7 +3,7 @@ package test.java.pages;
 import org.openqa.selenium.By;
 import test.java.exceptions.PageValidationException;
 
-public class AddressBookBasePage extends BasePage {
+public class AddressBookBasePage extends OldBasePage {
     protected static final String URL = "http://a.testaddressbook.com/";
     protected final By SIGN_IN_LINK = By.id("sign-in");
 
