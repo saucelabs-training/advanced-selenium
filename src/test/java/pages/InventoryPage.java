@@ -1,12 +1,11 @@
 package test.java.pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import test.java.data.Product;
 import test.java.exceptions.PageValidationException;
 
-import java.util.function.Function;
+import java.util.concurrent.TimeUnit;
 
 public class InventoryPage extends BasePage {
     private static final String URL = "https://www.saucedemo.com/inventory.html";
@@ -50,7 +49,7 @@ public class InventoryPage extends BasePage {
     }
 
     public Product selectProduct() {
-        wait.until((Function<WebDriver, Object>) driver -> doesElementExist(INVENTORY_ITEM));
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
         Product product = new Product();
         WebElement parent = partialStringMatch(INVENTORY_ITEM, product.getName());
