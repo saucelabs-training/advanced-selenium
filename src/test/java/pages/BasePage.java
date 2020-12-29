@@ -74,19 +74,26 @@ public class BasePage {
     }
 
     protected void click(String description, By locator) {
-        waitForExists(description, locator);
-        WebElement element = driver.findElement(locator);
-        waitForDisplayed(description, locator, element);
-
         try {
-            element.click();
+            synchronize(description, locator).click();
         } catch (StaleElementReferenceException e) {
             click(description, locator);
         }
     }
 
     protected void sendKeys(String description, By locator, String text) {
+        try {
+            synchronize(description, locator).sendKeys(text);
+        } catch (StaleElementReferenceException e) {
+            sendKeys(description, locator, text);
+        }
+    }
 
+    protected WebElement synchronize(String description, By locator) {
+        waitForExists(description, locator);
+        WebElement element = driver.findElement(locator);
+        waitForDisplayed(description, locator, element);
+        return element;
     }
 
     private void waitForExists(String description, By locator) {
