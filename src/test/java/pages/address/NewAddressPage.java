@@ -12,4 +12,8 @@ public class NewAddressPage {
     public void createAddressSuccessfully(Address address) {
         throw new PageValidationException("Implement Creating Address Successfully");
     }
+
+    public void createAddressSuccessfully() {
+        throw new PageValidationException("Implement Creating Address Successfully");
+    }
 }

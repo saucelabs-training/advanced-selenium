@@ -14,7 +14,7 @@ public class AddressTest extends SauceTestBase {
         SignUpPage signUpPage = SignUpPage.visit();
 
         try {
-            signUpPage.signupSuccessfully(new User());
+            signUpPage.signupSuccessfully();
         } catch (PageValidationException e) {
             Assert.fail(e.toString());
         }
@@ -23,7 +23,7 @@ public class AddressTest extends SauceTestBase {
     @Test
     public void logOut() {
         SignUpPage signUpPage = SignUpPage.visit();
-        signUpPage.signupSuccessfully(new User());
+        signUpPage.signupSuccessfully();
 
         try {
             new HomePage().signOutSuccessfully();
@@ -36,7 +36,7 @@ public class AddressTest extends SauceTestBase {
     public void logIn() {
         SignUpPage signUpPage = SignUpPage.visit();
         User user = new User();
-        signUpPage.signupSuccessfully(new User());
+        signUpPage.signupSuccessfully(user);
         new HomePage().signOutSuccessfully();
 
         try {
@@ -49,11 +49,11 @@ public class AddressTest extends SauceTestBase {
     @Test
     public void createAddress() {
         SignUpPage signUpPage = SignUpPage.visit();
-        signUpPage.signupSuccessfully(new User());
+        signUpPage.signupSuccessfully();
 
         NewAddressPage newAddressPage = NewAddressPage.visit();
         try {
-            newAddressPage.createAddressSuccessfully(new Address());
+            newAddressPage.createAddressSuccessfully();
         } catch (PageValidationException e) {
             Assert.fail(e.toString());
         }
@@ -62,14 +62,14 @@ public class AddressTest extends SauceTestBase {
     @Test
     public void editAddress() {
         SignUpPage signUpPage = SignUpPage.visit();
-        signUpPage.signupSuccessfully(new User());
+        signUpPage.signupSuccessfully();
         NewAddressPage newAddressPage = NewAddressPage.visit();
-        newAddressPage.createAddressSuccessfully(new Address());
+        newAddressPage.createAddressSuccessfully();
 
         new ReadAddressPage().navigateToEditPage();
 
         try {
-            new EditAddressPage().editAddressSuccessfully(new Address());
+            new EditAddressPage().editAddressSuccessfully();
         } catch (PageValidationException e) {
             Assert.fail(e.toString());
         }

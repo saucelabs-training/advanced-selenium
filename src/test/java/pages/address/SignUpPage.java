@@ -12,5 +12,9 @@ public class SignUpPage {
     public void signupSuccessfully(User user) {
         throw new PageValidationException("Implement Signing Up Successfully");
     }
+
+    public void signupSuccessfully() {
+        throw new PageValidationException("Implement Signing Up Successfully");
+    }
 }
 
