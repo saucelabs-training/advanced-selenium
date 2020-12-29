@@ -30,7 +30,7 @@ public class InventoryPage extends BasePage {
     }
 
     public void navigateToShoppingCart() {
-        locateDisplayedElement("Shopping Cart Link", SHOPPING_CART).click();
+        click("Shopping Cart Button", SHOPPING_CART);
         validateSuccessfulNavigation();
     }
 

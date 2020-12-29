@@ -57,6 +57,19 @@ public class AtomicTest extends SauceTestSynchBase {
     }
 
     @Test
+    public void navigateToCartFromInventory() {
+        InventoryPage inventoryPage = InventoryPage.visit();
+        inventoryPage.navigateToShoppingCart();
+
+        ShoppingCartPage shoppingCartPage = new ShoppingCartPage();
+        try {
+            shoppingCartPage.checkOutSuccessfully();
+        } catch (PageValidationException e) {
+            Assert.fail(e.toString());
+        }
+    }
+
+    @Test
     public void submitUserInformationInCheckout() {
         InventoryPage inventoryPage = InventoryPage.visit();
         inventoryPage.selectProduct(swag1);

@@ -71,4 +71,32 @@ public class BasePage {
         throw new PageValidationException("Can not find an element matching "
                 + string + " with the locator " + locator.toString());
     }
+
+    protected void click(String description, By locator) {
+        waitForExists(description, locator);
+        WebElement element = driver.findElement(locator);
+        waitForDisplayed(description, locator, element);
+
+        element.click();
+    }
+
+    private void waitForExists(String description, By locator) {
+        try {
+            wait.until((Function<WebDriver, Object>) driver -> doesElementExist(locator));
+        } catch (TimeoutException e) {
+            throw new PageValidationException("After " + defaultWaitTime
+                    + " seconds, unable to find any elements matching "
+                    + description + " with the locator " + locator.toString());
+        }
+    }
+
+    private void waitForDisplayed(String description, By locator, WebElement element) {
+        try {
+            wait.until((Function<WebDriver, Object>) driver -> element.isDisplayed());
+        } catch (TimeoutException e) {
+            throw new PageValidationException("Located Element " + description + ", but after"
+                    + defaultWaitTime + " seconds, it was still not visible. Locator: "
+                    + locator.toString());
+        }
+    }
 }
