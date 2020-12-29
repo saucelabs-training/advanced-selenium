@@ -12,6 +12,7 @@ public class BasePage {
     protected static WebDriverWait wait;
     // Note, in production code I would set this higher
     protected static int defaultWaitTime = 5;
+    private Boolean refreshToggle = false;
 
     public static void setDriver(WebDriver driver) {
         BasePage.driver = driver;
@@ -77,7 +78,11 @@ public class BasePage {
         WebElement element = driver.findElement(locator);
         waitForDisplayed(description, locator, element);
 
-        element.click();
+        try {
+            element.click();
+        } catch (StaleElementReferenceException e) {
+            click(description, locator);
+        }
     }
 
     private void waitForExists(String description, By locator) {
@@ -93,6 +98,11 @@ public class BasePage {
     private void waitForDisplayed(String description, By locator, WebElement element) {
         try {
             wait.until((Function<WebDriver, Object>) driver -> element.isDisplayed());
+            // temporarily add this to show off potential race condition for Stale Element
+            if (!refreshToggle) {
+                refreshToggle = true;
+                driver.navigate().refresh();
+            }
         } catch (TimeoutException e) {
             throw new PageValidationException("Located Element " + description + ", but after"
                     + defaultWaitTime + " seconds, it was still not visible. Locator: "
