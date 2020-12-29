@@ -85,6 +85,10 @@ public class BasePage {
         }
     }
 
+    protected void sendKeys(String description, By locator, String text) {
+
+    }
+
     private void waitForExists(String description, By locator) {
         try {
             wait.until((Function<WebDriver, Object>) driver -> doesElementExist(locator));

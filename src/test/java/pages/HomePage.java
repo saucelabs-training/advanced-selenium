@@ -41,9 +41,9 @@ public class HomePage extends BasePage {
     }
 
     public void login(String username, String password) {
-        driver.findElement(USERNAME).sendKeys(username);
-        driver.findElement(PASSWORD).sendKeys(password);
-        driver.findElement(SUBMIT).click();
+        sendKeys("User Name", USERNAME, username);
+        sendKeys("Password", PASSWORD, password);
+        click("Submit Button", SUBMIT);
     }
 
     public boolean loginSuccessful() {
