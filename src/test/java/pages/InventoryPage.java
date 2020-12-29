@@ -48,7 +48,9 @@ public class InventoryPage extends BasePage {
 
     public Product selectProduct() {
         Product product = new Product();
-        selectProduct(product);
+        WebElement parent = partialStringMatch(INVENTORY_ITEM, product.getName());
+        parent.findElement(BUTTON).click();
+
         return product;
     }
 }

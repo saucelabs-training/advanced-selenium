@@ -2,13 +2,13 @@ package test.java.projects;
 
 import org.junit.Assert;
 import org.junit.Test;
-import test.java.SauceTestBase;
+import test.java.SauceTestSynchBase;
 import test.java.data.Person;
 import test.java.data.Product;
 import test.java.exceptions.PageValidationException;
 import test.java.pages.*;
 
-public class AtomicTest extends SauceTestBase {
+public class AtomicTest extends SauceTestSynchBase {
     public static Product swag1 = new Product();
     public static Product swag2 = new Product();
 

@@ -55,6 +55,11 @@ public class BasePage {
 
     protected WebElement partialStringMatch(By locator, String string)  {
         List<WebElement> elements = driver.findElements(locator);
+
+        if (elements.size() == 0) {
+            throw new PageValidationException("Unable to find any elements with the locator " + locator.toString());
+        }
+
         for (WebElement element : elements){
             if(element.getText().contains(string)) {
                 return element;
