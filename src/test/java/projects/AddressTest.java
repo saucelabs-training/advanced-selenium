@@ -26,7 +26,7 @@ public class AddressTest extends SauceTestBase {
         signUpPage.signupSuccessfully();
 
         try {
-            new HomePage().signOutSuccessfully();
+            new NavBar().signOutSuccessfully();
         } catch (PageValidationException e) {
             Assert.fail(e.toString());
         }
@@ -37,7 +37,7 @@ public class AddressTest extends SauceTestBase {
         SignUpPage signUpPage = SignUpPage.visit();
         User user = new User();
         signUpPage.signupSuccessfully(user);
-        new HomePage().signOutSuccessfully();
+        new NavBar().signOutSuccessfully();
 
         try {
             new SignInPage().signInSuccessfully(user);

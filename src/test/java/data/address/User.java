@@ -1,7 +1,16 @@
 package test.java.data.address;
 
-public class User {
-    public static User valid() {
-        return new User();
+import test.java.data.DataModel;
+
+public class User extends DataModel {
+    private String email = faker.internet().emailAddress();
+    private String password = faker.internet().password();
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getEmail() {
+        return email;
     }
 }
