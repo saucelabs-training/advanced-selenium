@@ -22,6 +22,10 @@ public class Browser {
         return new ButtonElement(description, locator, driver);
     }
 
+    public TextElement textField(String description, By locator) {
+        return new TextElement(description, locator, driver);
+    }
+
     public ElementCollection elements(String description, By locator) {
         return new ElementCollection(description, locator, driver);
     }

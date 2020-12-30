@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import test.java.data.User;
 import test.java.element.ButtonElement;
 import test.java.element.Element;
+import test.java.element.TextElement;
 import test.java.exceptions.PageValidationException;
 
 import java.util.function.Function;
@@ -13,8 +14,8 @@ import java.util.function.Function;
 public class HomePage extends BasePage {
     private static final String URL = "https://www.saucedemo.com/";
 
-    private Element usernameField = browser.element("Username Field", By.id("user-name"));
-    private Element passwordField = browser.element("Password Field", By.id("password"));
+    private TextElement usernameField = browser.textField("Username Field", By.id("user-name"));
+    private TextElement passwordField = browser.textField("Password Field", By.id("password"));
     private ButtonElement submitButton = browser.button("Submit Button", By.id("login-button"));
     private Element errorMessage = browser.element("Error Message", By.cssSelector("[data-test=error]"));
 
