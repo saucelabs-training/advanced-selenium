@@ -19,7 +19,9 @@ public class DataExamplesTest extends SauceTestBase {
 
     @Test
     public void dataClass() {
-        User validUser = new User("standard_user", "secret_sauce");
+        User validUser = new User();
+        validUser.setUsername("standard_user");
+        validUser.setPassword("secret_sauce");
 
         HomePage homePage = new HomePage();
         homePage.loginSuccessfully(validUser);

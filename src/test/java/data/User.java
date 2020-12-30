@@ -2,21 +2,9 @@ package test.java.data;
 
 import com.github.javafaker.Faker;
 
-public class User {
-    private final Faker faker = new Faker();
-
-    private String username;
-    private String password;
-
-    public User() {
-        this.username = faker.name().username();
-        this.password = faker.internet().password();
-    }
-
-    public User(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
+public class User extends DataModel {
+    private String username = faker.name().username();
+    private String password = faker.internet().password();
 
     public static User blankPassword() {
         User user = new User();
@@ -30,6 +18,14 @@ public class User {
 
     public String getPassword() {
         return password;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public static User valid() {

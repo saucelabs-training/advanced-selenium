@@ -14,10 +14,10 @@ import java.util.function.Function;
 public class HomePage extends BasePage {
     private static final String URL = "https://www.saucedemo.com/";
 
-    private TextElement usernameField = browser.textField("Username Field", By.id("user-name"));
-    private TextElement passwordField = browser.textField("Password Field", By.id("password"));
-    private ButtonElement submitButton = browser.button("Submit Button", By.id("login-button"));
-    private Element errorMessage = browser.element("Error Message", By.cssSelector("[data-test=error]"));
+    protected TextElement username = browser.textField("Username Field", By.id("user-name"));
+    protected TextElement password = browser.textField("Password Field", By.id("password"));
+    protected ButtonElement submitButton = browser.button("Submit Button", By.id("login-button"));
+    protected Element errorMessage = browser.element("Error Message", By.cssSelector("[data-test=error]"));
 
     public static HomePage visit() {
         HomePage homePage = new HomePage();
@@ -34,18 +34,14 @@ public class HomePage extends BasePage {
     }
 
     public void loginSuccessfully(User user) {
-        login(user.getUsername(), user.getPassword());
+        fillForm(User.valid());
+        submitButton.click();
         validateSuccessfulLogin();
     }
 
-    public void loginSuccessfully(String username, String password) {
-        login(username, password);
-        validateSuccessfulLogin();
-    }
-
-    public void login(String username, String password) {
-        usernameField.sendKeys(username);
-        passwordField.sendKeys(password);
+    public void login(String uname, String pwd) {
+        username.sendKeys(uname);
+        username.sendKeys(pwd);
         submitButton.click();
     }
 
@@ -87,5 +83,12 @@ public class HomePage extends BasePage {
     public void loginUnsuccessfully(User user) {
         login(user.getUsername(), user.getPassword());
         validateUnsuccessfulLogin();
+    }
+
+    public void loginSuccessfully(String un, String pw) {
+        User user = new User();
+        user.setUsername(un);
+        user.setPassword(pw);
+        loginSuccessfully(user);
     }
 }
