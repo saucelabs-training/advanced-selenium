@@ -12,10 +12,10 @@ import java.util.function.Function;
 public class HomePage extends BasePage {
     private static final String URL = "https://www.saucedemo.com/";
 
-    private Element usernameField = getElement("Username Field", By.id("user-name"));
-    private Element passwordField = getElement("Password Field", By.id("password"));
-    private Element submitButton = getElement("Submit Button", By.id("login-button"));
-    private Element errorMessage = getElement("Error Message", By.cssSelector("[data-test=error]"));
+    private Element usernameField = browser.element("Username Field", By.id("user-name"));
+    private Element passwordField = browser.element("Password Field", By.id("password"));
+    private Element submitButton = browser.element("Submit Button", By.id("login-button"));
+    private Element errorMessage = browser.element("Error Message", By.cssSelector("[data-test=error]"));
 
     public static HomePage visit() {
         HomePage homePage = new HomePage();

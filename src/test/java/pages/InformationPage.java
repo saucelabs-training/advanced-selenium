@@ -12,11 +12,11 @@ import java.util.function.Function;
 public class InformationPage extends BasePage {
     private static final String URL = "https://www.saucedemo.com/checkout-step-one.html";
 
-    private Element firstNameField = getElement("First Name Field", By.id("first-name"));
-    private Element lastNameField = getElement("Last Name Field", By.id("last-name"));
-    private Element postalCodeField = getElement("Postal Code Field", By.id("postal-code"));
-    private Element submitButton = getElement("Submit Button", By.className("cart_button"));
-    private Element errorMessage = getElement("Error Message", By.cssSelector("[data-test=error]"));
+    private Element firstNameField = browser.element("First Name Field", By.id("first-name"));
+    private Element lastNameField = browser.element("Last Name Field", By.id("last-name"));
+    private Element postalCodeField = browser.element("Postal Code Field", By.id("postal-code"));
+    private Element submitButton = browser.element("Submit Button", By.className("cart_button"));
+    private Element errorMessage = browser.element("Error Message", By.cssSelector("[data-test=error]"));
 
     public static InformationPage visit() {
         InformationPage informationPage = new InformationPage();

@@ -9,8 +9,8 @@ import test.java.exceptions.PageValidationException;
 public class ShoppingCartPage extends BasePage {
     private static final String URL = "https://www.saucedemo.com/cart.html";
 
-    private ElementCollection inventoryItems = getElements("Inventory Item", By.className("inventory_item_name"));
-    private Element checkoutPageButton = getElement("Checkout Page Button", By.className("checkout_button"));
+    private ElementCollection inventoryItems = browser.elements("Inventory Item", By.className("inventory_item_name"));
+    private Element checkoutPageButton = browser.element("Checkout Page Button", By.className("checkout_button"));
 
     public static ShoppingCartPage visit() {
         ShoppingCartPage shoppingCartPage = new ShoppingCartPage();

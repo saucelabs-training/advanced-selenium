@@ -25,7 +25,7 @@ public class LocalTestBase {
 //        chromeOptions.setPageLoadStrategy(PageLoadStrategy.NONE);
 
         driver = new ChromeDriver(chromeOptions);
-        BasePage.setDriver(driver);
+        BasePage.createBrowser(driver);
     }
 
     private static class LocalTestWatcher extends TestWatcher {
@@ -37,13 +37,13 @@ public class LocalTestBase {
             } catch (Exception exception) {
                 exception.printStackTrace();
             }
-            BasePage.getDriver().quit();
+            BasePage.getBrowser().quit();
         }
 
         @Override
         protected void succeeded(Description description) {
             System.out.println("Passed! :) :)");
-            BasePage.getDriver().quit();
+            BasePage.getBrowser().quit();
         }
 
         private void doSomethingWithResults(Description description) throws Exception {

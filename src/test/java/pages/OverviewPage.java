@@ -7,7 +7,7 @@ import test.java.exceptions.PageValidationException;
 public class OverviewPage extends BasePage {
     private static final String URL = "https://www.saucedemo.com/checkout-step-one.html";
 
-    private Element finishButton = getElement("finishButton", By.className("cart_button"));
+    private Element finishButton = browser.element("finishButton", By.className("cart_button"));
 
     public void finishSuccessfully() {
         finishButton.click();

@@ -38,7 +38,7 @@ public class SauceTestBase {
         session = new SauceSession(sauceOptions);
         sauceTestWatcher.setSession(session);
         driver = session.start();
-        BasePage.setDriver(driver);
+        BasePage.createBrowser(driver);
     }
 
     private static class SauceTestWatcher extends TestWatcher {
