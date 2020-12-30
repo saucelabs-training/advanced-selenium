@@ -106,6 +106,7 @@ public class Element {
     }
 
     protected void waitForDisplayed() {
+        waitForExists();
         try {
             wait.until((Function<WebDriver, Object>) driver -> element.isDisplayed());
         } catch (TimeoutException e) {
@@ -114,6 +115,18 @@ public class Element {
                     + locator.toString());
         }
     }
+
+    protected void waitForEnabled() {
+        waitForExists();
+        try {
+            wait.until((Function<WebDriver, Object>) driver -> element.isEnabled());
+        } catch (TimeoutException e) {
+            throw new PageValidationException("Located Element " + description + ", but after"
+                    + DEFAULT_WAIT_TIME + " seconds, it was still not visible. Locator: "
+                    + locator.toString());
+        }
+    }
+
 
     public Boolean doesExist() {
         try {

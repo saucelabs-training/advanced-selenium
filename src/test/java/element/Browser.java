@@ -18,6 +18,10 @@ public class Browser {
         return new Element(description, locator, driver);
     }
 
+    public ButtonElement button(String description, By locator) {
+        return new ButtonElement(description, locator, driver);
+    }
+
     public ElementCollection elements(String description, By locator) {
         return new ElementCollection(description, locator, driver);
     }

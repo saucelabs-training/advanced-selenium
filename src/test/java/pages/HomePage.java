@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import test.java.data.User;
+import test.java.element.ButtonElement;
 import test.java.element.Element;
 import test.java.exceptions.PageValidationException;
 
@@ -14,7 +15,7 @@ public class HomePage extends BasePage {
 
     private Element usernameField = browser.element("Username Field", By.id("user-name"));
     private Element passwordField = browser.element("Password Field", By.id("password"));
-    private Element submitButton = browser.element("Submit Button", By.id("login-button"));
+    private ButtonElement submitButton = browser.button("Submit Button", By.id("login-button"));
     private Element errorMessage = browser.element("Error Message", By.cssSelector("[data-test=error]"));
 
     public static HomePage visit() {

@@ -10,15 +10,14 @@ public class InventoryPage extends BasePage {
     private static final String URL = "https://www.saucedemo.com/inventory.html";
 
     private ElementCollection inventoryItems = browser.elements("Inventory Item", By.className("inventory_item"));
-    private Element addToCartButton = browser.element("Add To Cart Button", By.tagName("button"));
+    private Element addToCartButton = browser.button("Add To Cart Button", By.tagName("button"));
+    private Element shoppingCartLink = browser.element("Shopping Cart Link", By.className("shopping_cart_link"));
 
     public static InventoryPage visit() {
         InventoryPage inventoryPage = new InventoryPage();
         driver.navigate().to(URL);
         return inventoryPage;
     }
-
-    private static final By SHOPPING_CART = By.className("shopping_cart_link");
 
     public boolean isOnPage() {
         return driver.getCurrentUrl().equals("https://www.saucedemo.com/inventory.html");
@@ -30,7 +29,7 @@ public class InventoryPage extends BasePage {
     }
 
     public void navigateToShoppingCart() {
-        browser.element("Shopping Cart Button", SHOPPING_CART).click();
+        shoppingCartLink.click();
         validateSuccessfulNavigation();
     }
 

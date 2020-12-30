@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import test.java.data.Person;
+import test.java.element.ButtonElement;
 import test.java.element.Element;
 import test.java.exceptions.PageValidationException;
 
@@ -15,7 +16,7 @@ public class InformationPage extends BasePage {
     private Element firstNameField = browser.element("First Name Field", By.id("first-name"));
     private Element lastNameField = browser.element("Last Name Field", By.id("last-name"));
     private Element postalCodeField = browser.element("Postal Code Field", By.id("postal-code"));
-    private Element submitButton = browser.element("Submit Button", By.className("cart_button"));
+    private ButtonElement submitButton = browser.button("Submit Button", By.className("cart_button"));
     private Element errorMessage = browser.element("Error Message", By.cssSelector("[data-test=error]"));
 
     public static InformationPage visit() {
