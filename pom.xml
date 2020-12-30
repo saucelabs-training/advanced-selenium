@@ -98,7 +98,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.1</version>
                 <configuration>
-                    <parallel>none</parallel>
+                    <parallel>all</parallel>
                     <threadCountMethods>30</threadCountMethods>
                     <useUnlimitedThreads>true</useUnlimitedThreads>
                     <redirectTestOutputToFile>false</redirectTestOutputToFile>
