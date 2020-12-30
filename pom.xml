@@ -98,10 +98,14 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.1</version>
                 <configuration>
-                    <parallel>all</parallel>
+                    <parallel>none</parallel>
                     <threadCountMethods>30</threadCountMethods>
                     <useUnlimitedThreads>true</useUnlimitedThreads>
                     <redirectTestOutputToFile>false</redirectTestOutputToFile>
+                    <includes>
+                        <include>**/AtomicTest.java</include>
+                        <include>**/AddressTest.java</include>
+                    </includes>
                 </configuration>
             </plugin>
             <plugin>
