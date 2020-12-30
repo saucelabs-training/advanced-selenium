@@ -1,6 +1,7 @@
 package test.java.projects;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import test.java.SauceTestBase;
 import test.java.data.address.Address;
@@ -40,12 +41,14 @@ public class AddressTest extends SauceTestBase {
         new NavBar().signOutSuccessfully();
 
         try {
-            new SignInPage().signInSuccessfully(user);
+            SignInPage signInPage = SignInPage.visit();
+            signInPage.signInSuccessfully(user);
         } catch (PageValidationException e) {
             Assert.fail(e.toString());
         }
     }
 
+    @Ignore
     @Test
     public void createAddress() {
         SignUpPage signUpPage = SignUpPage.visit();
@@ -59,6 +62,7 @@ public class AddressTest extends SauceTestBase {
         }
     }
 
+    @Ignore
     @Test
     public void editAddress() {
         SignUpPage signUpPage = SignUpPage.visit();
@@ -75,6 +79,7 @@ public class AddressTest extends SauceTestBase {
         }
     }
 
+    @Ignore
     @Test
     public void deleteAddress() {
         SignUpPage signUpPage = SignUpPage.visit();

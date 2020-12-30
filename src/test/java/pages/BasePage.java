@@ -3,6 +3,7 @@ package test.java.pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import test.java.app.App;
 import test.java.data.DataModel;
 import test.java.element.Browser;
 import test.java.element.Element;
@@ -17,7 +18,8 @@ public class BasePage {
     protected static WebDriver driver;
     protected static WebDriverWait wait;
     protected static final int DEFAULT_WAIT_TIME = 20;
-    private Set<Field> elements = new HashSet<Field>();
+    private Set<Field> elements = new HashSet<>();
+    protected App app = new App();
 
     public static Browser getBrowser() {
         return browser;

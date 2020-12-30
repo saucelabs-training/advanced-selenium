@@ -3,6 +3,7 @@ package test.java.pages.address;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import test.java.data.address.User;
 import test.java.element.Element;
 import test.java.exceptions.PageValidationException;
 import test.java.pages.BasePage;
@@ -17,7 +18,7 @@ public class NavBar extends BasePage {
         signOut.click();
 
         try {
-            wait.until((Function<WebDriver, Object>) driver -> !isLoggedIn());
+            wait.until((Function<WebDriver, Object>) driver -> !app.isAuthenticated());
         } catch (TimeoutException e) {
             throw new PageValidationException("Sign Out was not successful after " + DEFAULT_WAIT_TIME + " seconds; "
             + currentUser.getText() + " is still logged in");
@@ -26,5 +27,9 @@ public class NavBar extends BasePage {
 
     public boolean isLoggedIn() {
         return currentUser.doesExist();
+    }
+
+    public boolean isLoggedIn(User user) {
+        return currentUser.doesExist() && currentUser.getText().equals(user.getEmail());
     }
 }
