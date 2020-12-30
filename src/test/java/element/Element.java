@@ -4,7 +4,10 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import test.java.exceptions.PageValidationException;
 
+import java.time.Instant;
 import java.util.function.Function;
+
+import static java.util.concurrent.TimeUnit.SECONDS;
 
 public class Element {
     protected String description;
@@ -37,34 +40,59 @@ public class Element {
     }
 
     public void click() {
+        long expireTime = Instant.now().toEpochMilli() + SECONDS.toMillis(DEFAULT_WAIT_TIME);
+
         try {
             locateElement().click();
-        } catch (StaleElementReferenceException e) {
-            click();
+        } catch (StaleElementReferenceException | NotFoundException | InvalidElementStateException e) {
+            if (Instant.now().toEpochMilli() > expireTime) {
+                String message = "After attempting for " + DEFAULT_WAIT_TIME + " seconds, " + e.getMessage();
+                throw new PageValidationException(message);
+            } else {
+                element = null;
+                click();
+            }
         }
     }
 
     public void clear() {
+        long expireTime = Instant.now().toEpochMilli() + SECONDS.toMillis(DEFAULT_WAIT_TIME);
+
         try {
             locateElement().clear();
-        } catch (StaleElementReferenceException e) {
-            clear();
+        } catch (StaleElementReferenceException | NotFoundException | InvalidElementStateException e) {
+            if (Instant.now().toEpochMilli() > expireTime) {
+                String message = "After attempting for " + DEFAULT_WAIT_TIME + " seconds, " + e.getMessage();
+                throw new PageValidationException(message);
+            } else {
+                element = null;
+                clear();
+            }
         }
     }
 
     public void sendKeys(String string) {
+        long expireTime = Instant.now().toEpochMilli() + SECONDS.toMillis(DEFAULT_WAIT_TIME);
+
         try {
             locateElement().sendKeys(string);
-        } catch (StaleElementReferenceException e) {
-            sendKeys(string);
+        } catch (StaleElementReferenceException | NotFoundException | InvalidElementStateException e) {
+            if (Instant.now().toEpochMilli() > expireTime) {
+                String message = "After attempting for " + DEFAULT_WAIT_TIME + " seconds, " + e.getMessage();
+                throw new PageValidationException(message);
+            } else {
+                element = null;
+                sendKeys(string);
+            }
         }
     }
 
     protected WebElement locateElement() {
-        waitForExists();
-        element = driver.findElement(locator);
-        waitForDisplayed();
-        return element;
+        if (element == null) {
+            return driver.findElement(locator);
+        } else {
+            return element;
+        }
     }
 
     protected void waitForExists() {
@@ -102,9 +130,9 @@ public class Element {
 
     public NestedElement findElement(Element subElement) {
         if (element == null) {
-            locateElement();
+            waitForExists();
         }
 
-        return new NestedElement(subElement,this, driver);
+        return new NestedElement(subElement, this, driver);
     }
 }
