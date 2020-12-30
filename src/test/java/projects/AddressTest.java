@@ -7,6 +7,7 @@ import test.java.SauceTestBase;
 import test.java.data.address.Address;
 import test.java.data.address.User;
 import test.java.exceptions.PageValidationException;
+import test.java.pages.BasePage;
 import test.java.pages.address.*;
 
 public class AddressTest extends SauceTestBase {
@@ -23,8 +24,7 @@ public class AddressTest extends SauceTestBase {
 
     @Test
     public void logOut() {
-        SignUpPage signUpPage = SignUpPage.visit();
-        signUpPage.signupSuccessfully();
+        BasePage.getApp().authenticateNewUser();
 
         try {
             new NavBar().signOutSuccessfully();
@@ -35,10 +35,7 @@ public class AddressTest extends SauceTestBase {
 
     @Test
     public void logIn() {
-        SignUpPage signUpPage = SignUpPage.visit();
-        User user = new User();
-        signUpPage.signupSuccessfully(user);
-        new NavBar().signOutSuccessfully();
+        User user = BasePage.getApp().createNewUser();
 
         try {
             SignInPage signInPage = SignInPage.visit();
