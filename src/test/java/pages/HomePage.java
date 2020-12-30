@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import test.java.data.User;
+import test.java.element.Element;
 import test.java.exceptions.PageValidationException;
 
 import java.util.function.Function;
@@ -11,10 +12,10 @@ import java.util.function.Function;
 public class HomePage extends BasePage {
     private static final String URL = "https://www.saucedemo.com/";
 
-    private static final By USERNAME = By.id("user-name");
-    private static final By PASSWORD = By.id("password");
-    private static final By SUBMIT = By.id("login-button");
-    private static final By ERROR = By.cssSelector("[data-test=error]");
+    private Element usernameField = getElement("Username Field", By.id("user-name"));
+    private Element passwordField = getElement("Password Field", By.id("password"));
+    private Element submitButton = getElement("Submit Button", By.id("login-button"));
+    private Element errorMessage = getElement("Error Message", By.cssSelector("[data-test=error]"));
 
     public static HomePage visit() {
         HomePage homePage = new HomePage();
@@ -41,9 +42,9 @@ public class HomePage extends BasePage {
     }
 
     public void login(String username, String password) {
-        getElement("User Name", USERNAME).sendKeys(username);
-        getElement("Password", PASSWORD).sendKeys(password);
-        getElement("Submit Button", SUBMIT).click();
+        usernameField.sendKeys(username);
+        passwordField.sendKeys(password);
+        submitButton.click();
     }
 
     public boolean loginSuccessful() {
@@ -51,19 +52,19 @@ public class HomePage extends BasePage {
     }
 
     public boolean isLoginUnsuccessful() {
-        return !getElement("Error Message", ERROR).doesExist();
+        return !errorMessage.doesExist();
     }
 
     public boolean badLoginSuccessful() throws InterruptedException {
         Thread.sleep(5000);
-        return !getElement("Error Message", ERROR).doesExist();
+        return !errorMessage.doesExist();
     }
 
     public void validateSuccessfulLogin() {
         try {
             wait.until((Function<WebDriver, Object>) driver -> loginSuccessful());
         } catch (TimeoutException e) {
-            String message = driver.findElement(ERROR).getText();
+            String message = errorMessage.getText();
             throw new PageValidationException("Login was not successful after 5 seconds: " + message);
         }
     }

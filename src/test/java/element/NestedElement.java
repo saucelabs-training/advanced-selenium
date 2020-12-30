@@ -1,6 +1,5 @@
 package test.java.element;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -8,8 +7,8 @@ import org.openqa.selenium.WebElement;
 public class NestedElement extends Element {
     private Element scopeElement;
 
-    public NestedElement(String description, By locator, Element element, WebDriver driver) {
-        super(description, locator, driver);
+    public NestedElement(Element subElement, Element element, WebDriver driver) {
+        super(subElement.description, subElement.locator, driver);
         this.scopeElement = element;
     }
 
@@ -28,5 +27,4 @@ public class NestedElement extends Element {
         }
         return true;
     }
-
 }

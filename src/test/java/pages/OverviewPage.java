@@ -1,14 +1,16 @@
 package test.java.pages;
 
 import org.openqa.selenium.By;
+import test.java.element.Element;
 import test.java.exceptions.PageValidationException;
 
 public class OverviewPage extends BasePage {
     private static final String URL = "https://www.saucedemo.com/checkout-step-one.html";
-    private static final By FINISH_BUTTON = By.className("cart_button");
+
+    private Element finishButton = getElement("finishButton", By.className("cart_button"));
 
     public void finishSuccessfully() {
-        getElement("Finish Button", FINISH_BUTTON).click();
+        finishButton.click();
         validateSuccessfulNavigation();
     }
 

@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import test.java.data.Person;
+import test.java.element.Element;
 import test.java.exceptions.PageValidationException;
 
 import java.util.function.Function;
@@ -11,11 +12,11 @@ import java.util.function.Function;
 public class InformationPage extends BasePage {
     private static final String URL = "https://www.saucedemo.com/checkout-step-one.html";
 
-    private static final By FIRST_NAME = By.id("first-name");
-    private static final By LAST_NAME = By.id("last-name");
-    private static final By POSTAL_CODE = By.id("postal-code");
-    private static final By SUBMIT = By.className("cart_button");
-    private static final By ERROR = By.cssSelector("[data-test=error]");
+    private Element firstNameField = getElement("First Name Field", By.id("first-name"));
+    private Element lastNameField = getElement("Last Name Field", By.id("last-name"));
+    private Element postalCodeField = getElement("Postal Code Field", By.id("postal-code"));
+    private Element submitButton = getElement("Submit Button", By.className("cart_button"));
+    private Element errorMessage = getElement("Error Message", By.cssSelector("[data-test=error]"));
 
     public static InformationPage visit() {
         InformationPage informationPage = new InformationPage();
@@ -24,10 +25,10 @@ public class InformationPage extends BasePage {
     }
 
     public void submitInformation(String first, String last, String postal) {
-        getElement("First Name", FIRST_NAME).sendKeys(first);
-        getElement("Last Name", LAST_NAME).sendKeys(last);
-        getElement("Postal Code", POSTAL_CODE).sendKeys(postal);
-        getElement("Submit Button", SUBMIT).click();
+        firstNameField.sendKeys(first);
+        lastNameField.sendKeys(last);
+        postalCodeField.sendKeys(postal);
+        submitButton.click();
     }
 
     public void addInformationSuccessfully(String first, String last, String postal) {
@@ -39,7 +40,7 @@ public class InformationPage extends BasePage {
         try {
             wait.until((Function<WebDriver, Object>) driver -> informationAddSuccessful());
         } catch (TimeoutException e) {
-            String message = driver.findElement(ERROR).getText();
+            String message = errorMessage.getText();
             throw new PageValidationException("Information was not successful after 5 seconds: " + message);
         }
     }

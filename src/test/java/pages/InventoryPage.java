@@ -9,8 +9,8 @@ import test.java.exceptions.PageValidationException;
 public class InventoryPage extends BasePage {
     private static final String URL = "https://www.saucedemo.com/inventory.html";
 
-    private static final By INVENTORY_ITEM = By.className("inventory_item");
-    private static final By BUTTON = By.tagName("button");
+    private ElementCollection inventoryItems = getElements("Inventory Item", By.className("inventory_item"));
+    private Element addToCartButton = getElement("Add To Cart Button", By.tagName("button"));
 
     public static InventoryPage visit() {
         InventoryPage inventoryPage = new InventoryPage();
@@ -25,9 +25,8 @@ public class InventoryPage extends BasePage {
     }
 
     public void selectProduct(String product) {
-        ElementCollection inventoryItems = getElements("Inventory Item", INVENTORY_ITEM);
         Element matchingSubstring = inventoryItems.findMatchingSubstring(product);
-        matchingSubstring.findElement("Select Button", BUTTON).click();
+        matchingSubstring.findElement(addToCartButton).click();
     }
 
     public void navigateToShoppingCart() {

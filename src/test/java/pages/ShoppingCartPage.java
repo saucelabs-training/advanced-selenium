@@ -2,13 +2,15 @@ package test.java.pages;
 
 import org.openqa.selenium.By;
 import test.java.data.Product;
+import test.java.element.Element;
 import test.java.element.ElementCollection;
 import test.java.exceptions.PageValidationException;
 
 public class ShoppingCartPage extends BasePage {
     private static final String URL = "https://www.saucedemo.com/cart.html";
-    private static final By INVENTORY_ITEM_NAME = By.className("inventory_item_name");
-    private static final By CHECKOUT_PAGE = By.className("checkout_button");
+
+    private ElementCollection inventoryItems = getElements("Inventory Item", By.className("inventory_item_name"));
+    private Element checkoutPageButton = getElement("Checkout Page Button", By.className("checkout_button"));
 
     public static ShoppingCartPage visit() {
         ShoppingCartPage shoppingCartPage = new ShoppingCartPage();
@@ -17,7 +19,7 @@ public class ShoppingCartPage extends BasePage {
     }
 
     public void checkOutSuccessfully() {
-        getElement("Checkout Page Button", CHECKOUT_PAGE).click();
+        checkoutPageButton.click();
     }
 
     public boolean isOnPage() {
@@ -26,7 +28,6 @@ public class ShoppingCartPage extends BasePage {
 
     public void validateItem(String product) {
         try {
-            ElementCollection inventoryItems = getElements("Inventory Item", INVENTORY_ITEM_NAME);
             inventoryItems.findMatchingSubstring(product);
         } catch (PageValidationException e) {
             throw new PageValidationException("Unable to find this product in the cart: "

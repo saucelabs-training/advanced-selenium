@@ -100,11 +100,11 @@ public class Element {
         return this.element;
     }
 
-    public NestedElement findElement(String description, By locator) {
+    public NestedElement findElement(Element subElement) {
         if (element == null) {
             locateElement();
         }
 
-        return new NestedElement(description, locator, this, driver);
+        return new NestedElement(subElement,this, driver);
     }
 }
