@@ -19,7 +19,7 @@ public class BasePage {
     protected static WebDriverWait wait;
     protected static final int DEFAULT_WAIT_TIME = 20;
     private Set<Field> elements = new HashSet<>();
-    protected static App app = new App();
+    protected static App app;
 
     public static Browser getBrowser() {
         return browser;
@@ -29,6 +29,7 @@ public class BasePage {
         browser = new Browser(driver);
         BasePage.driver = browser.getDriver();
         wait = new WebDriverWait(driver, DEFAULT_WAIT_TIME);
+        app = new App(driver);
     }
 
     public static App getApp() {
