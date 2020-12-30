@@ -71,6 +71,11 @@
             <artifactId>sauce_bindings</artifactId>
             <version>1.0.1</version>
         </dependency>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>4.3.3</version>
+        </dependency>
     </dependencies>
 
     <build>
