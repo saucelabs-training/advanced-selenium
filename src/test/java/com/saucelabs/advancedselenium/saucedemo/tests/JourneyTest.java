@@ -1,11 +1,36 @@
 package com.saucelabs.advancedselenium.saucedemo.tests;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
+
+import java.io.File;
 
 public class JourneyTest {
+    RemoteWebDriver driver;
+
+    @BeforeEach
+    public void setup() {
+        WebDriverManager.chromedriver().setup();
+        ChromeOptions options = new ChromeOptions();
+        options.addExtensions(new File("src/test/resources/selectorsHub.crx"));
+        driver = new ChromeDriver(options);
+    }
+
+    @AfterEach
+    public void tearDown() {
+        driver.quit();
+    }
 
     @Test
-    public void userJourney() {
+    public void userJourney() throws InterruptedException {
         // Go to Sauce Demo Site
         // Attempt Sign in with locked user
         // Validate error
