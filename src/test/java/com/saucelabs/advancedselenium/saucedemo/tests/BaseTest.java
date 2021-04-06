@@ -24,14 +24,22 @@ public class BaseTest {
     public class MyTestWatcher implements TestWatcher {
         @Override
         public void testFailed(ExtensionContext context, Throwable cause) {
-            System.out.println("Test Failed!");
-            driver.quit();
+            try {
+                System.out.println("Test Failed!");
+            } catch (Exception ignored) {
+            } finally {
+                driver.quit();
+            }
         }
 
         @Override
         public void testSuccessful(ExtensionContext context) {
-            System.out.println("Test Passed!");
-            driver.quit();
+            try {
+                System.out.println("Test Passed!");
+            } catch (Exception ignored) {
+            } finally {
+                driver.quit();
+            }
         }
 
         @Override
