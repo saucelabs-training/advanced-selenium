@@ -1,6 +1,7 @@
 package test.java.com.saucelabs.advancedselenium.saucedemo.tests;
 
 import com.saucelabs.saucebindings.SauceOptions;
+import com.saucelabs.saucebindings.SaucePlatform;
 import com.saucelabs.saucebindings.SauceSession;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.BeforeEach;
@@ -54,6 +55,9 @@ public class BaseTest {
         if (platform != null && platform.equals("SAUCE")) {
             SauceOptions sauceOptions = new SauceOptions(chromeOptions);
             sauceOptions.setName(testinfo.getDisplayName());
+            sauceOptions.setPlatformName(SaucePlatform.MAC_CATALINA);
+            sauceOptions.setExtendedDebugging(true);
+            sauceOptions.setIdleTimeout(30);
 
             session = new SauceSession(sauceOptions);
             driver = session.start();
