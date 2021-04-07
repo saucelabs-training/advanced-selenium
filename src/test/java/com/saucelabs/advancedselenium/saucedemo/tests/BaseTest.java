@@ -14,6 +14,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
+import java.io.File;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -37,8 +39,18 @@ public class BaseTest {
         timeouts.put("script", 60000);
         chromeOptions.setCapability("timeouts", timeouts);
 
-        String platform = System.getProperty("SELENIUM_PLATFORM");
+        // Start Full Screen
+        chromeOptions.addArguments("start-fullscreen");
 
+        // Add Extension
+        File ext = new File("src/test/java/com/saucelabs/advancedselenium/saucedemo/ninja-saucebot.crx");
+        chromeOptions.addExtensions(ext);
+
+        // Restore Popup Blocking
+        chromeOptions.setExperimentalOption("excludeSwitches",
+                Collections.singletonList("disable-popup-blocking"));
+
+        String platform = System.getProperty("SELENIUM_PLATFORM");
         if (platform != null && platform.equals("SAUCE")) {
             SauceOptions sauceOptions = new SauceOptions(chromeOptions);
             sauceOptions.setName(testinfo.getDisplayName());
