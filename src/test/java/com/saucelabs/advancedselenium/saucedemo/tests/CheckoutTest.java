@@ -23,22 +23,6 @@ public class CheckoutTest {
     }
 
     @Test
-    public void badInfo() {
-        driver.get("https://www.saucedemo.com/");
-        driver.findElement(By.id("user-name")).sendKeys("standard_user");
-        driver.findElement(By.id("password")).sendKeys("secret_sauce");
-        driver.findElement(By.id("login-button")).click();
-        driver.findElement(By.id("add-to-cart-sauce-labs-onesie")).click();
-        driver.findElement(By.className("shopping_cart_link")).click();
-        driver.findElement(By.id("checkout")).click();
-
-        driver.findElement(By.id("continue")).click();
-
-        Assertions.assertTrue(driver.findElement(By.id("first-name")).getAttribute("class").contains("error"),
-                "Expected error not found on page");
-    }
-
-    @Test
     public void goodInfo() {
         driver.get("https://www.saucedemo.com/");
         driver.findElement(By.id("user-name")).sendKeys("standard_user");
