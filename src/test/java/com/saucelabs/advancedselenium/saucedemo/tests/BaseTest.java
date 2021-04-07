@@ -8,10 +8,14 @@ import org.junit.jupiter.api.TestInfo;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.junit.jupiter.api.extension.TestWatcher;
+import org.openqa.selenium.PageLoadStrategy;
+import org.openqa.selenium.UnexpectedAlertBehaviour;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 public class BaseTest {
@@ -24,6 +28,15 @@ public class BaseTest {
     @BeforeEach
     public void setUp(TestInfo testinfo) {
         ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.setAcceptInsecureCerts(true);
+        chromeOptions.setPageLoadStrategy(PageLoadStrategy.EAGER);
+        chromeOptions.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.IGNORE);
+
+        Map<String, Integer> timeouts = new HashMap<String, Integer>();
+        timeouts.put("pageLoad", 60000);
+        timeouts.put("script", 60000);
+        chromeOptions.setCapability("timeouts", timeouts);
+
         String platform = System.getProperty("SELENIUM_PLATFORM");
 
         if (platform != null && platform.equals("SAUCE")) {
