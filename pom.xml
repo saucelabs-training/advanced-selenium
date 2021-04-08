@@ -95,6 +95,7 @@
                 <configuration>
                     <systemPropertyVariables>
                         <SELENIUM_PLATFORM>SAUCE</SELENIUM_PLATFORM>
+                        <PLATFORM_VALUES>firefox_windows</PLATFORM_VALUES>
                     </systemPropertyVariables>
                     <properties>
                         <configurationParameters>

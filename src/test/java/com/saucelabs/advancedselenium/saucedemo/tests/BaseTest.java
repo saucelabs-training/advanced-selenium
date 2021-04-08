@@ -1,7 +1,6 @@
 package test.java.com.saucelabs.advancedselenium.saucedemo.tests;
 
 import com.saucelabs.saucebindings.SauceOptions;
-import com.saucelabs.saucebindings.SaucePlatform;
 import com.saucelabs.saucebindings.SauceSession;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,8 +13,12 @@ import org.openqa.selenium.UnexpectedAlertBehaviour;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.yaml.snakeyaml.Yaml;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -30,41 +33,59 @@ public class BaseTest {
 
     @BeforeEach
     public void setUp(TestInfo testinfo) {
-        ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.setAcceptInsecureCerts(true);
-        chromeOptions.setPageLoadStrategy(PageLoadStrategy.EAGER);
-        chromeOptions.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.IGNORE);
-
-        Map<String, Integer> timeouts = new HashMap<String, Integer>();
-        timeouts.put("pageLoad", 60000);
-        timeouts.put("script", 60000);
-        chromeOptions.setCapability("timeouts", timeouts);
-
-        // Start Full Screen
-        chromeOptions.addArguments("start-fullscreen");
-
-        // Add Extension
-        File ext = new File("src/test/java/com/saucelabs/advancedselenium/saucedemo/ninja-saucebot.crx");
-        chromeOptions.addExtensions(ext);
-
-        // Restore Popup Blocking
-        chromeOptions.setExperimentalOption("excludeSwitches",
-                Collections.singletonList("disable-popup-blocking"));
-
         String platform = System.getProperty("SELENIUM_PLATFORM");
         if (platform != null && platform.equals("SAUCE")) {
-            SauceOptions sauceOptions = new SauceOptions(chromeOptions);
+            SauceOptions sauceOptions = new SauceOptions();
             sauceOptions.setName(testinfo.getDisplayName());
-            sauceOptions.setPlatformName(SaucePlatform.MAC_CATALINA);
-            sauceOptions.setExtendedDebugging(true);
-            sauceOptions.setIdleTimeout(30);
+
+            String configs = System.getProperty("PLATFORM_VALUES");
+            if (configs != null) {
+                Map<String, Object> map = serialize(configs);
+
+                sauceOptions.mergeCapabilities(map);
+            }
 
             session = new SauceSession(sauceOptions);
             driver = session.start();
         } else {
+            // TODO: Show how to iterate over Mutable Capabilities for these
             WebDriverManager.chromedriver().setup();
+            ChromeOptions chromeOptions = new ChromeOptions();
+
+            // Start Full Screen
+            chromeOptions.addArguments("start-fullscreen");
+
+            // Add Extension
+            File ext = new File("src/test/java/com/saucelabs/advancedselenium/saucedemo/ninja-saucebot.crx");
+            chromeOptions.addExtensions(ext);
+
+            // Restore Popup Blocking
+            chromeOptions.setExperimentalOption("excludeSwitches",
+                    Collections.singletonList("disable-popup-blocking"));
+
+            chromeOptions.setAcceptInsecureCerts(true);
+            chromeOptions.setPageLoadStrategy(PageLoadStrategy.EAGER);
+            chromeOptions.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.IGNORE);
+
+            Map<String, Integer> timeouts = new HashMap<>();
+            timeouts.put("pageLoad", 60000);
+            timeouts.put("script", 60000);
+            chromeOptions.setCapability("timeouts", timeouts);
+
             driver = new ChromeDriver(chromeOptions);
         }
+    }
+
+    public Map<String, Object> serialize(String key) {
+        String path = "src/test/java/com/saucelabs/advancedselenium/saucedemo/config.yml";
+        InputStream input = null;
+        try {
+            input = new FileInputStream(path);
+        } catch (FileNotFoundException ignored) {
+        }
+        Yaml yaml = new Yaml();
+        Map<String, Object> data = yaml.load(input);
+        return (Map<String, Object>) data.get(key);
     }
 
     public class MyTestWatcher implements TestWatcher {
