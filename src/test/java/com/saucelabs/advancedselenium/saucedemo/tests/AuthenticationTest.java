@@ -2,44 +2,48 @@ package test.java.com.saucelabs.advancedselenium.saucedemo.tests;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
+import test.java.com.saucelabs.advancedselenium.saucedemo.pages.HomePage;
+import test.java.com.saucelabs.advancedselenium.saucedemo.pages.InventoryPage;
 
 public class AuthenticationTest extends BaseTest {
     @Test
     public void signInUnsuccessful() {
-        driver.get("https://www.saucedemo.com/");
+        HomePage homePage = new HomePage(driver);
+        driver.get(homePage.getUrl());
 
-        driver.findElement(By.id("user-name")).sendKeys("locked_out_user");
-        driver.findElement(By.id("password")).sendKeys("secret_sauce");
-        driver.findElement(By.id("login-button")).click();
+        homePage.getUsernameElement().sendKeys("locked_out_user");
+        homePage.getPasswordElement().sendKeys("secret_sauce");
+        homePage.getSubmitElement().click();
 
-        WebElement errorElement = driver.findElement(By.cssSelector("[data-test=error]"));
-        Assertions.assertTrue(errorElement.getText().contains("Sorry, this user has been locked out"));
+        Assertions.assertTrue(homePage.getErrorElement().getText().contains("Sorry, this user has been locked out"));
     }
 
     @Test
     public void signInSuccessful() {
-        driver.get("https://www.saucedemo.com/");
+        HomePage homePage = new HomePage(driver);
+        driver.get(homePage.getUrl());
 
-        driver.findElement(By.id("user-name")).sendKeys("standard_user");
-        driver.findElement(By.id("password")).sendKeys("secret_sauce");
-        driver.findElement(By.id("login-button")).click();
+        homePage.getUsernameElement().sendKeys("standard_user");
+        homePage.getPasswordElement().sendKeys("secret_sauce");
+        homePage.getSubmitElement().click();
+        InventoryPage inventoryPage = new InventoryPage(driver);
 
-        Assertions.assertEquals("https://www.saucedemo.com/inventory.html", driver.getCurrentUrl());
+        Assertions.assertEquals(inventoryPage.getUrl(), driver.getCurrentUrl());
     }
 
     @Test
     public void logout() throws InterruptedException {
-        driver.get("https://www.saucedemo.com/");
-        driver.findElement(By.id("user-name")).sendKeys("standard_user");
-        driver.findElement(By.id("password")).sendKeys("secret_sauce");
-        driver.findElement(By.id("login-button")).click();
-        driver.findElement(By.id("react-burger-menu-btn")).click();
+        HomePage homePage = new HomePage(driver);
+        driver.get(homePage.getUrl());
+        homePage.getUsernameElement().sendKeys("standard_user");
+        homePage.getPasswordElement().sendKeys("secret_sauce");
+        homePage.getSubmitElement().click();
+        InventoryPage inventoryPage = new InventoryPage(driver);
+
+        inventoryPage.getMenuButton().click();
         Thread.sleep(1000);
+        inventoryPage.getLogoutLink().click();
 
-        driver.findElement(By.id("logout_sidebar_link")).click();
-
-        Assertions.assertEquals("https://www.saucedemo.com/", driver.getCurrentUrl());
+        Assertions.assertEquals(homePage.getUrl(), driver.getCurrentUrl());
     }
 }
