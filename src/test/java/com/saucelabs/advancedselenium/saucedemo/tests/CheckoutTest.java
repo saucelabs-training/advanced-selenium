@@ -2,47 +2,56 @@ package test.java.com.saucelabs.advancedselenium.saucedemo.tests;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
+import test.java.com.saucelabs.advancedselenium.saucedemo.pages.*;
 
 public class CheckoutTest extends BaseTest {
 
     @Test
     public void goodInfo() {
-        driver.get("https://www.saucedemo.com/");
-        driver.findElement(By.id("user-name")).sendKeys("standard_user");
-        driver.findElement(By.id("password")).sendKeys("secret_sauce");
-        driver.findElement(By.id("login-button")).click();
-        driver.findElement(By.id("add-to-cart-sauce-labs-onesie")).click();
-        driver.findElement(By.className("shopping_cart_link")).click();
-        driver.findElement(By.id("checkout")).click();
+        HomePage homePage = new HomePage(driver);
+        driver.get(homePage.getUrl());
+        homePage.getUsernameElement().sendKeys("standard_user");
+        homePage.getPasswordElement().sendKeys("secret_sauce");
+        homePage.getSubmitElement().click();
+        InventoryPage inventoryPage = new InventoryPage(driver);
+        inventoryPage.getAddOnesieButton().click();
+        inventoryPage.getCartImageLink().click();
+        CartPage cartPage = new CartPage(driver);
+        cartPage.getCheckoutButton().click();
+        InformationPage informationPage = new InformationPage(driver);
+        informationPage.getFirstNameElement().sendKeys("Luke");
+        informationPage.getLastNameElement().sendKeys("Perry");
+        informationPage.getPostalCodeElement().sendKeys("90210");
 
-        driver.findElement(By.id("first-name")).sendKeys("Luke");
-        driver.findElement(By.id("last-name")).sendKeys("Perry");
-        driver.findElement(By.id("postal-code")).sendKeys("90210");
+        informationPage.getContinueButton().click();
 
-        driver.findElement(By.id("continue")).click();
-
-        Assertions.assertEquals("https://www.saucedemo.com/checkout-step-two.html", driver.getCurrentUrl());
+        CheckoutPage checkoutPage = new CheckoutPage(driver);
+        Assertions.assertEquals(checkoutPage.getUrl(), driver.getCurrentUrl());
     }
 
     @Test
     public void completeCheckout() {
-        driver.get("https://www.saucedemo.com/");
-        driver.findElement(By.id("user-name")).sendKeys("standard_user");
-        driver.findElement(By.id("password")).sendKeys("secret_sauce");
-        driver.findElement(By.id("login-button")).click();
-        driver.findElement(By.id("add-to-cart-sauce-labs-onesie")).click();
-        driver.findElement(By.className("shopping_cart_link")).click();
-        driver.findElement(By.id("checkout")).click();
-        driver.findElement(By.id("first-name")).sendKeys("Luke");
-        driver.findElement(By.id("last-name")).sendKeys("Perry");
-        driver.findElement(By.id("postal-code")).sendKeys("90210");
-        driver.findElement(By.id("continue")).click();
+        HomePage homePage = new HomePage(driver);
+        driver.get(homePage.getUrl());
+        homePage.getUsernameElement().sendKeys("standard_user");
+        homePage.getPasswordElement().sendKeys("secret_sauce");
+        homePage.getSubmitElement().click();
+        InventoryPage inventoryPage = new InventoryPage(driver);
+        inventoryPage.getAddOnesieButton().click();
+        inventoryPage.getCartImageLink().click();
+        CartPage cartPage = new CartPage(driver);
+        cartPage.getCheckoutButton().click();
+        InformationPage informationPage = new InformationPage(driver);
+        informationPage.getFirstNameElement().sendKeys("Luke");
+        informationPage.getLastNameElement().sendKeys("Perry");
+        informationPage.getPostalCodeElement().sendKeys("90210");
+        informationPage.getContinueButton().click();
+        CheckoutPage checkoutPage = new CheckoutPage(driver);
 
-        driver.findElement(By.id("finish")).click();
+        checkoutPage.getFinishButton().click();
 
-        Assertions.assertEquals("https://www.saucedemo.com/checkout-complete.html", driver.getCurrentUrl());
-
-        Assertions.assertTrue(driver.findElement(By.className("complete-text")).isDisplayed());
+        FinishPage finishPage = new FinishPage(driver);
+        Assertions.assertEquals(FinishPage.getUrl(), driver.getCurrentUrl());
+        Assertions.assertTrue(finishPage.getCompleteElement().getText().contains("Your order has been dispatched"));
     }
 }
