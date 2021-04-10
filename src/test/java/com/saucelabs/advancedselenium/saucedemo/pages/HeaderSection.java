@@ -2,6 +2,7 @@ package test.java.com.saucelabs.advancedselenium.saucedemo.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import test.java.com.saucelabs.advancedselenium.resources.pages.BasePage;
 
 public class HeaderSection extends BasePage {
     private final By menuButton = By.id("react-burger-menu-btn");

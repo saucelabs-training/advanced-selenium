@@ -1,4 +1,4 @@
-package test.java.com.saucelabs.advancedselenium.saucedemo.pages;
+package test.java.com.saucelabs.advancedselenium.resources.pages;
 
 import org.openqa.selenium.remote.RemoteWebDriver;
 

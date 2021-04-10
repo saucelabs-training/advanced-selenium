@@ -2,6 +2,7 @@ package test.java.com.saucelabs.advancedselenium.saucedemo.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import test.java.com.saucelabs.advancedselenium.resources.pages.BasePage;
 
 public class InventoryPage extends BasePage {
     private final By boltShirtLink = By.id("item_1_title_link");
