@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import test.java.com.saucelabs.advancedselenium.resources.exceptions.PageValidationException;
 import test.java.com.saucelabs.advancedselenium.resources.pages.BasePage;
+import test.java.com.saucelabs.advancedselenium.saucedemo.data.User;
 
 import java.util.function.Function;
 
@@ -20,8 +21,8 @@ public class HomePage extends BasePage {
         this.pageUrl = "https://www.saucedemo.com/";
     }
 
-    public void loginSuccessfully(String user, String password) {
-        login(user, password);
+    public void loginSuccessfully(User user) {
+        login(user);
         try {
             wait.until((Function<WebDriver, Object>) driver -> !isOnPage());
         } catch (TimeoutException ex) {
@@ -29,12 +30,12 @@ public class HomePage extends BasePage {
         }
     }
 
-    public void loginLockedOutUserUnsuccessfully(String user, String password) {
-        loginUnsuccessfully(user, password, "Sorry, this user has been locked out");
+    public void loginLockedOutUserUnsuccessfully(User user) {
+        loginUnsuccessfully(user, "Sorry, this user has been locked out");
     }
 
-    public void loginUnsuccessfully(String user, String password, String msg) {
-        login(user, password);
+    public void loginUnsuccessfully(User user, String msg) {
+        login(user);
         try {
             wait.until((Function<WebDriver, Object>) driver -> isElementPresent("errorElement"));
             if (getError().contains(msg)) {
@@ -46,9 +47,9 @@ public class HomePage extends BasePage {
                 + ", but none found; Current page is: " + driver.getCurrentUrl());
     }
 
-    private void login(String user, String password) {
-        getElement("usernameTextField").sendKeys(user);
-        getElement("passwordTextField").sendKeys(password);
+    private void login(User user) {
+        getElement("usernameTextField").sendKeys(user.getUser());
+        getElement("passwordTextField").sendKeys(user.getPassword());
         getElement("submitButton").click();
     }
 
