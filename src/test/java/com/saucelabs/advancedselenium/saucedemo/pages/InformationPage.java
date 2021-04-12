@@ -6,15 +6,20 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 public class InformationPage {
     private RemoteWebDriver driver;
 
+    private final By firstNameTextField = By.id("first-name");
+    private final By lastNameTextField = By.id("last-name");
+    private final By postalCodeTextField = By.id("postal-code");
+    private final By continueButton = By.id("continue");
+
     public InformationPage(RemoteWebDriver driver) {
         this.driver = driver;
     }
 
     public CheckoutPage submitForm(String firstName, String lastName, String postalCode) {
-        driver.findElement(By.id("first-name")).sendKeys(firstName);
-        driver.findElement(By.id("last-name")).sendKeys(lastName);
-        driver.findElement(By.id("postal-code")).sendKeys(postalCode);
-        driver.findElement(By.id("continue")).click();
+        driver.findElement(firstNameTextField).sendKeys(firstName);
+        driver.findElement(lastNameTextField).sendKeys(lastName);
+        driver.findElement(postalCodeTextField).sendKeys(postalCode);
+        driver.findElement(continueButton).click();
         return new CheckoutPage(driver);
     }
 }

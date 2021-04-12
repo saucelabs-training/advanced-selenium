@@ -6,6 +6,8 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 public class CheckoutPage {
     private RemoteWebDriver driver;
 
+    private final By finishButton = By.id("finish");
+
     public CheckoutPage(RemoteWebDriver driver) {
         this.driver = driver;
     }
@@ -15,7 +17,7 @@ public class CheckoutPage {
     }
 
     public FinishPage finish() {
-        driver.findElement(By.id("finish")).click();
+        driver.findElement(finishButton).click();
         return new FinishPage(driver);
     }
 }

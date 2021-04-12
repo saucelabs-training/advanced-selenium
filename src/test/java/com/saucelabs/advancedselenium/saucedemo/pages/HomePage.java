@@ -6,19 +6,24 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 public class HomePage {
     private RemoteWebDriver driver;
 
+    private final By usernameTextField = By.id("user-name");
+    private final By passwordTextField = By.id("password");
+    private final By submitButton = By.id("login-button");
+    private final By errorElement = By.cssSelector("[data-test=error]");
+
     public HomePage(RemoteWebDriver driver) {
         driver.get("https://www.saucedemo.com/");
         this.driver = driver;
     }
 
     public InventoryPage login(String user, String password) {
-        driver.findElement(By.id("user-name")).sendKeys(user);
-        driver.findElement(By.id("password")).sendKeys(password);
-        driver.findElement(By.id("login-button")).click();
+        driver.findElement(usernameTextField).sendKeys(user);
+        driver.findElement(passwordTextField).sendKeys(password);
+        driver.findElement(submitButton).click();
         return new InventoryPage(driver);
     }
 
     public String getError() {
-        return driver.findElement(By.cssSelector("[data-test=error]")).getText();
+        return driver.findElement(errorElement).getText();
     }
 }
