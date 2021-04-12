@@ -8,7 +8,7 @@ public class CheckoutTest extends BaseTest {
 
     @Test
     public void goodInfo() {
-        InventoryPage inventoryPage = new InventoryPage(driver);
+        InventoryPage inventoryPage = new InventoryPage(driver).visit();
         inventoryPage.addBackpackToCart();
         inventoryPage.addBikeLightToCart();
         CartPage cartPage = inventoryPage.goToCart();
@@ -21,7 +21,7 @@ public class CheckoutTest extends BaseTest {
 
     @Test
     public void completeCheckout() {
-        InventoryPage inventoryPage = new InventoryPage(driver);
+        InventoryPage inventoryPage = new InventoryPage(driver).visit();
         inventoryPage.addBackpackToCart();
         inventoryPage.addBikeLightToCart();
         CartPage cartPage = inventoryPage.goToCart();

@@ -10,7 +10,7 @@ public class CartTest extends BaseTest {
 
     @Test
     public void addFromProductPage() {
-        InventoryPage inventoryPage = new InventoryPage(driver);
+        InventoryPage inventoryPage = new InventoryPage(driver).visit();
         ProductPage productPage = inventoryPage.selectBoltTshirt();
 
         productPage.addToCart();
@@ -20,7 +20,7 @@ public class CartTest extends BaseTest {
 
     @Test
     public void removeFromProductPage() {
-        InventoryPage inventoryPage = new InventoryPage(driver);
+        InventoryPage inventoryPage = new InventoryPage(driver).visit();
         ProductPage productPage = inventoryPage.selectBoltTshirt();
         productPage.addToCart();
 
@@ -31,7 +31,7 @@ public class CartTest extends BaseTest {
 
     @Test
     public void addFromInventoryPage() {
-        InventoryPage inventoryPage = new InventoryPage(driver);
+        InventoryPage inventoryPage = new InventoryPage(driver).visit();
 
         inventoryPage.addOnesieToCart();
 
@@ -40,7 +40,7 @@ public class CartTest extends BaseTest {
 
     @Test
     public void removeFromInventoryPage() {
-        InventoryPage inventoryPage = new InventoryPage(driver);
+        InventoryPage inventoryPage = new InventoryPage(driver).visit();
 
         inventoryPage.addBikeLightToCart();
         inventoryPage.removeBikeLightFromCart();
@@ -50,7 +50,7 @@ public class CartTest extends BaseTest {
 
     @Test
     public void removeFromCartPage() {
-        InventoryPage inventoryPage = new InventoryPage(driver);
+        InventoryPage inventoryPage = new InventoryPage(driver).visit();
         inventoryPage.addBackpackToCart();
         inventoryPage.addBikeLightToCart();
         CartPage cartPage = inventoryPage.goToCart();
