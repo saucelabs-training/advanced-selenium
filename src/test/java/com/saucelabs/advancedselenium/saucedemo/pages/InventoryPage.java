@@ -1,10 +1,7 @@
 package test.java.com.saucelabs.advancedselenium.saucedemo.pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
-
-import java.util.List;
 
 public class InventoryPage {
     private RemoteWebDriver driver;
@@ -13,47 +10,56 @@ public class InventoryPage {
         this.driver = driver;
     }
 
-    public String getUrl() {
-        return "https://www.saucedemo.com/inventory.html";
+    public boolean isOnPage() {
+        return driver.getCurrentUrl().equals("https://www.saucedemo.com/inventory.html");
     }
 
-    public WebElement getMenuButton() {
-        return driver.findElement(By.id("react-burger-menu-btn"));
+    public HomePage logout() {
+        driver.findElement(By.id("react-burger-menu-btn")).click();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        driver.findElement(By.id("logout_sidebar_link")).click();
+        return new HomePage(driver);
     }
 
-    public WebElement getLogoutLink() {
-        return driver.findElement(By.id("logout_sidebar_link"));
+    public ProductPage selectBoltTshirt() {
+        driver.findElement(By.id("item_1_title_link")).click();
+        return new ProductPage(driver);
     }
 
-    public WebElement getBoltTShirtLink() {
-        return driver.findElement(By.id("item_1_title_link"));
+    public InventoryPage addOnesieToCart() {
+        driver.findElement(By.id("add-to-cart-sauce-labs-onesie")).click();
+        return new InventoryPage(driver);
     }
 
-    public WebElement getAddOnesieButton() {
-        return driver.findElement(By.id("add-to-cart-sauce-labs-onesie"));
+    public int cartItems() {
+        if (driver.findElements(By.className("shopping_cart_badge")).isEmpty()) {
+            return 0;
+        } else {
+            return Integer.parseInt(driver.findElement(By.className("shopping_cart_badge")).getText());
+        }
     }
 
-    public WebElement getCartNumberElement() {
-        return driver.findElement(By.className("shopping_cart_badge"));
+    public InventoryPage addBikeLightToCart() {
+        driver.findElement(By.id("add-to-cart-sauce-labs-bike-light")).click();
+        return new InventoryPage(driver);
     }
 
-    public WebElement getAddBikeLightButton() {
-        return driver.findElement(By.id("add-to-cart-sauce-labs-bike-light"));
+    public InventoryPage removeBikeLightFromCart() {
+        driver.findElement(By.id("remove-sauce-labs-bike-light")).click();
+        return new InventoryPage(driver);
     }
 
-    public WebElement getRemoveBikeLightButton() {
-        return driver.findElement(By.id("remove-sauce-labs-bike-light"));
+    public InventoryPage addBackpackToCart() {
+        driver.findElement(By.id("add-to-cart-sauce-labs-backpack")).click();
+        return new InventoryPage(driver);
     }
 
-    public List getCartNumberElements() {
-        return driver.findElements(By.className("shopping_cart_badge"));
-    }
-
-    public WebElement getAddBackpackButton() {
-        return driver.findElement(By.id("add-to-cart-sauce-labs-backpack"));
-    }
-
-    public WebElement getCartImageLink() {
-        return driver.findElement(By.className("shopping_cart_link"));
+    public CartPage goToCart() {
+        driver.findElement(By.className("shopping_cart_link")).click();
+        return new CartPage(driver);
     }
 }

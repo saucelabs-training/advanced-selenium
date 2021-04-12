@@ -9,41 +9,28 @@ public class AuthenticationTest extends BaseTest {
     @Test
     public void signInUnsuccessful() {
         HomePage homePage = new HomePage(driver);
-        driver.get(homePage.getUrl());
 
-        homePage.getUsernameElement().sendKeys("locked_out_user");
-        homePage.getPasswordElement().sendKeys("secret_sauce");
-        homePage.getSubmitElement().click();
+        homePage.login("locked_out_user", "secret_sauce");
 
-        Assertions.assertTrue(homePage.getErrorElement().getText().contains("Sorry, this user has been locked out"));
+        Assertions.assertTrue(homePage.getError().contains("Sorry, this user has been locked out"));
     }
 
     @Test
     public void signInSuccessful() {
         HomePage homePage = new HomePage(driver);
-        driver.get(homePage.getUrl());
 
-        homePage.getUsernameElement().sendKeys("standard_user");
-        homePage.getPasswordElement().sendKeys("secret_sauce");
-        homePage.getSubmitElement().click();
-        InventoryPage inventoryPage = new InventoryPage(driver);
+        InventoryPage inventoryPage = homePage.login("standard_user", "secret_sauce");
 
-        Assertions.assertEquals(inventoryPage.getUrl(), driver.getCurrentUrl());
+        Assertions.assertTrue(inventoryPage.isOnPage());
     }
 
     @Test
-    public void logout() throws InterruptedException {
+    public void logout() {
         HomePage homePage = new HomePage(driver);
-        driver.get(homePage.getUrl());
-        homePage.getUsernameElement().sendKeys("standard_user");
-        homePage.getPasswordElement().sendKeys("secret_sauce");
-        homePage.getSubmitElement().click();
-        InventoryPage inventoryPage = new InventoryPage(driver);
+        InventoryPage inventoryPage = homePage.login("standard_user", "secret_sauce");
 
-        inventoryPage.getMenuButton().click();
-        Thread.sleep(1000);
-        inventoryPage.getLogoutLink().click();
+        inventoryPage.logout();
 
-        Assertions.assertEquals(homePage.getUrl(), driver.getCurrentUrl());
+        Assertions.assertFalse(inventoryPage.isOnPage());
     }
 }

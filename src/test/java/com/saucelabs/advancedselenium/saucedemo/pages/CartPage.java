@@ -1,7 +1,6 @@
 package test.java.com.saucelabs.advancedselenium.saucedemo.pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class CartPage {
@@ -11,15 +10,16 @@ public class CartPage {
         this.driver = driver;
     }
 
-    public WebElement getRemoveBackPackButton() {
-        return driver.findElement(By.id("remove-sauce-labs-backpack"));
+    public void removeBackpackFromCart() {
+        driver.findElement(By.id("remove-sauce-labs-backpack")).click();
     }
 
-    public WebElement getCartNumberElement() {
-        return driver.findElement(By.className("shopping_cart_badge"));
+    public int cartItems() {
+        return Integer.parseInt(driver.findElement(By.className("shopping_cart_badge")).getText());
     }
 
-    public WebElement getCheckoutButton() {
-        return driver.findElement(By.id("checkout"));
+    public InformationPage checkout() {
+        driver.findElement(By.id("checkout")).click();
+        return new InformationPage(driver);
     }
 }
