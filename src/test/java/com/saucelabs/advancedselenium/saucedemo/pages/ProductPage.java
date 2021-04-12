@@ -6,25 +6,29 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 public class ProductPage {
     private RemoteWebDriver driver;
 
+    private final By shoppingCartBadgeImage = By.className("shopping_cart_badge");
+    private final By addButton = By.id("add-to-cart-sauce-labs-bolt-t-shirt");
+    private final By removeButton = By.id("remove-sauce-labs-bolt-t-shirt");
+
     public ProductPage(RemoteWebDriver driver) {
         this.driver = driver;
     }
 
     public ProductPage addToCart() {
-        driver.findElement(By.id("add-to-cart-sauce-labs-bolt-t-shirt")).click();
+        driver.findElement(addButton).click();
         return this;
     }
 
     public ProductPage removeFromCart() {
-        driver.findElement(By.id("remove-sauce-labs-bolt-t-shirt")).click();
+        driver.findElement(removeButton).click();
         return this;
     }
 
     public int cartItems() {
-        if (driver.findElements(By.className("shopping_cart_badge")).isEmpty()) {
+        if (driver.findElements(shoppingCartBadgeImage).isEmpty()) {
             return 0;
         } else {
-            return Integer.parseInt(driver.findElement(By.className("shopping_cart_badge")).getText());
+            return Integer.parseInt(driver.findElement(shoppingCartBadgeImage).getText());
         }
     }
 }
