@@ -12,8 +12,12 @@ public class HomePage {
     private final By errorElement = By.cssSelector("[data-test=error]");
 
     public HomePage(RemoteWebDriver driver) {
-        driver.get("https://www.saucedemo.com/");
         this.driver = driver;
+    }
+
+    public HomePage visit() {
+        driver.get("https://www.saucedemo.com/");
+        return this;
     }
 
     public InventoryPage login(String user, String password) {
