@@ -8,6 +8,7 @@ public class InformationPage extends BasePage {
     private final By lastNameTextField = By.id("last-name");
     private final By postalCodeTextField = By.id("postal-code");
     private final By continueButton = By.id("continue");
+    private final By errorElement = By.cssSelector("[data-test=error]");
 
     public InformationPage(RemoteWebDriver driver) {
         super(driver);
@@ -18,5 +19,14 @@ public class InformationPage extends BasePage {
         driver.findElement(lastNameTextField).sendKeys(lastName);
         driver.findElement(postalCodeTextField).sendKeys(postalCode);
         driver.findElement(continueButton).click();
+    }
+
+    public boolean isSubmitSuccessful() {
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return driver.findElements(errorElement).isEmpty();
     }
 }

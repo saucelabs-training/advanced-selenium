@@ -14,4 +14,8 @@ public class CheckoutPage extends BasePage {
     public void finish() {
         driver.findElement(finishButton).click();
     }
+
+    public boolean isCheckoutSuccessful() {
+        return !isOnPage();
+    }
 }

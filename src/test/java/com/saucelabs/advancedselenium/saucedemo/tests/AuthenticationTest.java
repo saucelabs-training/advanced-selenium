@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import test.java.com.saucelabs.advancedselenium.saucedemo.pages.HeaderSection;
 import test.java.com.saucelabs.advancedselenium.saucedemo.pages.HomePage;
-import test.java.com.saucelabs.advancedselenium.saucedemo.pages.InventoryPage;
 
 public class AuthenticationTest extends BaseTest {
     @Test
@@ -14,6 +13,7 @@ public class AuthenticationTest extends BaseTest {
 
         homePage.login("locked_out_user", "secret_sauce");
 
+        Assertions.assertFalse(homePage.isLoginSuccessful());
         Assertions.assertTrue(homePage.getError().contains("Sorry, this user has been locked out"));
     }
 
@@ -24,7 +24,7 @@ public class AuthenticationTest extends BaseTest {
 
         homePage.login("standard_user", "secret_sauce");
 
-        Assertions.assertTrue(new InventoryPage(driver).isOnPage());
+        Assertions.assertTrue(homePage.isLoginSuccessful());
     }
 
     @Test

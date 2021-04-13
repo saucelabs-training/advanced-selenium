@@ -11,7 +11,7 @@ public class HomePage extends BasePage {
 
     public HomePage(RemoteWebDriver driver) {
         super(driver);
-        this.pageUrl = "https://www.saucedemo.com";
+        this.pageUrl = "https://www.saucedemo.com/";
     }
 
     public void login(String user, String password) {
@@ -22,5 +22,14 @@ public class HomePage extends BasePage {
 
     public String getError() {
         return driver.findElement(errorElement).getText();
+    }
+
+    public boolean isLoginSuccessful() {
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return driver.findElements(errorElement).isEmpty();
     }
 }
