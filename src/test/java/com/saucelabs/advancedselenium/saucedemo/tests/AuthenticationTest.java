@@ -8,7 +8,8 @@ import test.java.com.saucelabs.advancedselenium.saucedemo.pages.InventoryPage;
 public class AuthenticationTest extends BaseTest {
     @Test
     public void signInUnsuccessful() {
-        HomePage homePage = new HomePage(driver).visit();
+        HomePage homePage = new HomePage(driver);
+        homePage.visit();
 
         homePage.login("locked_out_user", "secret_sauce");
 
@@ -17,18 +18,21 @@ public class AuthenticationTest extends BaseTest {
 
     @Test
     public void signInSuccessful() {
-        HomePage homePage = new HomePage(driver).visit();
+        HomePage homePage = new HomePage(driver);
+        homePage.visit();
 
-        InventoryPage inventoryPage = homePage.login("standard_user", "secret_sauce");
+        homePage.login("standard_user", "secret_sauce");
 
-        Assertions.assertTrue(inventoryPage.isOnPage());
+        Assertions.assertTrue(new InventoryPage(driver).isOnPage());
     }
 
     @Test
     public void logout() {
-        HomePage homePage = new HomePage(driver).visit();
-        InventoryPage inventoryPage = homePage.login("standard_user", "secret_sauce");
+        HomePage homePage = new HomePage(driver);
+        homePage.visit();
+        homePage.login("standard_user", "secret_sauce");
 
+        InventoryPage inventoryPage = new InventoryPage(driver);
         inventoryPage.logout();
 
         Assertions.assertFalse(inventoryPage.isOnPage());

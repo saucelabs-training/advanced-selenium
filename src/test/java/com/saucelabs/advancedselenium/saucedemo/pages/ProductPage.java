@@ -3,7 +3,7 @@ package test.java.com.saucelabs.advancedselenium.saucedemo.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
-public class ProductPage extends BasePage<ProductPage> {
+public class ProductPage extends BasePage {
     private final By shoppingCartBadgeImage = By.className("shopping_cart_badge");
     private final By addButton = By.id("add-to-cart-sauce-labs-bolt-t-shirt");
     private final By removeButton = By.id("remove-sauce-labs-bolt-t-shirt");
@@ -12,14 +12,12 @@ public class ProductPage extends BasePage<ProductPage> {
         super(driver);
     }
 
-    public ProductPage addToCart() {
+    public void addToCart() {
         driver.findElement(addButton).click();
-        return this;
     }
 
-    public ProductPage removeFromCart() {
+    public void removeFromCart() {
         driver.findElement(removeButton).click();
-        return this;
     }
 
     public int cartItems() {
