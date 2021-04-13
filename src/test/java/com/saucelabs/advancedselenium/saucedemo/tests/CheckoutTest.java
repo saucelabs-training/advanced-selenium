@@ -21,14 +21,11 @@ public class CheckoutTest extends BaseTest {
 
     @Test
     public void completeCheckout() {
-        InventoryPage inventoryPage = new InventoryPage(driver).visit();
-        inventoryPage.addBackpackToCart();
-        inventoryPage.addBikeLightToCart();
-        CartPage cartPage = inventoryPage.goToCart();
-        InformationPage informationPage = cartPage.checkout();
-        CheckoutPage checkoutPage = informationPage.submitForm("Luke", "Perry", "90210");
-
-        FinishPage finishPage = checkoutPage.finish();
+        FinishPage finishPage = new HomePage(driver).visit()
+                .login("standard_user", "secret_sauce")
+                .addBackpackToCart().addBikeLightToCart().goToCart().checkout()
+                .submitForm("Luke", "Perry", "90210")
+                .finish();
 
         Assertions.assertTrue(finishPage.isOnPage());
         Assertions.assertTrue(finishPage.getMessage().contains("Your order has been dispatched"));
