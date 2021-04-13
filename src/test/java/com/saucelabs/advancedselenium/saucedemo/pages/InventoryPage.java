@@ -3,9 +3,7 @@ package test.java.com.saucelabs.advancedselenium.saucedemo.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
-public class InventoryPage {
-    private RemoteWebDriver driver;
-
+public class InventoryPage extends BasePage<InventoryPage> {
     private final By menuButton = By.id("react-burger-menu-btn");
     private final By logoutLink = By.id("logout_sidebar_link");
     private final By boltShirtLink = By.id("item_1_title_link");
@@ -17,17 +15,15 @@ public class InventoryPage {
     private final By shoppingCartLink = By.className("shopping_cart_link");
 
     public InventoryPage(RemoteWebDriver driver) {
-        this.driver = driver;
+        super(driver);
+        this.pageUrl = "https://www.saucedemo.com/inventory.html";
     }
 
+    @Override
     public InventoryPage visit() {
         HomePage homePage = new HomePage(driver).visit();
         homePage.login("standard_user", "secret_sauce");
         return this;
-    }
-
-    public boolean isOnPage() {
-        return driver.getCurrentUrl().equals("https://www.saucedemo.com/inventory.html");
     }
 
     public HomePage logout() {
