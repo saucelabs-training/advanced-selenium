@@ -15,9 +15,10 @@ public class CheckoutTest extends BaseTest {
         inventoryPage.goToCart();
         new CartPage(driver).checkout();
 
-        new InformationPage(driver).submitForm("Luke", "Perry", "90210");
+        InformationPage informationPage = new InformationPage(driver);
+        informationPage.submitForm("Luke", "Perry", "90210");
 
-        Assertions.assertTrue(new CheckoutPage(driver).isOnPage());
+        Assertions.assertTrue(informationPage.isSubmitSuccessful());
     }
 
     @Test
@@ -30,10 +31,10 @@ public class CheckoutTest extends BaseTest {
         new CartPage(driver).checkout();
         new InformationPage(driver).submitForm("Luke", "Perry", "90210");
 
-        new CheckoutPage(driver).finish();
+        CheckoutPage checkoutPage = new CheckoutPage(driver);
+        checkoutPage.finish();
 
-        FinishPage finishPage = new FinishPage(driver);
-        Assertions.assertTrue(finishPage.isOnPage());
-        Assertions.assertTrue(finishPage.getMessage().contains("Your order has been dispatched"));
+        Assertions.assertTrue(checkoutPage.isCheckoutSuccessful());
+        Assertions.assertTrue(new FinishPage(driver).getMessage().contains("Your order has been dispatched"));
     }
 }
