@@ -16,6 +16,10 @@ public class CheckoutPage extends BasePage {
     }
 
     public boolean isCheckoutSuccessful() {
-        return !isOnPage();
+        if (isOnPage()) {
+            throw new RuntimeException();
+        } else {
+            return true;
+        }
     }
 }

@@ -13,7 +13,7 @@ public class AuthenticationTest extends BaseTest {
 
         homePage.login("locked_out_user", "secret_sauce");
 
-        Assertions.assertFalse(homePage.isLoginSuccessful());
+        Assertions.assertThrows(RuntimeException.class, homePage::isLoginSuccessful);
         Assertions.assertTrue(homePage.getError().contains("Sorry, this user has been locked out"));
     }
 

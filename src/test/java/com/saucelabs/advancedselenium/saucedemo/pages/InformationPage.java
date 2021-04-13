@@ -22,11 +22,10 @@ public class InformationPage extends BasePage {
     }
 
     public boolean isSubmitSuccessful() {
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        if (isOnPage()) {
+            throw new RuntimeException();
+        } else {
+            return true;
         }
-        return driver.findElements(errorElement).isEmpty();
     }
 }
