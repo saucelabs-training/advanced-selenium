@@ -5,7 +5,6 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class CartPage extends BasePage {
     private final By removeBackpackButton = By.id("remove-sauce-labs-backpack");
-    private final By shoppingCartBadgeImage = By.className("shopping_cart_badge");
     private final By checkoutButton = By.id("checkout");
 
     public CartPage(RemoteWebDriver driver) {
@@ -14,10 +13,6 @@ public class CartPage extends BasePage {
 
     public void removeBackpackFromCart() {
         driver.findElement(removeBackpackButton).click();
-    }
-
-    public int cartItems() {
-        return Integer.parseInt(driver.findElement(shoppingCartBadgeImage).getText());
     }
 
     public void checkout() {
