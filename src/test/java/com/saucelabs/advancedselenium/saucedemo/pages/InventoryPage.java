@@ -3,7 +3,7 @@ package test.java.com.saucelabs.advancedselenium.saucedemo.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
-public class InventoryPage extends BasePage<InventoryPage> {
+public class InventoryPage extends BasePage {
     private final By menuButton = By.id("react-burger-menu-btn");
     private final By logoutLink = By.id("logout_sidebar_link");
     private final By boltShirtLink = By.id("item_1_title_link");
@@ -20,13 +20,13 @@ public class InventoryPage extends BasePage<InventoryPage> {
     }
 
     @Override
-    public InventoryPage visit() {
-        HomePage homePage = new HomePage(driver).visit();
+    public void visit() {
+        HomePage homePage = new HomePage(driver);
+        homePage.visit();
         homePage.login("standard_user", "secret_sauce");
-        return this;
     }
 
-    public HomePage logout() {
+    public void logout() {
         driver.findElement(menuButton).click();
         try {
             Thread.sleep(1000);
@@ -34,17 +34,14 @@ public class InventoryPage extends BasePage<InventoryPage> {
             e.printStackTrace();
         }
         driver.findElement(logoutLink).click();
-        return new HomePage(driver);
     }
 
-    public ProductPage selectBoltTshirt() {
+    public void selectBoltTshirt() {
         driver.findElement(boltShirtLink).click();
-        return new ProductPage(driver);
     }
 
-    public InventoryPage addOnesieToCart() {
+    public void addOnesieToCart() {
         driver.findElement(onesieButton).click();
-        return new InventoryPage(driver);
     }
 
     public int cartItems() {
@@ -55,23 +52,19 @@ public class InventoryPage extends BasePage<InventoryPage> {
         }
     }
 
-    public InventoryPage addBikeLightToCart() {
+    public void addBikeLightToCart() {
         driver.findElement(addBikeLightButton).click();
-        return new InventoryPage(driver);
     }
 
-    public InventoryPage removeBikeLightFromCart() {
+    public void removeBikeLightFromCart() {
         driver.findElement(removeBikeLightButton).click();
-        return new InventoryPage(driver);
     }
 
-    public InventoryPage addBackpackToCart() {
+    public void addBackpackToCart() {
         driver.findElement(backpackButton).click();
-        return new InventoryPage(driver);
     }
 
-    public CartPage goToCart() {
+    public void goToCart() {
         driver.findElement(shoppingCartLink).click();
-        return new CartPage(driver);
     }
 }

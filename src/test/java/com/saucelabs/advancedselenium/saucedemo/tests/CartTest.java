@@ -10,9 +10,11 @@ public class CartTest extends BaseTest {
 
     @Test
     public void addFromProductPage() {
-        InventoryPage inventoryPage = new InventoryPage(driver).visit();
-        ProductPage productPage = inventoryPage.selectBoltTshirt();
+        InventoryPage inventoryPage = new InventoryPage(driver);
+        inventoryPage.visit();
+        inventoryPage.selectBoltTshirt();
 
+        ProductPage productPage = new ProductPage(driver);
         productPage.addToCart();
 
         Assertions.assertEquals(1, productPage.cartItems());
@@ -20,8 +22,10 @@ public class CartTest extends BaseTest {
 
     @Test
     public void removeFromProductPage() {
-        InventoryPage inventoryPage = new InventoryPage(driver).visit();
-        ProductPage productPage = inventoryPage.selectBoltTshirt();
+        InventoryPage inventoryPage = new InventoryPage(driver);
+        inventoryPage.visit();
+        inventoryPage.selectBoltTshirt();
+        ProductPage productPage = new ProductPage(driver);
         productPage.addToCart();
 
         productPage.removeFromCart();
@@ -31,7 +35,8 @@ public class CartTest extends BaseTest {
 
     @Test
     public void addFromInventoryPage() {
-        InventoryPage inventoryPage = new InventoryPage(driver).visit();
+        InventoryPage inventoryPage = new InventoryPage(driver);
+        inventoryPage.visit();
 
         inventoryPage.addOnesieToCart();
 
@@ -40,7 +45,8 @@ public class CartTest extends BaseTest {
 
     @Test
     public void removeFromInventoryPage() {
-        InventoryPage inventoryPage = new InventoryPage(driver).visit();
+        InventoryPage inventoryPage = new InventoryPage(driver);
+        inventoryPage.visit();
 
         inventoryPage.addBikeLightToCart();
         inventoryPage.removeBikeLightFromCart();
@@ -50,11 +56,13 @@ public class CartTest extends BaseTest {
 
     @Test
     public void removeFromCartPage() {
-        InventoryPage inventoryPage = new InventoryPage(driver).visit();
+        InventoryPage inventoryPage = new InventoryPage(driver);
+        inventoryPage.visit();
         inventoryPage.addBackpackToCart();
         inventoryPage.addBikeLightToCart();
-        CartPage cartPage = inventoryPage.goToCart();
+        inventoryPage.goToCart();
 
+        CartPage cartPage = new CartPage(driver);
         cartPage.removeBackpackFromCart();
 
         Assertions.assertEquals(1, cartPage.cartItems());

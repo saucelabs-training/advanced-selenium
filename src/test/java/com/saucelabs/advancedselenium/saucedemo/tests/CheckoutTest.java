@@ -8,25 +8,31 @@ public class CheckoutTest extends BaseTest {
 
     @Test
     public void goodInfo() {
-        InventoryPage inventoryPage = new InventoryPage(driver).visit();
+        InventoryPage inventoryPage = new InventoryPage(driver);
+        inventoryPage.visit();
         inventoryPage.addBackpackToCart();
         inventoryPage.addBikeLightToCart();
-        CartPage cartPage = inventoryPage.goToCart();
-        InformationPage informationPage = cartPage.checkout();
+        inventoryPage.goToCart();
+        new CartPage(driver).checkout();
 
-        CheckoutPage checkoutPage = informationPage.submitForm("Luke", "Perry", "90210");
+        new InformationPage(driver).submitForm("Luke", "Perry", "90210");
 
-        Assertions.assertTrue(checkoutPage.isOnPage());
+        Assertions.assertTrue(new CheckoutPage(driver).isOnPage());
     }
 
     @Test
     public void completeCheckout() {
-        FinishPage finishPage = new HomePage(driver).visit()
-                .login("standard_user", "secret_sauce")
-                .addBackpackToCart().addBikeLightToCart().goToCart().checkout()
-                .submitForm("Luke", "Perry", "90210")
-                .finish();
+        InventoryPage inventoryPage = new InventoryPage(driver);
+        inventoryPage.visit();
+        inventoryPage.addBackpackToCart();
+        inventoryPage.addBikeLightToCart();
+        inventoryPage.goToCart();
+        new CartPage(driver).checkout();
+        new InformationPage(driver).submitForm("Luke", "Perry", "90210");
 
+        new CheckoutPage(driver).finish();
+
+        FinishPage finishPage = new FinishPage(driver);
         Assertions.assertTrue(finishPage.isOnPage());
         Assertions.assertTrue(finishPage.getMessage().contains("Your order has been dispatched"));
     }

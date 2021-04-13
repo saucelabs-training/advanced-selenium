@@ -2,7 +2,7 @@ package test.java.com.saucelabs.advancedselenium.saucedemo.pages;
 
 import org.openqa.selenium.remote.RemoteWebDriver;
 
-public abstract class BasePage<T extends BasePage<T>> {
+public abstract class BasePage {
     protected RemoteWebDriver driver;
     protected String pageUrl;
 
@@ -10,9 +10,8 @@ public abstract class BasePage<T extends BasePage<T>> {
         this.driver = driver;
     }
 
-    public T visit() {
+    public void visit() {
         driver.get(pageUrl);
-        return (T) this;
     }
 
     public boolean isOnPage() {
