@@ -2,6 +2,7 @@ package test.java.com.saucelabs.advancedselenium.saucedemo.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import test.java.com.saucelabs.advancedselenium.resources.exceptions.PageValidationException;
 import test.java.com.saucelabs.advancedselenium.resources.pages.BasePage;
 
 public class InformationPage extends BasePage {
@@ -13,6 +14,7 @@ public class InformationPage extends BasePage {
 
     public InformationPage(RemoteWebDriver driver) {
         super(driver);
+        this.pageUrl = "https://www.saucedemo.com/checkout-step-one.html";
     }
 
     public void submitForm(String firstName, String lastName, String postalCode) {
@@ -22,11 +24,10 @@ public class InformationPage extends BasePage {
         driver.findElement(continueButton).click();
     }
 
-    public boolean isSubmitSuccessful() {
+    public void validateSubmitSuccessful() {
         if (isOnPage()) {
-            throw new RuntimeException();
-        } else {
-            return true;
+            String error = driver.findElement(errorElement).getText();
+            throw new PageValidationException("Information submission was not successful: " + error);
         }
     }
 }
