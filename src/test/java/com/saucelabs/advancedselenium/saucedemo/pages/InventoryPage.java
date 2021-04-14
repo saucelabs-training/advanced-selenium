@@ -17,6 +17,11 @@ public class InventoryPage {
     private final By shoppingCartLink = By.className("shopping_cart_link");
 
     public InventoryPage(RemoteWebDriver driver) {
+        if (!driver.getCurrentUrl().equals("https://www.saucedemo.com/inventory.html")) {
+            HomePage homePage = new HomePage(driver);
+            homePage.login("standard_user", "secret_sauce");
+        }
+
         this.driver = driver;
     }
 
