@@ -3,14 +3,6 @@ package test.java.com.saucelabs.advancedselenium.saucedemo.pages;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class PageFactory {
-    public static SpecialPage special(RemoteWebDriver driver) {
-        if (System.getProperty("MOBILE") != null) {
-            return new MobileSpecialPage(driver);
-        } else {
-            return new DesktopSpecialPage(driver);
-        }
-    }
-
     public static HomePage home(RemoteWebDriver driver) {
         return new HomePage(driver);
     }
