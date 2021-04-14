@@ -25,26 +25,26 @@ public class InventoryPage extends BasePage {
     }
 
     public void selectBoltTshirt() {
-        driver.findElement(boltShirtLink).click();
+        getElement("boltShirtLink").click();
     }
 
     public void addOnesieToCart() {
-        driver.findElement(onesieButton).click();
+        getElement("onesieButton").click();
     }
 
     public void addBikeLightToCart() {
-        driver.findElement(addBikeLightButton).click();
+        getElement("addBikeLightButton").click();
     }
 
     public void removeBikeLightFromCart() {
-        driver.findElement(removeBikeLightButton).click();
+        getElement("removeBikeLightButton").click();
     }
 
     public void addBackpackToCart() {
-        driver.findElement(backpackButton).click();
+        getElement("backpackButton").click();
     }
 
     public void goToCart() {
-        driver.findElement(shoppingCartLink).click();
+        getElement("shoppingCartLink").click();
     }
 }

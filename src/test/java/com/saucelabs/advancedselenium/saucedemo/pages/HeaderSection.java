@@ -14,20 +14,20 @@ public class HeaderSection extends BasePage {
     }
 
     public int cartItems() {
-        if (driver.findElements(shoppingCartBadgeImage).isEmpty()) {
+        if (getElements("shoppingCartBadgeImage").isEmpty()) {
             return 0;
         } else {
-            return Integer.parseInt(driver.findElement(shoppingCartBadgeImage).getText());
+            return Integer.parseInt(getElement("shoppingCartBadgeImage").getText());
         }
     }
 
     public void logout() {
-        driver.findElement(menuButton).click();
+        getElement("menuButton").click();
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        driver.findElement(logoutLink).click();
+        getElement("logoutLink").click();
     }
 }

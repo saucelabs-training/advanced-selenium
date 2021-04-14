@@ -15,12 +15,12 @@ public class CheckoutPage extends BasePage {
     }
 
     public void finish() {
-        driver.findElement(finishButton).click();
+        getElement("finishButton").click();
     }
 
     public void validateCheckoutSuccessful() {
         if (isOnPage()) {
-            String error = driver.findElement(errorElement).getText();
+            String error = getElement("errorElement").getText();
             throw new PageValidationException("Information submission was not successful: " + error);
         }
     }

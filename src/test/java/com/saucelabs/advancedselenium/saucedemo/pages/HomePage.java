@@ -17,13 +17,13 @@ public class HomePage extends BasePage {
     }
 
     public void login(String user, String password) {
-        driver.findElement(usernameTextField).sendKeys(user);
-        driver.findElement(passwordTextField).sendKeys(password);
-        driver.findElement(submitButton).click();
+        getElement("usernameTextField").sendKeys(user);
+        getElement("passwordTextField").sendKeys(password);
+        getElement("submitButton").click();
     }
 
     public String getError() {
-        return driver.findElement(errorElement).getText();
+        return getElement("errorElement").getText();
     }
 
     public void validateLoginSuccessful() {
