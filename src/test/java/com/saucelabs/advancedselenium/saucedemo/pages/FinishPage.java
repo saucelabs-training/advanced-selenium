@@ -13,6 +13,6 @@ public class FinishPage extends BasePage {
     }
 
     public String getMessage() {
-        return driver.findElement(completeElement).getText();
+        return getElement("completeElement").getText();
     }
 }

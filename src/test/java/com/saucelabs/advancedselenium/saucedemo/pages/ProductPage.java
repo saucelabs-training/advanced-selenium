@@ -13,10 +13,10 @@ public class ProductPage extends BasePage {
     }
 
     public void addToCart() {
-        driver.findElement(addButton).click();
+        getElement("addButton").click();
     }
 
     public void removeFromCart() {
-        driver.findElement(removeButton).click();
+        getElement("removeButton").click();
     }
 }

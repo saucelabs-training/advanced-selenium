@@ -13,10 +13,10 @@ public class CartPage extends BasePage {
     }
 
     public void removeBackpackFromCart() {
-        driver.findElement(removeBackpackButton).click();
+        getElement("removeBackpackButton").click();
     }
 
     public void checkout() {
-        driver.findElement(checkoutButton).click();
+        getElement("checkoutButton").click();
     }
 }

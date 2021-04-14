@@ -18,15 +18,15 @@ public class InformationPage extends BasePage {
     }
 
     public void submitForm(String firstName, String lastName, String postalCode) {
-        driver.findElement(firstNameTextField).sendKeys(firstName);
-        driver.findElement(lastNameTextField).sendKeys(lastName);
-        driver.findElement(postalCodeTextField).sendKeys(postalCode);
-        driver.findElement(continueButton).click();
+        getElement("firstNameTextField").sendKeys(firstName);
+        getElement("lastNameTextField").sendKeys(lastName);
+        getElement("postalCodeTextField").sendKeys(postalCode);
+        getElement("continueButton").click();
     }
 
     public void validateSubmitSuccessful() {
         if (isOnPage()) {
-            String error = driver.findElement(errorElement).getText();
+            String error = getElement("errorElement").getText();
             throw new PageValidationException("Information submission was not successful: " + error);
         }
     }
