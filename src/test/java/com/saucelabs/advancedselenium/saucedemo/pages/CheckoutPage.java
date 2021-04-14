@@ -14,12 +14,13 @@ public class CheckoutPage extends BasePage {
         this.pageUrl = "https://www.saucedemo.com/checkout-step-two.html";
     }
 
-    public void finish() {
+    public void finishSuccessfully() {
         getElement("finishButton").click();
+        validateCheckoutSuccessful();
     }
 
     public void validateCheckoutSuccessful() {
-        if (isOnPage()) {
+        if (isOnPage() || !(new FinishPage(driver)).getMessage().contains("Your order has been dispatched")) {
             String error = getElement("errorElement").getText();
             throw new PageValidationException("Information submission was not successful: " + error);
         }

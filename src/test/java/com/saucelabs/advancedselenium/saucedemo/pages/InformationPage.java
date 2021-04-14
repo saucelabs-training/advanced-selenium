@@ -17,17 +17,22 @@ public class InformationPage extends BasePage {
         this.pageUrl = "https://www.saucedemo.com/checkout-step-one.html";
     }
 
-    public void submitForm(String firstName, String lastName, String postalCode) {
-        getElement("firstNameTextField").sendKeys(firstName);
-        getElement("lastNameTextField").sendKeys(lastName);
-        getElement("postalCodeTextField").sendKeys(postalCode);
-        getElement("continueButton").click();
-    }
-
     public void validateSubmitSuccessful() {
         if (isOnPage()) {
             String error = getElement("errorElement").getText();
             throw new PageValidationException("Information submission was not successful: " + error);
         }
+    }
+
+    public void submitInfoSuccessfully(String firstName, String lastName, String postalCode) {
+        submitForm(firstName, lastName, postalCode);
+        validateSubmitSuccessful();
+    }
+
+    private void submitForm(String firstName, String lastName, String postalCode) {
+        getElement("firstNameTextField").sendKeys(firstName);
+        getElement("lastNameTextField").sendKeys(lastName);
+        getElement("postalCodeTextField").sendKeys(postalCode);
+        getElement("continueButton").click();
     }
 }
