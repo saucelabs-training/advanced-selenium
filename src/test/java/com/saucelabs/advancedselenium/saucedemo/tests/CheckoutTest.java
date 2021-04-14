@@ -8,8 +8,7 @@ public class CheckoutTest extends BaseTest {
 
     @Test
     public void goodInfo() {
-        HomePage homePage = new HomePage(driver);
-        InventoryPage inventoryPage = homePage.login("standard_user", "secret_sauce");
+        InventoryPage inventoryPage = new InventoryPage(driver);
         inventoryPage.addBackpackToCart();
         inventoryPage.addBikeLightToCart();
         CartPage cartPage = inventoryPage.goToCart();
@@ -22,8 +21,7 @@ public class CheckoutTest extends BaseTest {
 
     @Test
     public void completeCheckout() {
-        HomePage homePage = new HomePage(driver);
-        InventoryPage inventoryPage = homePage.login("standard_user", "secret_sauce");
+        InventoryPage inventoryPage = new InventoryPage(driver);
         inventoryPage.addBackpackToCart();
         inventoryPage.addBikeLightToCart();
         CartPage cartPage = inventoryPage.goToCart();

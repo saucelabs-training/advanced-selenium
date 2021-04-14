@@ -3,7 +3,6 @@ package test.java.com.saucelabs.advancedselenium.saucedemo.tests;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import test.java.com.saucelabs.advancedselenium.saucedemo.pages.CartPage;
-import test.java.com.saucelabs.advancedselenium.saucedemo.pages.HomePage;
 import test.java.com.saucelabs.advancedselenium.saucedemo.pages.InventoryPage;
 import test.java.com.saucelabs.advancedselenium.saucedemo.pages.ProductPage;
 
@@ -11,8 +10,7 @@ public class CartTest extends BaseTest {
 
     @Test
     public void addFromProductPage() {
-        HomePage homePage = new HomePage(driver);
-        InventoryPage inventoryPage = homePage.login("standard_user", "secret_sauce");
+        InventoryPage inventoryPage = new InventoryPage(driver);
         ProductPage productPage = inventoryPage.selectBoltTshirt();
 
         productPage.addToCart();
@@ -22,8 +20,7 @@ public class CartTest extends BaseTest {
 
     @Test
     public void removeFromProductPage() {
-        HomePage homePage = new HomePage(driver);
-        InventoryPage inventoryPage = homePage.login("standard_user", "secret_sauce");
+        InventoryPage inventoryPage = new InventoryPage(driver);
         ProductPage productPage = inventoryPage.selectBoltTshirt();
         productPage.addToCart();
 
@@ -34,8 +31,7 @@ public class CartTest extends BaseTest {
 
     @Test
     public void addFromInventoryPage() {
-        HomePage homePage = new HomePage(driver);
-        InventoryPage inventoryPage = homePage.login("standard_user", "secret_sauce");
+        InventoryPage inventoryPage = new InventoryPage(driver);
 
         inventoryPage.addOnesieToCart();
 
@@ -44,8 +40,7 @@ public class CartTest extends BaseTest {
 
     @Test
     public void removeFromInventoryPage() {
-        HomePage homePage = new HomePage(driver);
-        InventoryPage inventoryPage = homePage.login("standard_user", "secret_sauce");
+        InventoryPage inventoryPage = new InventoryPage(driver);
 
         inventoryPage.addBikeLightToCart();
         inventoryPage.removeBikeLightFromCart();
@@ -55,8 +50,7 @@ public class CartTest extends BaseTest {
 
     @Test
     public void removeFromCartPage() {
-        HomePage homePage = new HomePage(driver);
-        InventoryPage inventoryPage = homePage.login("standard_user", "secret_sauce");
+        InventoryPage inventoryPage = new InventoryPage(driver);
         inventoryPage.addBackpackToCart();
         inventoryPage.addBikeLightToCart();
         CartPage cartPage = inventoryPage.goToCart();
