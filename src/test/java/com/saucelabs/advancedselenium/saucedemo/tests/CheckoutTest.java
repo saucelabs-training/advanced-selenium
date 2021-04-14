@@ -16,9 +16,8 @@ public class CheckoutTest extends BaseTest {
         new CartPage(driver).checkout();
 
         InformationPage informationPage = new InformationPage(driver);
-        informationPage.submitForm("Luke", "Perry", "90210");
-
-        Assertions.assertDoesNotThrow(informationPage::validateSubmitSuccessful);
+        Assertions.assertDoesNotThrow(() ->
+                informationPage.submitInfoSuccessfully("Luke", "Perry", "90210"));
     }
 
     @Test
@@ -29,12 +28,9 @@ public class CheckoutTest extends BaseTest {
         inventoryPage.addBikeLightToCart();
         inventoryPage.goToCart();
         new CartPage(driver).checkout();
-        new InformationPage(driver).submitForm("Luke", "Perry", "90210");
+        new InformationPage(driver).submitInfoSuccessfully("Luke", "Perry", "90210");
 
-        CheckoutPage checkoutPage = new CheckoutPage(driver);
-        checkoutPage.finish();
-
-        Assertions.assertDoesNotThrow(checkoutPage::validateCheckoutSuccessful);
-        Assertions.assertTrue(new FinishPage(driver).getMessage().contains("Your order has been dispatched"));
+        Assertions.assertDoesNotThrow(() ->
+                new CheckoutPage(driver).finishSuccessfully());
     }
 }
