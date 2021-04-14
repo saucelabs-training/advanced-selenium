@@ -21,7 +21,7 @@ public class InventoryPage extends BasePage {
     public void visit() {
         HomePage homePage = new HomePage(driver);
         homePage.visit();
-        homePage.login("locked_out_user", "secret_sauce");
+        homePage.login("standard_user", "secret_sauce");
     }
 
     public void selectBoltTshirt() {
