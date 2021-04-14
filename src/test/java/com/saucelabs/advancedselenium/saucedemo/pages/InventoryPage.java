@@ -19,7 +19,7 @@ public class InventoryPage extends BasePage {
 
     @Override
     public void visit() {
-        HomePage homePage = new HomePage(driver);
+        HomePage homePage = PageFactory.home(driver);
         homePage.visit();
         homePage.loginSuccessfully("standard_user", "secret_sauce");
     }

@@ -8,29 +8,28 @@ public class CheckoutTest extends BaseTest {
 
     @Test
     public void goodInfo() {
-        InventoryPage inventoryPage = new InventoryPage(driver);
+        InventoryPage inventoryPage = PageFactory.inventory(driver);
         inventoryPage.visit();
         inventoryPage.addBackpackToCart();
         inventoryPage.addBikeLightToCart();
         inventoryPage.goToCart();
-        new CartPage(driver).checkout();
+        PageFactory.cart(driver).checkout();
 
-        InformationPage informationPage = new InformationPage(driver);
         Assertions.assertDoesNotThrow(() ->
-                informationPage.submitInfoSuccessfully("Luke", "Perry", "90210"));
+                PageFactory.information(driver).submitInfoSuccessfully("Luke", "Perry", "90210"));
     }
 
     @Test
     public void completeCheckout() {
-        InventoryPage inventoryPage = new InventoryPage(driver);
+        InventoryPage inventoryPage = PageFactory.inventory(driver);
         inventoryPage.visit();
         inventoryPage.addBackpackToCart();
         inventoryPage.addBikeLightToCart();
         inventoryPage.goToCart();
-        new CartPage(driver).checkout();
-        new InformationPage(driver).submitInfoSuccessfully("Luke", "Perry", "90210");
+        PageFactory.cart(driver).checkout();
+        PageFactory.information(driver).submitInfoSuccessfully("Luke", "Perry", "90210");
 
         Assertions.assertDoesNotThrow(() ->
-                new CheckoutPage(driver).finishSuccessfully());
+                PageFactory.checkout(driver).finishSuccessfully());
     }
 }
