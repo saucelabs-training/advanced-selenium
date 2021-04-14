@@ -4,17 +4,21 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import test.java.com.saucelabs.advancedselenium.resources.exceptions.PageValidationException;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.lang.reflect.Field;
+import java.time.Duration;
 import java.util.List;
 
 public abstract class BasePage {
+    public Duration defaultWaitTime = Duration.ofSeconds(20);
     protected RemoteWebDriver driver;
     protected String pageUrl;
+    protected WebDriverWait wait;
 
     public BasePage(RemoteWebDriver driver) {
         this.driver = driver;
+        wait = new WebDriverWait(driver, defaultWaitTime);
     }
 
     public void visit() {
@@ -22,9 +26,6 @@ public abstract class BasePage {
     }
 
     public boolean isOnPage() {
-        if (pageUrl == null) {
-            throw new PageValidationException("Can not evaluate if on a given page if pageUrl is not defined");
-        }
         return driver.getCurrentUrl().equals(pageUrl);
     }
 
@@ -51,5 +52,9 @@ public abstract class BasePage {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public boolean isElementPresent(String locatorName) {
+        return !getElements(locatorName).isEmpty();
     }
 }

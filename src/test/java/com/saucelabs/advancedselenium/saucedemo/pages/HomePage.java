@@ -1,9 +1,13 @@
 package test.java.com.saucelabs.advancedselenium.saucedemo.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import test.java.com.saucelabs.advancedselenium.resources.exceptions.PageValidationException;
 import test.java.com.saucelabs.advancedselenium.resources.pages.BasePage;
+
+import java.util.function.Function;
 
 public class HomePage extends BasePage {
     private final By usernameTextField = By.id("user-name");
@@ -18,24 +22,28 @@ public class HomePage extends BasePage {
 
     public void loginSuccessfully(String user, String password) {
         login(user, password);
-        validateLoginSuccessful();
+        try {
+            wait.until((Function<WebDriver, Object>) driver -> !isOnPage());
+        } catch (TimeoutException ex) {
+            throw new PageValidationException("Login was not successful: " + getError());
+        }
     }
 
     public void loginLockedOutUserUnsuccessfully(String user, String password) {
         loginUnsuccessfully(user, password, "Sorry, this user has been locked out");
     }
 
-    public String loginUnsuccessfully(String user, String password, String msg) {
+    public void loginUnsuccessfully(String user, String password, String msg) {
+        login(user, password);
         try {
-            loginSuccessfully(user, password);
-        } catch (PageValidationException ex) {
-            if (ex.getMessage().contains(msg)) {
-                return null;
+            wait.until((Function<WebDriver, Object>) driver -> isElementPresent("errorElement"));
+            if (getError().contains(msg)) {
+                return;
             }
+        } catch (TimeoutException ignored) {
         }
-        String currentUrl = driver.getCurrentUrl();
         throw new PageValidationException("Expected error with: " + msg
-                + ", but none found; Current page is: " + currentUrl);
+                + ", but none found; Current page is: " + driver.getCurrentUrl());
     }
 
     private void login(String user, String password) {
@@ -47,11 +55,4 @@ public class HomePage extends BasePage {
     public String getError() {
         return getElement("errorElement").getText();
     }
-
-    public void validateLoginSuccessful() {
-        if (isOnPage()) {
-            throw new PageValidationException("Login was not successful: " + getError());
-        }
-    }
-
 }
