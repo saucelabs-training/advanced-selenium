@@ -2,13 +2,12 @@ package test.java.com.saucelabs.advancedselenium.saucedemo.tests;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import test.java.com.saucelabs.advancedselenium.saucedemo.pages.HeaderSection;
-import test.java.com.saucelabs.advancedselenium.saucedemo.pages.HomePage;
+import test.java.com.saucelabs.advancedselenium.saucedemo.pages.*;
 
 public class AuthenticationTest extends BaseTest {
     @Test
     public void signInLockedOutUser() {
-        HomePage homePage = new HomePage(driver);
+        HomePage homePage = PageFactory.home(driver);
         homePage.visit();
 
         Assertions.assertDoesNotThrow(() ->
@@ -17,7 +16,7 @@ public class AuthenticationTest extends BaseTest {
 
     @Test
     public void signInSuccessful() {
-        HomePage homePage = new HomePage(driver);
+        HomePage homePage = PageFactory.home(driver);
         homePage.visit();
 
         Assertions.assertDoesNotThrow(() ->
@@ -26,11 +25,11 @@ public class AuthenticationTest extends BaseTest {
 
     @Test
     public void logout() {
-        HomePage homePage = new HomePage(driver);
+        HomePage homePage = PageFactory.home(driver);
         homePage.visit();
         homePage.loginSuccessfully("standard_user", "secret_sauce");
 
-        new HeaderSection(driver).logout();
+        PageFactory.header(driver).logout();
 
         Assertions.assertTrue(homePage.isOnPage());
     }
