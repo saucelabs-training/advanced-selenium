@@ -4,8 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class ProductPage extends BasePage {
-    private final By addButton = By.id("add-to-cart-sauce-labs-bolt-t-shirt");
-    private final By removeButton = By.id("remove-sauce-labs-bolt-t-shirt");
+    private final By addButton = By.className("btn_primary");
+    private final By removeButton = By.cssSelector(".btn_secondary.btn_inventory");
 
     public ProductPage(RemoteWebDriver driver) {
         super(driver);
