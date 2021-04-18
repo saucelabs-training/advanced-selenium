@@ -4,6 +4,20 @@ public class User {
     private String user;
     private String password;
 
+    public static User valid() {
+        User user = new User();
+        user.setUser("standard_user");
+        user.setPassword("secret_sauce");
+        return user;
+    }
+
+    public static User lockedOut() {
+        User user = new User();
+        user.setUser("locked_out_user");
+        user.setPassword("secret_sauce");
+        return user;
+    }
+
     public void setUser(String user) {
         this.user = user;
     }
