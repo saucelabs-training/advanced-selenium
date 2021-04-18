@@ -12,8 +12,8 @@ public class CheckoutTest extends BaseTest {
     public void goodInfo() {
         InventoryPage inventoryPage = PageFactory.inventory(driver);
         inventoryPage.visit();
-        inventoryPage.addBackpackToCart();
-        inventoryPage.addBikeLightToCart();
+        inventoryPage.addItemToCart();
+        inventoryPage.addItemToCart();
         inventoryPage.goToCart();
         PageFactory.cart(driver).checkout();
 
@@ -25,8 +25,8 @@ public class CheckoutTest extends BaseTest {
     public void completeCheckout() {
         InventoryPage inventoryPage = PageFactory.inventory(driver);
         inventoryPage.visit();
-        inventoryPage.addBackpackToCart();
-        inventoryPage.addBikeLightToCart();
+        inventoryPage.addItemToCart();
+        inventoryPage.addItemToCart();
         inventoryPage.goToCart();
         PageFactory.cart(driver).checkout();
         PageFactory.information(driver).submitInfoSuccessfully();

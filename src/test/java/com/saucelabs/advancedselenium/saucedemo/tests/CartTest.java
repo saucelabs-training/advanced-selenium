@@ -35,7 +35,7 @@ public class CartTest extends BaseTest {
         InventoryPage inventoryPage = PageFactory.inventory(driver);
         inventoryPage.visit();
 
-        inventoryPage.addOnesieToCart();
+        inventoryPage.addItemToCart();
 
         Assertions.assertEquals(1, PageFactory.header(driver).cartItems());
     }
@@ -45,8 +45,8 @@ public class CartTest extends BaseTest {
         InventoryPage inventoryPage = PageFactory.inventory(driver);
         inventoryPage.visit();
 
-        inventoryPage.addBikeLightToCart();
-        inventoryPage.removeBikeLightFromCart();
+        inventoryPage.addItemToCart();
+        inventoryPage.removeItemFromCart();
 
         Assertions.assertEquals(0, PageFactory.header(driver).cartItems());
     }
@@ -55,11 +55,11 @@ public class CartTest extends BaseTest {
     public void removeFromCartPage() {
         InventoryPage inventoryPage = PageFactory.inventory(driver);
         inventoryPage.visit();
-        inventoryPage.addBackpackToCart();
-        inventoryPage.addBikeLightToCart();
+        inventoryPage.addItemToCart();
+        inventoryPage.addItemToCart();
         inventoryPage.goToCart();
 
-        PageFactory.cart(driver).removeBackpackFromCart();
+        PageFactory.cart(driver).removeItemFromCart();
 
         Assertions.assertEquals(1, PageFactory.header(driver).cartItems());
     }
