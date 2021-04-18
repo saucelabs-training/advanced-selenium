@@ -13,10 +13,10 @@ public class ProductPage extends BasePage {
     }
 
     public void addToCart() {
-        click("addButton");
+        getElement("addButton").click();
     }
 
     public void removeFromCart() {
-        click("removeButton");
+        getElement("removeButton").click();
     }
 }

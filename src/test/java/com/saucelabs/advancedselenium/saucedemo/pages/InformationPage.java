@@ -37,9 +37,9 @@ public class InformationPage extends BasePage {
     }
 
     private void submitForm(Person person) {
-        sendKeys("firstNameTextField", person.getFirstName());
-        sendKeys("lastNameTextField", person.getLastName());
-        sendKeys("postalCodeTextField", person.getPostalCode());
-        click("continueButton");
+        getElement("firstNameTextField").sendKeys(person.getFirstName());
+        getElement("lastNameTextField").sendKeys(person.getLastName());
+        getElement("postalCodeTextField").sendKeys(person.getPostalCode());
+        getElement("continueButton").click();
     }
 }

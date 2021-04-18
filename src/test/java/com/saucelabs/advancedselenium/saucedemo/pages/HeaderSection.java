@@ -14,15 +14,15 @@ public class HeaderSection extends BasePage {
     }
 
     public int cartItems() {
-        if (getElements("shoppingCartBadgeImage").isEmpty()) {
-            return 0;
-        } else {
+        if (getElement("shoppingCartBadgeImage").isElementPresent()) {
             return Integer.parseInt(getElement("shoppingCartBadgeImage").getText());
+        } else {
+            return 0;
         }
     }
 
     public void logout() {
-        click("menuButton");
-        click("logoutLink");
+        getElement("menuButton").click();
+        getElement("logoutLink").click();
     }
 }

@@ -41,7 +41,8 @@ public class HomePage extends BasePage {
     public void loginUnsuccessfully(User user, String msg) {
         login(user);
         try {
-            wait.until((Function<WebDriver, Object>) driver -> isElementPresent("errorElement"));
+            wait.until((Function<WebDriver, Object>) driver ->
+                    getElement("errorElement").isElementPresent());
             if (getError().contains(msg)) {
                 return;
             }
@@ -52,9 +53,9 @@ public class HomePage extends BasePage {
     }
 
     private void login(User user) {
-        sendKeys("usernameTextField", user.getUser());
-        sendKeys("passwordTextField", user.getPassword());
-        click("submitButton");
+        getElement("usernameTextField").sendKeys(user.getUser());
+        getElement("passwordTextField").sendKeys(user.getPassword());
+        getElement("submitButton").click();
     }
 
     public String getError() {
