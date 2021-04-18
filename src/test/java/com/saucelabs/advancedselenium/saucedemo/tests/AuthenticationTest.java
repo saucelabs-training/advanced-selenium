@@ -11,35 +11,25 @@ public class AuthenticationTest extends BaseTest {
     public void signInLockedOutUser() {
         HomePage homePage = PageFactory.home(driver);
         homePage.visit();
-        User lockedOutUser = new User();
-        lockedOutUser.setUser("locked_out_user");
-        lockedOutUser.setPassword("secret_sauce");
 
         Assertions.assertDoesNotThrow(() ->
-                homePage.loginLockedOutUserUnsuccessfully(lockedOutUser));
+                homePage.loginLockedOutUserUnsuccessfully(User.lockedOut()));
     }
 
     @Test
     public void signInSuccessful() {
         HomePage homePage = PageFactory.home(driver);
         homePage.visit();
-        User validUser = new User();
-        validUser.setUser("standard_user");
-        validUser.setPassword("secret_sauce");
 
         Assertions.assertDoesNotThrow(() ->
-                homePage.loginSuccessfully(validUser));
+                homePage.loginSuccessfully(User.valid()));
     }
 
     @Test
     public void logout() {
         HomePage homePage = PageFactory.home(driver);
         homePage.visit();
-        User validUser = new User();
-        validUser.setUser("standard_user");
-        validUser.setPassword("secret_sauce");
-
-        homePage.loginSuccessfully(validUser);
+        homePage.loginSuccessfully(User.valid());
 
         PageFactory.header(driver).logout();
 

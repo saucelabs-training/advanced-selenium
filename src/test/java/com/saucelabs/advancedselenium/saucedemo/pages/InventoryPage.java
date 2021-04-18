@@ -22,11 +22,7 @@ public class InventoryPage extends BasePage {
     public void visit() {
         HomePage homePage = PageFactory.home(driver);
         homePage.visit();
-        User validUser = new User();
-        validUser.setUser("standard_user");
-        validUser.setPassword("secret_sauce");
-
-        homePage.loginSuccessfully(validUser);
+        homePage.loginSuccessfully(User.valid());
     }
 
     public void selectBoltTshirt() {
