@@ -65,7 +65,7 @@ public class BaseTest {
                     Collections.singletonList("disable-popup-blocking"));
 
             chromeOptions.setAcceptInsecureCerts(true);
-            chromeOptions.setPageLoadStrategy(PageLoadStrategy.EAGER);
+            chromeOptions.setPageLoadStrategy(PageLoadStrategy.NONE);
             chromeOptions.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.IGNORE);
 
             Map<String, Integer> timeouts = new HashMap<>();
