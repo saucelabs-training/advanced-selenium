@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import test.java.com.saucelabs.advancedselenium.resources.exceptions.PageValidationException;
 import test.java.com.saucelabs.advancedselenium.resources.pages.BasePage;
+import test.java.com.saucelabs.advancedselenium.saucedemo.data.Person;
 
 import java.util.function.Function;
 
@@ -21,8 +22,12 @@ public class InformationPage extends BasePage {
         this.pageUrl = "https://www.saucedemo.com/checkout-step-one.html";
     }
 
-    public void submitInfoSuccessfully(String firstName, String lastName, String postalCode) {
-        submitForm(firstName, lastName, postalCode);
+    public void submitInfoSuccessfully() {
+        submitInfoSuccessfully(new Person());
+    }
+
+    public void submitInfoSuccessfully(Person person) {
+        submitForm(person);
         try {
             wait.until((Function<WebDriver, Object>) driver -> !isOnPage());
         } catch (TimeoutException ex) {
@@ -31,10 +36,10 @@ public class InformationPage extends BasePage {
         }
     }
 
-    private void submitForm(String firstName, String lastName, String postalCode) {
-        getElement("firstNameTextField").sendKeys(firstName);
-        getElement("lastNameTextField").sendKeys(lastName);
-        getElement("postalCodeTextField").sendKeys(postalCode);
+    private void submitForm(Person person) {
+        getElement("firstNameTextField").sendKeys(person.getFirstName());
+        getElement("lastNameTextField").sendKeys(person.getLastName());
+        getElement("postalCodeTextField").sendKeys(person.getPostalCode());
         getElement("continueButton").click();
     }
 }
