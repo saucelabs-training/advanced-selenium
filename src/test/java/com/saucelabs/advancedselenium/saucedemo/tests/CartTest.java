@@ -10,7 +10,7 @@ public class CartTest extends BaseTest {
     public void addFromProductPage() {
         InventoryPage inventoryPage = PageFactory.inventory(driver);
         inventoryPage.visit();
-        inventoryPage.selectBoltTshirt();
+        inventoryPage.selectItem();
 
         PageFactory.product(driver).addToCart();
 
@@ -21,7 +21,7 @@ public class CartTest extends BaseTest {
     public void removeFromProductPage() {
         InventoryPage inventoryPage = PageFactory.inventory(driver);
         inventoryPage.visit();
-        inventoryPage.selectBoltTshirt();
+        inventoryPage.selectItem();
         ProductPage productPage = PageFactory.product(driver);
         productPage.addToCart();
 
