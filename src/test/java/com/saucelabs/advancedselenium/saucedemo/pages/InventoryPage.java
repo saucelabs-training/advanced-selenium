@@ -9,10 +9,10 @@ import java.util.List;
 import java.util.Random;
 
 public class InventoryPage extends BasePage {
+    private final By inventoryItemLink = By.className("inventory_item_img");
     private final By addItemButton = By.className("btn_primary");
     private final By removeItemButton = By.className("btn_secondary");
 
-    private final By boltShirtLink = By.id("item_1_title_link");
     private final By shoppingCartLink = By.className("shopping_cart_link");
 
     public InventoryPage(RemoteWebDriver driver) {
@@ -27,8 +27,10 @@ public class InventoryPage extends BasePage {
         homePage.loginSuccessfully();
     }
 
-    public void selectBoltTshirt() {
-        getElement("boltShirtLink").click();
+    public void selectItem() {
+        List<WebElement> inventoryItems = getElements("inventoryItemLink");
+        WebElement item = inventoryItems.get(new Random().nextInt(inventoryItems.size()));
+        item.click();
     }
 
     public void addItemToCart() {
