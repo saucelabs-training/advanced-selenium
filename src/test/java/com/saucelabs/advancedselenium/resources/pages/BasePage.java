@@ -67,6 +67,19 @@ public abstract class BasePage {
     }
 
     private void clickWithRetries(String locatorName, int retries) {
+        try {
+            getElement(locatorName).click();
+        } catch (NoSuchElementException | ElementNotInteractableException ex) {
+            try {
+                if (retries++ > maxRetries) {
+                    throw new ElementValidationException("Unable to click after " + maxRetries + "attempts; ", ex);
+                }
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            clickWithRetries(locatorName, retries);
+        }
     }
 
     private void sendKeysWithRetries(String locatorName, String value, int retries) {
