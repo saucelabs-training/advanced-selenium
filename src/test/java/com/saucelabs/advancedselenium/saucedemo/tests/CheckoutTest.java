@@ -2,7 +2,9 @@ package test.java.com.saucelabs.advancedselenium.saucedemo.tests;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import test.java.com.saucelabs.advancedselenium.saucedemo.pages.*;
+import test.java.com.saucelabs.advancedselenium.saucedemo.data.Person;
+import test.java.com.saucelabs.advancedselenium.saucedemo.pages.InventoryPage;
+import test.java.com.saucelabs.advancedselenium.saucedemo.pages.PageFactory;
 
 public class CheckoutTest extends BaseTest {
 
@@ -16,7 +18,7 @@ public class CheckoutTest extends BaseTest {
         PageFactory.cart(driver).checkout();
 
         Assertions.assertDoesNotThrow(() ->
-                PageFactory.information(driver).submitInfoSuccessfully("Luke", "Perry", "90210"));
+                PageFactory.information(driver).submitInfoSuccessfully(new Person()));
     }
 
     @Test
@@ -27,7 +29,7 @@ public class CheckoutTest extends BaseTest {
         inventoryPage.addBikeLightToCart();
         inventoryPage.goToCart();
         PageFactory.cart(driver).checkout();
-        PageFactory.information(driver).submitInfoSuccessfully("Luke", "Perry", "90210");
+        PageFactory.information(driver).submitInfoSuccessfully();
 
         Assertions.assertDoesNotThrow(() ->
                 PageFactory.checkout(driver).finishSuccessfully());
