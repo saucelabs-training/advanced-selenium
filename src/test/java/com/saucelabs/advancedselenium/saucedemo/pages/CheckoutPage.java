@@ -19,7 +19,7 @@ public class CheckoutPage extends BasePage {
     }
 
     public void finishSuccessfully() {
-        getElement("finishButton").click();
+        click("finishButton");
         try {
             wait.until((Function<WebDriver, Object>) driver -> !isOnPage());
             if ((new FinishPage(driver)).getMessage().contains("Your order has been dispatched")) {

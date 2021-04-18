@@ -46,6 +46,6 @@ public class InventoryPage extends BasePage {
     }
 
     public void goToCart() {
-        getElement("shoppingCartLink").click();
+        click("shoppingCartLink");
     }
 }

@@ -52,9 +52,9 @@ public class HomePage extends BasePage {
     }
 
     private void login(User user) {
-        getElement("usernameTextField").sendKeys(user.getUser());
-        getElement("passwordTextField").sendKeys(user.getPassword());
-        getElement("submitButton").click();
+        sendKeys("usernameTextField", user.getUser());
+        sendKeys("passwordTextField", user.getPassword());
+        click("submitButton");
     }
 
     public String getError() {
