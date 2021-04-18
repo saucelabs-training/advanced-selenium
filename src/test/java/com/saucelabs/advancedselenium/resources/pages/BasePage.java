@@ -8,7 +8,6 @@ import test.java.com.saucelabs.advancedselenium.resources.exceptions.ElementVali
 import java.lang.reflect.Field;
 import java.time.Duration;
 import java.util.List;
-import java.util.function.Function;
 
 public abstract class BasePage {
     public Duration defaultWaitTime = Duration.ofSeconds(20);
@@ -56,8 +55,7 @@ public abstract class BasePage {
     }
 
     public void click(String locatorName) {
-        wait.until((Function<WebDriver, Object>) driver -> isElementDisplayed(locatorName));
-        getElement(locatorName).click();
+        clickWithRetries(locatorName, 0);
     }
 
     public void sendKeys(String locatorName, String value) {
@@ -68,8 +66,7 @@ public abstract class BasePage {
         return !getElements(locatorName).isEmpty();
     }
 
-    public boolean isElementDisplayed(String locatorName) {
-        return isElementPresent(locatorName) && getElement(locatorName).isDisplayed();
+    private void clickWithRetries(String locatorName, int retries) {
     }
 
     private void sendKeysWithRetries(String locatorName, String value, int retries) {
