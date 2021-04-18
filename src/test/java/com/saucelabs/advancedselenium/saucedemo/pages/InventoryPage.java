@@ -1,15 +1,18 @@
 package test.java.com.saucelabs.advancedselenium.saucedemo.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import test.java.com.saucelabs.advancedselenium.resources.pages.BasePage;
 
+import java.util.List;
+import java.util.Random;
+
 public class InventoryPage extends BasePage {
+    private final By addItemButton = By.className("btn_primary");
+    private final By removeItemButton = By.className("btn_secondary");
+
     private final By boltShirtLink = By.id("item_1_title_link");
-    private final By onesieButton = By.id("add-to-cart-sauce-labs-onesie");
-    private final By addBikeLightButton = By.id("add-to-cart-sauce-labs-bike-light");
-    private final By removeBikeLightButton = By.id("remove-sauce-labs-bike-light");
-    private final By backpackButton = By.id("add-to-cart-sauce-labs-backpack");
     private final By shoppingCartLink = By.className("shopping_cart_link");
 
     public InventoryPage(RemoteWebDriver driver) {
@@ -28,20 +31,16 @@ public class InventoryPage extends BasePage {
         getElement("boltShirtLink").click();
     }
 
-    public void addOnesieToCart() {
-        getElement("onesieButton").click();
+    public void addItemToCart() {
+        List<WebElement> inventoryItems = getElements("addItemButton");
+        WebElement item = inventoryItems.get(new Random().nextInt(inventoryItems.size()));
+        item.click();
     }
 
-    public void addBikeLightToCart() {
-        getElement("addBikeLightButton").click();
-    }
-
-    public void removeBikeLightFromCart() {
-        getElement("removeBikeLightButton").click();
-    }
-
-    public void addBackpackToCart() {
-        getElement("backpackButton").click();
+    public void removeItemFromCart() {
+        List<WebElement> inventoryItems = getElements("removeItemButton");
+        WebElement item = inventoryItems.get(new Random().nextInt(inventoryItems.size()));
+        item.click();
     }
 
     public void goToCart() {
