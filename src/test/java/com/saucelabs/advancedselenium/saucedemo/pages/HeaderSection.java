@@ -2,6 +2,7 @@ package test.java.com.saucelabs.advancedselenium.saucedemo.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import test.java.com.saucelabs.advancedselenium.resources.pages.BasePage;
 
 public class HeaderSection extends BasePage {
@@ -23,11 +24,7 @@ public class HeaderSection extends BasePage {
 
     public void logout() {
         getElement("menuButton").click();
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        wait.until(ExpectedConditions.elementToBeClickable(logoutLink));
         getElement("logoutLink").click();
     }
 }
