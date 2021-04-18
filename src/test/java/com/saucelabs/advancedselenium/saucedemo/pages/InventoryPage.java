@@ -3,7 +3,6 @@ package test.java.com.saucelabs.advancedselenium.saucedemo.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import test.java.com.saucelabs.advancedselenium.resources.pages.BasePage;
-import test.java.com.saucelabs.advancedselenium.saucedemo.data.User;
 
 public class InventoryPage extends BasePage {
     private final By boltShirtLink = By.id("item_1_title_link");
@@ -22,7 +21,7 @@ public class InventoryPage extends BasePage {
     public void visit() {
         HomePage homePage = PageFactory.home(driver);
         homePage.visit();
-        homePage.loginSuccessfully(User.valid());
+        homePage.loginSuccessfully();
     }
 
     public void selectBoltTshirt() {
