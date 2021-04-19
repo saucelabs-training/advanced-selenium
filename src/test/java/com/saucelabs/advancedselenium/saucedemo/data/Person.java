@@ -1,18 +1,11 @@
 package test.java.com.saucelabs.advancedselenium.saucedemo.data;
 
-import com.github.javafaker.Faker;
+import test.java.com.saucelabs.advancedselenium.resources.data.DataModel;
 
-public class Person {
-    private String firstName;
-    private String lastName;
-    private String postalCode;
-
-    public Person() {
-        Faker faker = new Faker();
-        this.firstName = faker.name().firstName();
-        this.lastName = faker.name().lastName();
-        this.postalCode = faker.address().zipCode();
-    }
+public class Person extends DataModel {
+    private String firstName = faker.name().firstName();
+    private String lastName = faker.name().lastName();
+    private String postalCode = faker.address().zipCode();
 
     public String getFirstName() {
         return firstName;

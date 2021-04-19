@@ -1,10 +1,10 @@
 package test.java.com.saucelabs.advancedselenium.saucedemo.data;
 
-import com.github.javafaker.Faker;
+import test.java.com.saucelabs.advancedselenium.resources.data.DataModel;
 
-public class User {
-    private String user;
-    private String password;
+public class User extends DataModel {
+    private String user = faker.name().username();
+    private String password = faker.internet().password();
 
     public static User valid() {
         User user = new User();
@@ -22,12 +22,6 @@ public class User {
 
     public static User invalid() {
         return new User();
-    }
-
-    public User() {
-        Faker faker = new Faker();
-        this.user = faker.name().username();
-        this.password = faker.internet().password();
     }
 
     public void setUser(String user) {
