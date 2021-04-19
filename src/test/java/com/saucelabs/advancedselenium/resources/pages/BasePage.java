@@ -44,6 +44,10 @@ public abstract class BasePage {
         return new ButtonElement(locator, description, this);
     }
 
+    public TextFieldElement getTextField(By locator) {
+        return new TextFieldElement(locator, this);
+    }
+
     public TextFieldElement getTextField(By locator, String description) {
         return new TextFieldElement(locator, description, this);
     }

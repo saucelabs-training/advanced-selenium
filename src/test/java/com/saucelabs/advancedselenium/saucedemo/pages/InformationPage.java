@@ -14,9 +14,9 @@ import test.java.com.saucelabs.advancedselenium.saucedemo.data.Person;
 import java.util.function.Function;
 
 public class InformationPage extends BasePage {
-    private final TextFieldElement firstNameTextField = getTextField(By.id("first-name"), "First Name Text Field");
-    private final TextFieldElement lastNameTextField = getTextField(By.id("last-name"), "Last Name Text Field");
-    private final TextFieldElement postalCodeTextField = getTextField(By.id("postal-code"), "Postal Code Text Field");
+    private final TextFieldElement firstNameTextField = getTextField(By.id("first-name"));
+    private final TextFieldElement lastNameTextField = getTextField(By.id("last-name"));
+    private final TextFieldElement postalCodeTextField = getTextField(By.id("postal-code"));
     private final ButtonElement continueButton = getButton(By.id("continue"));
     private final Element errorElement = getElement(By.cssSelector("[data-test=error]"), "Error Element");
 
