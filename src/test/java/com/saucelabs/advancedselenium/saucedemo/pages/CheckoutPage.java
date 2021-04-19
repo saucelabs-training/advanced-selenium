@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import test.java.com.saucelabs.advancedselenium.resources.elements.ButtonElement;
 import test.java.com.saucelabs.advancedselenium.resources.elements.Element;
 import test.java.com.saucelabs.advancedselenium.resources.exceptions.PageValidationException;
 import test.java.com.saucelabs.advancedselenium.resources.pages.BasePage;
@@ -12,7 +13,7 @@ import java.util.function.Function;
 
 public class CheckoutPage extends BasePage {
     private final Element finishButton = getElement(By.id("finish"), "Finish Button");
-    private final Element errorElement = getElement(By.cssSelector("[data-test=error]"), "Error Element");
+    private final ButtonElement errorElement = getButton(By.cssSelector("[data-test=error]"), "Error Element");
 
     public CheckoutPage(RemoteWebDriver driver) {
         super(driver);
