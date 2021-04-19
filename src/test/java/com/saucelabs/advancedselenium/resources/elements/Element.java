@@ -12,11 +12,11 @@ import java.util.Random;
 import java.util.function.Function;
 
 public class Element {
-    private int maxRetries = 20;
+    protected int maxRetries = 20;
     public Duration defaultWaitTime = Duration.ofSeconds(20);
     private final By locator;
     private final RemoteWebDriver driver;
-    private final String description;
+    protected final String description;
     protected WebDriverWait wait;
     private WebElement element;
 
@@ -29,10 +29,6 @@ public class Element {
 
     public void click() {
         clickWithRetries(0);
-    }
-
-    public void sendKeys(String value) {
-        sendKeysWithRetries(value, 0);
     }
 
     public String getText() {
@@ -82,7 +78,7 @@ public class Element {
         return driver.findElements(locator);
     }
 
-    private WebElement locateFirst() {
+    protected WebElement locateFirst() {
         if (element == null) {
             this.element = driver.findElement(locator);
         }
@@ -102,22 +98,6 @@ public class Element {
                 e.printStackTrace();
             }
             clickWithRetries(retries);
-        }
-    }
-
-    private void sendKeysWithRetries(String value, int retries) {
-        try {
-            locateFirst().sendKeys(value);
-        } catch (NoSuchElementException | ElementNotInteractableException | StaleElementReferenceException ex) {
-            if (retries++ > maxRetries) {
-                throw new ElementValidationException("Unable to send keys to " + description + " after " + maxRetries + " attempts", ex);
-            }
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            sendKeysWithRetries(value, retries);
         }
     }
 
