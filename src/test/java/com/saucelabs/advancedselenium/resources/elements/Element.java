@@ -61,7 +61,7 @@ public class Element {
     private void clickWithRetries(int retries) {
         try {
             locateFirst().click();
-        } catch (NoSuchElementException | ElementNotInteractableException ex) {
+        } catch (NoSuchElementException | ElementNotInteractableException | StaleElementReferenceException ex) {
             if (retries++ > maxRetries) {
                 throw new ElementValidationException("Unable to click " + description + " after " + maxRetries + " attempts", ex);
             }
@@ -77,7 +77,7 @@ public class Element {
     private void sendKeysWithRetries(String value, int retries) {
         try {
             locateFirst().sendKeys(value);
-        } catch (NoSuchElementException | ElementNotInteractableException ex) {
+        } catch (NoSuchElementException | ElementNotInteractableException | StaleElementReferenceException ex) {
             if (retries++ > maxRetries) {
                 throw new ElementValidationException("Unable to send keys to " + description + " after " + maxRetries + " attempts", ex);
             }
@@ -93,7 +93,7 @@ public class Element {
     private String getTextWithRetries(int retries) {
         try {
             return locateFirst().getText();
-        } catch (NoSuchElementException ex) {
+        } catch (NoSuchElementException | StaleElementReferenceException ex) {
             if (retries++ > maxRetries) {
                 throw new ElementValidationException("Unable to get text of " + description + " after " + maxRetries + " attempts", ex);
             }
@@ -106,4 +106,3 @@ public class Element {
         }
     }
 }
-
