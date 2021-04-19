@@ -13,6 +13,7 @@ public class Element {
     private final By locator;
     private final RemoteWebDriver driver;
     private final String description;
+    private WebElement element;
 
     public Element(By locator, String description, BasePage page) {
         this.locator = locator;
@@ -33,7 +34,12 @@ public class Element {
     }
 
     public boolean isElementPresent() {
-        return !locateAll().isEmpty();
+        try {
+            locateFirst();
+            return true;
+        } catch (NoSuchElementException ex) {
+            return false;
+        }
     }
 
     public WebElement getRandom() {
@@ -46,7 +52,10 @@ public class Element {
     }
 
     private WebElement locateFirst() {
-        return driver.findElement(locator);
+        if (element == null) {
+            this.element = driver.findElement(locator);
+        }
+        return element;
     }
 
     private void clickWithRetries(int retries) {
