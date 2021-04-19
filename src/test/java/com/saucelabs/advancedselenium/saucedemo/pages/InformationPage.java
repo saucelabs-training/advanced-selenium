@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import test.java.com.saucelabs.advancedselenium.resources.elements.ButtonElement;
 import test.java.com.saucelabs.advancedselenium.resources.elements.Element;
 import test.java.com.saucelabs.advancedselenium.resources.exceptions.PageValidationException;
 import test.java.com.saucelabs.advancedselenium.resources.pages.BasePage;
@@ -15,7 +16,7 @@ public class InformationPage extends BasePage {
     private final Element firstNameTextField = getElement(By.id("first-name"), "First Name Text Field");
     private final Element lastNameTextField = getElement(By.id("last-name"), "Last Name Text Field");
     private final Element postalCodeTextField = getElement(By.id("postal-code"), "Postal Code Text Field");
-    private final Element continueButton = getElement(By.id("continue"), "Continue Button");
+    private final ButtonElement continueButton = getButton(By.id("continue"), "Continue Button");
     private final Element errorElement = getElement(By.cssSelector("[data-test=error]"), "Error Element");
 
     public InformationPage(RemoteWebDriver driver) {

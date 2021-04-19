@@ -3,6 +3,7 @@ package test.java.com.saucelabs.advancedselenium.resources.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import test.java.com.saucelabs.advancedselenium.resources.elements.ButtonElement;
 import test.java.com.saucelabs.advancedselenium.resources.elements.Element;
 
 import java.time.Duration;
@@ -32,5 +33,9 @@ public abstract class BasePage {
 
     public Element getElement(By locator, String description) {
         return new Element(locator, description, this);
+    }
+
+    public ButtonElement getButton(By locator, String description) {
+        return new ButtonElement(locator, description, this);
     }
 }
