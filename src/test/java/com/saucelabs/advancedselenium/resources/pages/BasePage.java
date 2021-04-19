@@ -5,6 +5,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import test.java.com.saucelabs.advancedselenium.resources.elements.ButtonElement;
 import test.java.com.saucelabs.advancedselenium.resources.elements.Element;
+import test.java.com.saucelabs.advancedselenium.resources.elements.TextFieldElement;
 
 import java.time.Duration;
 
@@ -41,5 +42,9 @@ public abstract class BasePage {
 
     public ButtonElement getButton(By locator, String description) {
         return new ButtonElement(locator, description, this);
+    }
+
+    public TextFieldElement getTextField(By locator, String description) {
+        return new TextFieldElement(locator, description, this);
     }
 }

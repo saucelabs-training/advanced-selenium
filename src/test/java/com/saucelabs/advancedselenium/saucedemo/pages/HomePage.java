@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import test.java.com.saucelabs.advancedselenium.resources.elements.ButtonElement;
 import test.java.com.saucelabs.advancedselenium.resources.elements.Element;
+import test.java.com.saucelabs.advancedselenium.resources.elements.TextFieldElement;
 import test.java.com.saucelabs.advancedselenium.resources.exceptions.PageValidationException;
 import test.java.com.saucelabs.advancedselenium.resources.pages.BasePage;
 import test.java.com.saucelabs.advancedselenium.saucedemo.data.User;
@@ -13,8 +14,8 @@ import test.java.com.saucelabs.advancedselenium.saucedemo.data.User;
 import java.util.function.Function;
 
 public class HomePage extends BasePage {
-    private final Element usernameTextField = getElement(By.id("user-name"), "Username Text Field");
-    private final Element passwordTextField = getElement(By.id("password"), "Password Text Field");
+    private final TextFieldElement usernameTextField = getTextField(By.id("user-name"), "Username Text Field");
+    private final TextFieldElement passwordTextField = getTextField(By.id("password"), "Password Text Field");
     private final ButtonElement submitButton = getButton(By.id("login-button"));
     private final Element errorElement = getElement(By.cssSelector("[data-test=error]"), "Error Eleemnt");
 

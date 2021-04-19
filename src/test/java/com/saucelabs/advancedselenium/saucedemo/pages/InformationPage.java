@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import test.java.com.saucelabs.advancedselenium.resources.elements.ButtonElement;
 import test.java.com.saucelabs.advancedselenium.resources.elements.Element;
+import test.java.com.saucelabs.advancedselenium.resources.elements.TextFieldElement;
 import test.java.com.saucelabs.advancedselenium.resources.exceptions.PageValidationException;
 import test.java.com.saucelabs.advancedselenium.resources.pages.BasePage;
 import test.java.com.saucelabs.advancedselenium.saucedemo.data.Person;
@@ -13,9 +14,9 @@ import test.java.com.saucelabs.advancedselenium.saucedemo.data.Person;
 import java.util.function.Function;
 
 public class InformationPage extends BasePage {
-    private final Element firstNameTextField = getElement(By.id("first-name"), "First Name Text Field");
-    private final Element lastNameTextField = getElement(By.id("last-name"), "Last Name Text Field");
-    private final Element postalCodeTextField = getElement(By.id("postal-code"), "Postal Code Text Field");
+    private final TextFieldElement firstNameTextField = getTextField(By.id("first-name"), "First Name Text Field");
+    private final TextFieldElement lastNameTextField = getTextField(By.id("last-name"), "Last Name Text Field");
+    private final TextFieldElement postalCodeTextField = getTextField(By.id("postal-code"), "Postal Code Text Field");
     private final ButtonElement continueButton = getButton(By.id("continue"));
     private final Element errorElement = getElement(By.cssSelector("[data-test=error]"), "Error Element");
 
