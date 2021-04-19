@@ -5,20 +5,19 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import test.java.com.saucelabs.advancedselenium.resources.exceptions.ElementValidationException;
 import test.java.com.saucelabs.advancedselenium.resources.pages.BasePage;
 
-import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Random;
 
 public class Element {
     private int maxRetries = 20;
-    private final String locatorName;
+    private final By locator;
     private final RemoteWebDriver driver;
-    private final BasePage page;
+    private final String description;
 
-    public Element(String locatorName, BasePage page) {
-        this.locatorName = locatorName;
+    public Element(By locator, String description, BasePage page) {
+        this.locator = locator;
+        this.description = description;
         this.driver = page.getDriver();
-        this.page = page;
     }
 
     public void click() {
@@ -43,28 +42,11 @@ public class Element {
     }
 
     private List<WebElement> locateAll() {
-        try {
-            Field field = page.getClass().getDeclaredField(locatorName);
-            field.setAccessible(true);
-            return driver.findElements((By) field.get(page));
-        } catch (NoSuchFieldException | IllegalAccessException e) {
-            e.printStackTrace();
-        }
-        return null;
+        return driver.findElements(locator);
     }
 
     private WebElement locateFirst() {
-        try {
-            Field field = page.getClass().getDeclaredField(locatorName);
-            field.setAccessible(true);
-            return driver.findElement((By) field.get(page));
-        } catch (NoSuchElementException e) {
-            String msg = "Attempted to locate '" + locatorName + "' element in " + page.getClass() + ", but ";
-            throw new NoSuchElementException(msg + e.getMessage());
-        } catch (NoSuchFieldException | IllegalAccessException e) {
-            e.printStackTrace();
-        }
-        return null;
+        return driver.findElement(locator);
     }
 
     private void clickWithRetries(int retries) {
@@ -72,7 +54,7 @@ public class Element {
             locateFirst().click();
         } catch (NoSuchElementException | ElementNotInteractableException ex) {
             if (retries++ > maxRetries) {
-                throw new ElementValidationException("Unable to click; ", ex);
+                throw new ElementValidationException("Unable to click " + description + " after " + maxRetries + " attempts", ex);
             }
             try {
                 Thread.sleep(500);
@@ -88,7 +70,7 @@ public class Element {
             locateFirst().sendKeys(value);
         } catch (NoSuchElementException | ElementNotInteractableException ex) {
             if (retries++ > maxRetries) {
-                throw new ElementValidationException("Unable to send keys; ", ex);
+                throw new ElementValidationException("Unable to send keys to " + description + " after " + maxRetries + " attempts", ex);
             }
             try {
                 Thread.sleep(500);
@@ -104,7 +86,7 @@ public class Element {
             return locateFirst().getText();
         } catch (NoSuchElementException ex) {
             if (retries++ > maxRetries) {
-                throw new ElementValidationException("Unable to get text; ", ex);
+                throw new ElementValidationException("Unable to get text of " + description + " after " + maxRetries + " attempts", ex);
             }
             try {
                 Thread.sleep(500);

@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import test.java.com.saucelabs.advancedselenium.resources.elements.Element;
 import test.java.com.saucelabs.advancedselenium.resources.exceptions.PageValidationException;
 import test.java.com.saucelabs.advancedselenium.resources.pages.BasePage;
 import test.java.com.saucelabs.advancedselenium.saucedemo.data.Person;
@@ -11,11 +12,11 @@ import test.java.com.saucelabs.advancedselenium.saucedemo.data.Person;
 import java.util.function.Function;
 
 public class InformationPage extends BasePage {
-    private final By firstNameTextField = By.id("first-name");
-    private final By lastNameTextField = By.id("last-name");
-    private final By postalCodeTextField = By.id("postal-code");
-    private final By continueButton = By.id("continue");
-    private final By errorElement = By.cssSelector("[data-test=error]");
+    private final Element firstNameTextField = getElement(By.id("first-name"), "First Name Text Field");
+    private final Element lastNameTextField = getElement(By.id("last-name"), "Last Name Text Field");
+    private final Element postalCodeTextField = getElement(By.id("postal-code"), "Postal Code Text Field");
+    private final Element continueButton = getElement(By.id("continue"), "Continue Button");
+    private final Element errorElement = getElement(By.cssSelector("[data-test=error]"), "Error Element");
 
     public InformationPage(RemoteWebDriver driver) {
         super(driver);
@@ -31,15 +32,15 @@ public class InformationPage extends BasePage {
         try {
             wait.until((Function<WebDriver, Object>) driver -> !isOnPage());
         } catch (TimeoutException ex) {
-            String error = driver.findElement(errorElement).getText();
+            String error = errorElement.getText();
             throw new PageValidationException("Information submission was not successful: " + error);
         }
     }
 
     private void submitForm(Person person) {
-        getElement("firstNameTextField").sendKeys(person.getFirstName());
-        getElement("lastNameTextField").sendKeys(person.getLastName());
-        getElement("postalCodeTextField").sendKeys(person.getPostalCode());
-        getElement("continueButton").click();
+        firstNameTextField.sendKeys(person.getFirstName());
+        lastNameTextField.sendKeys(person.getLastName());
+        postalCodeTextField.sendKeys(person.getPostalCode());
+        continueButton.click();
     }
 }

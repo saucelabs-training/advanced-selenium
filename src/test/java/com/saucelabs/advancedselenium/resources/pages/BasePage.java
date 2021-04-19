@@ -1,5 +1,6 @@
 package test.java.com.saucelabs.advancedselenium.resources.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import test.java.com.saucelabs.advancedselenium.resources.elements.Element;
@@ -29,7 +30,7 @@ public abstract class BasePage {
         return driver.getCurrentUrl().equals(pageUrl);
     }
 
-    public Element getElement(String locatorName) {
-        return new Element(locatorName, this);
+    public Element getElement(By locator, String description) {
+        return new Element(locator, description, this);
     }
 }

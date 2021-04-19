@@ -4,14 +4,15 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import test.java.com.saucelabs.advancedselenium.resources.elements.Element;
 import test.java.com.saucelabs.advancedselenium.resources.exceptions.PageValidationException;
 import test.java.com.saucelabs.advancedselenium.resources.pages.BasePage;
 
 import java.util.function.Function;
 
 public class CheckoutPage extends BasePage {
-    private final By finishButton = By.id("finish");
-    private final By errorElement = By.cssSelector("[data-test=error]");
+    private final Element finishButton = getElement(By.id("finish"), "Finish Button");
+    private final Element errorElement = getElement(By.cssSelector("[data-test=error]"), "Error Element");
 
     public CheckoutPage(RemoteWebDriver driver) {
         super(driver);
@@ -19,7 +20,7 @@ public class CheckoutPage extends BasePage {
     }
 
     public void finishSuccessfully() {
-        getElement("finishButton").click();
+        finishButton.click();
         try {
             wait.until((Function<WebDriver, Object>) driver -> !isOnPage());
             if ((new FinishPage(driver)).getMessage().contains("Your order has been dispatched")) {
@@ -27,7 +28,7 @@ public class CheckoutPage extends BasePage {
             }
         } catch (TimeoutException ignored) {
         }
-        String error = getElement("errorElement").getText();
+        String error = errorElement.getText();
         throw new PageValidationException("Finishing Checkout was not successful: " + error);
     }
 }
