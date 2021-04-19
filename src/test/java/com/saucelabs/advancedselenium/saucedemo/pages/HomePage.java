@@ -15,7 +15,7 @@ import java.util.function.Function;
 public class HomePage extends BasePage {
     private final Element usernameTextField = getElement(By.id("user-name"), "Username Text Field");
     private final Element passwordTextField = getElement(By.id("password"), "Password Text Field");
-    private final ButtonElement submitButton = getButton(By.id("login-button"), "Submit Button");
+    private final ButtonElement submitButton = getButton(By.id("login-button"));
     private final Element errorElement = getElement(By.cssSelector("[data-test=error]"), "Error Eleemnt");
 
     public HomePage(RemoteWebDriver driver) {

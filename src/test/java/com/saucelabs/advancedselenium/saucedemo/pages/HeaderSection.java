@@ -7,7 +7,7 @@ import test.java.com.saucelabs.advancedselenium.resources.elements.Element;
 import test.java.com.saucelabs.advancedselenium.resources.pages.BasePage;
 
 public class HeaderSection extends BasePage {
-    private final ButtonElement menuButton = getButton(By.id("react-burger-menu-btn"), "Menu Button");
+    private final ButtonElement menuButton = getButton(By.id("react-burger-menu-btn"));
     private final Element logoutLink = getElement(By.id("logout_sidebar_link"), "Logout Link");
     private final Element shoppingCartBadgeImage = getElement(By.className("shopping_cart_badge"), "Shopping Cart Badge Image");
 

@@ -13,7 +13,7 @@ import java.util.function.Function;
 
 public class CheckoutPage extends BasePage {
     private final Element finishButton = getElement(By.id("finish"), "Finish Button");
-    private final ButtonElement errorElement = getButton(By.cssSelector("[data-test=error]"), "Error Element");
+    private final ButtonElement errorElement = getButton(By.cssSelector("[data-test=error]"));
 
     public CheckoutPage(RemoteWebDriver driver) {
         super(driver);

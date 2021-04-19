@@ -35,6 +35,10 @@ public abstract class BasePage {
         return new Element(locator, description, this);
     }
 
+    public ButtonElement getButton(By locator) {
+        return new ButtonElement(locator, this);
+    }
+
     public ButtonElement getButton(By locator, String description) {
         return new ButtonElement(locator, description, this);
     }
