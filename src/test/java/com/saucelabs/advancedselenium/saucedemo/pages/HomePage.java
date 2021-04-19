@@ -14,8 +14,8 @@ import test.java.com.saucelabs.advancedselenium.saucedemo.data.User;
 import java.util.function.Function;
 
 public class HomePage extends BasePage {
-    private final TextFieldElement usernameTextField = getTextField(By.id("user-name"));
-    private final TextFieldElement passwordTextField = getTextField(By.id("password"));
+    private final TextFieldElement user = getTextField(By.id("user-name"));
+    private final TextFieldElement password = getTextField(By.id("password"));
     private final ButtonElement submitButton = getButton(By.id("login-button"));
     private final Element errorElement = getElement(By.cssSelector("[data-test=error]"), "Error Eleemnt");
 
@@ -56,8 +56,7 @@ public class HomePage extends BasePage {
     }
 
     private void login(User user) {
-        usernameTextField.sendKeys(user.getUser());
-        passwordTextField.sendKeys(user.getPassword());
+        fillForm(user);
         submitButton.click();
     }
 
