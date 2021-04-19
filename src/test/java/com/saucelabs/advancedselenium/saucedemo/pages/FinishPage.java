@@ -2,10 +2,11 @@ package test.java.com.saucelabs.advancedselenium.saucedemo.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import test.java.com.saucelabs.advancedselenium.resources.elements.Element;
 import test.java.com.saucelabs.advancedselenium.resources.pages.BasePage;
 
 public class FinishPage extends BasePage {
-    private final By completeElement = By.className("complete-text");
+    private final Element completeElement = getElement(By.className("complete-text"), "Complete Element");
 
     public FinishPage(RemoteWebDriver driver) {
         super(driver);
@@ -13,6 +14,6 @@ public class FinishPage extends BasePage {
     }
 
     public String getMessage() {
-        return getElement("completeElement").getText();
+        return completeElement.getText();
     }
 }
