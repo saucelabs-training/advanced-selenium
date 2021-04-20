@@ -11,6 +11,7 @@ public class CartPage extends BasePage {
 
     public CartPage(RemoteWebDriver driver) {
         super(driver);
+        this.pageUrl = "https://www.saucedemo.com/cart.html";
     }
 
     public void removeItemFromCart() {
