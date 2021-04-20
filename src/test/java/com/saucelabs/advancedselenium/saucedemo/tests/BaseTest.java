@@ -8,12 +8,12 @@ import org.junit.jupiter.api.TestInfo;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.junit.jupiter.api.extension.TestWatcher;
-import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.UnexpectedAlertBehaviour;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.yaml.snakeyaml.Yaml;
+import test.java.com.saucelabs.advancedselenium.saucedemo.App;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -27,6 +27,7 @@ import java.util.Optional;
 public class BaseTest {
     RemoteWebDriver driver = null;
     SauceSession session = null;
+    App app = null;
 
     @RegisterExtension
     public MyTestWatcher myTestWatcher = new MyTestWatcher();
@@ -64,7 +65,7 @@ public class BaseTest {
                     Collections.singletonList("disable-popup-blocking"));
 
             chromeOptions.setAcceptInsecureCerts(true);
-            chromeOptions.setPageLoadStrategy(PageLoadStrategy.NONE);
+//            chromeOptions.setPageLoadStrategy(PageLoadStrategy.NONE);
             chromeOptions.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.IGNORE);
 
             Map<String, Integer> timeouts = new HashMap<>();
@@ -74,6 +75,7 @@ public class BaseTest {
 
             driver = new ChromeDriver(chromeOptions);
         }
+        app = new App(driver);
     }
 
     public Map<String, Object> serialize(String key) {

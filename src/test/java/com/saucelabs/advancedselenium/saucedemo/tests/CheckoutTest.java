@@ -3,33 +3,29 @@ package test.java.com.saucelabs.advancedselenium.saucedemo.tests;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import test.java.com.saucelabs.advancedselenium.saucedemo.data.Person;
-import test.java.com.saucelabs.advancedselenium.saucedemo.pages.InventoryPage;
+import test.java.com.saucelabs.advancedselenium.saucedemo.pages.CheckoutPage;
+import test.java.com.saucelabs.advancedselenium.saucedemo.pages.InformationPage;
 import test.java.com.saucelabs.advancedselenium.saucedemo.pages.PageFactory;
 
 public class CheckoutTest extends BaseTest {
 
     @Test
     public void goodInfo() {
-        InventoryPage inventoryPage = PageFactory.inventory(driver);
-        inventoryPage.visit();
-        inventoryPage.addItemToCart();
-        inventoryPage.addItemToCart();
-        inventoryPage.goToCart();
-        PageFactory.cart(driver).checkout();
+        app.login();
+        app.addInventory(2);
+        InformationPage information = PageFactory.information(driver);
+        information.visit();
 
-        Assertions.assertDoesNotThrow(() ->
-                PageFactory.information(driver).submitInfoSuccessfully(new Person()));
+        Assertions.assertDoesNotThrow(() -> information.submitInfoSuccessfully(new Person()));
     }
 
     @Test
     public void completeCheckout() {
-        InventoryPage inventoryPage = PageFactory.inventory(driver);
-        inventoryPage.visit();
-        inventoryPage.addItemToCart();
-        inventoryPage.addItemToCart();
-        inventoryPage.goToCart();
-        PageFactory.cart(driver).checkout();
-        PageFactory.information(driver).submitInfoSuccessfully();
+        app.login();
+        app.addInventory(2);
+        app.addInformation();
+        CheckoutPage checkout = PageFactory.checkout(driver);
+        checkout.visit();
 
         Assertions.assertDoesNotThrow(() ->
                 PageFactory.checkout(driver).finishSuccessfully());

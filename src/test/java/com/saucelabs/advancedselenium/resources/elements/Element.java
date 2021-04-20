@@ -36,6 +36,7 @@ public class Element {
     }
 
     public boolean isElementPresent() {
+        this.element = null;
         try {
             locateFirst();
             return true;
@@ -46,6 +47,9 @@ public class Element {
 
     public WebElement getRandom() {
         List<WebElement> all = locateAll();
+        while (all.size() == 0) {
+            all = locateAll();
+        }
         return all.get(new Random().nextInt(all.size()));
     }
 
@@ -56,6 +60,9 @@ public class Element {
     protected void waitForEnabled() {
         try {
             wait.until((Function<WebDriver, Object>) driver -> locateFirst().isEnabled());
+        } catch (StaleElementReferenceException ignored) {
+            this.element = null;
+            waitForEnabled();
         } catch (NoSuchElementException ignored) {
             waitForExists();
             waitForEnabled();
@@ -67,7 +74,7 @@ public class Element {
 
     protected void waitForExists() {
         try {
-            wait.until((Function<WebDriver, Object>) driver -> !locateAll().isEmpty());
+            wait.until((Function<WebDriver, Object>) driver -> isElementPresent());
         } catch (TimeoutException ex) {
             throw new ElementValidationException("Unable to locate " + toString()
                     + " after " + defaultWaitTime + " seconds");

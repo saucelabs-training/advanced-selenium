@@ -8,21 +8,20 @@ public class CartTest extends BaseTest {
 
     @Test
     public void addFromProductPage() {
-        InventoryPage inventoryPage = PageFactory.inventory(driver);
-        inventoryPage.visit();
-        inventoryPage.selectItem();
+        app.login();
+        ProductPage productPage = PageFactory.product(driver);
+        productPage.visit();
 
-        PageFactory.product(driver).addToCart();
+        productPage.addToCart();
 
         Assertions.assertEquals(1, PageFactory.header(driver).cartItems());
     }
 
     @Test
     public void removeFromProductPage() {
-        InventoryPage inventoryPage = PageFactory.inventory(driver);
-        inventoryPage.visit();
-        inventoryPage.selectItem();
+        app.login();
         ProductPage productPage = PageFactory.product(driver);
+        productPage.visit();
         productPage.addToCart();
 
         productPage.removeFromCart();
@@ -32,6 +31,7 @@ public class CartTest extends BaseTest {
 
     @Test
     public void addFromInventoryPage() {
+        app.login();
         InventoryPage inventoryPage = PageFactory.inventory(driver);
         inventoryPage.visit();
 
@@ -42,6 +42,7 @@ public class CartTest extends BaseTest {
 
     @Test
     public void removeFromInventoryPage() {
+        app.login();
         InventoryPage inventoryPage = PageFactory.inventory(driver);
         inventoryPage.visit();
 
@@ -53,6 +54,7 @@ public class CartTest extends BaseTest {
 
     @Test
     public void removeFromCartPage() {
+        app.login();
         InventoryPage inventoryPage = PageFactory.inventory(driver);
         inventoryPage.visit();
         inventoryPage.addItemToCart();
