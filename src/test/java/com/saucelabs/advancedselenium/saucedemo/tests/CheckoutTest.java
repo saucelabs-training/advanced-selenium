@@ -14,14 +14,10 @@ public class CheckoutTest extends BaseTest {
         inventoryPage.addBikeLightToCart();
         CartPage cartPage = inventoryPage.goToCart();
         InformationPage informationPage = cartPage.checkout();
-        informationPage.getFirstNameElement().sendKeys("Luke");
-        informationPage.getLastNameElement().sendKeys("Perry");
-        informationPage.getPostalCodeElement().sendKeys("90210");
 
-        informationPage.getContinueButton().click();
+        CheckoutPage checkoutPage = informationPage.submitForm("Luke", "Perry", "90210");
 
-        CheckoutPage checkoutPage = new CheckoutPage(driver);
-        Assertions.assertEquals(checkoutPage.getUrl(), driver.getCurrentUrl());
+        Assertions.assertTrue(checkoutPage.isOnPage());
     }
 
     @Test
@@ -32,16 +28,11 @@ public class CheckoutTest extends BaseTest {
         inventoryPage.addBikeLightToCart();
         CartPage cartPage = inventoryPage.goToCart();
         InformationPage informationPage = cartPage.checkout();
-        informationPage.getFirstNameElement().sendKeys("Luke");
-        informationPage.getLastNameElement().sendKeys("Perry");
-        informationPage.getPostalCodeElement().sendKeys("90210");
-        informationPage.getContinueButton().click();
-        CheckoutPage checkoutPage = new CheckoutPage(driver);
+        CheckoutPage checkoutPage = informationPage.submitForm("Luke", "Perry", "90210");
 
-        checkoutPage.getFinishButton().click();
+        FinishPage finishPage = checkoutPage.finish();
 
-        FinishPage finishPage = new FinishPage(driver);
-        Assertions.assertEquals(FinishPage.getUrl(), driver.getCurrentUrl());
-        Assertions.assertTrue(finishPage.getCompleteElement().getText().contains("Your order has been dispatched"));
+        Assertions.assertTrue(finishPage.isOnPage());
+        Assertions.assertTrue(finishPage.getMessage().contains("Your order has been dispatched"));
     }
 }
