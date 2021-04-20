@@ -14,7 +14,7 @@ public class CartTest extends BaseTest {
 
         productPage.addToCart();
 
-        Assertions.assertEquals(1, PageFactory.header(driver).cartItems());
+        Assertions.assertEquals(1, app.cartItems());
     }
 
     @Test
@@ -26,7 +26,7 @@ public class CartTest extends BaseTest {
 
         productPage.removeFromCart();
 
-        Assertions.assertEquals(0, PageFactory.header(driver).cartItems());
+        Assertions.assertEquals(0, app.cartItems());
     }
 
     @Test
@@ -37,7 +37,7 @@ public class CartTest extends BaseTest {
 
         inventoryPage.addItemToCart();
 
-        Assertions.assertEquals(1, PageFactory.header(driver).cartItems());
+        Assertions.assertEquals(1, app.cartItems());
     }
 
     @Test
@@ -49,7 +49,7 @@ public class CartTest extends BaseTest {
         inventoryPage.addItemToCart();
         inventoryPage.removeItemFromCart();
 
-        Assertions.assertEquals(0, PageFactory.header(driver).cartItems());
+        Assertions.assertEquals(0, app.cartItems());
     }
 
     @Test
@@ -63,6 +63,6 @@ public class CartTest extends BaseTest {
 
         PageFactory.cart(driver).removeItemFromCart();
 
-        Assertions.assertEquals(1, PageFactory.header(driver).cartItems());
+        Assertions.assertEquals(1, app.cartItems());
     }
 }

@@ -7,7 +7,6 @@ import test.java.com.saucelabs.advancedselenium.resources.pages.BasePage;
 
 public class CartPage extends BasePage {
     private final ButtonElement removeItemButton = getButton(By.className("btn_secondary"), "Remove Item Button");
-    private final ButtonElement checkoutButton = getButton(By.id("checkout"), "Checkout Button");
 
     public CartPage(RemoteWebDriver driver) {
         super(driver);
@@ -16,9 +15,5 @@ public class CartPage extends BasePage {
 
     public void removeItemFromCart() {
         removeItemButton.click();
-    }
-
-    public void checkout() {
-        checkoutButton.click();
     }
 }

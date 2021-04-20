@@ -28,9 +28,10 @@ public class AuthenticationTest extends BaseTest {
     @Test
     public void logout() {
         app.login();
+        PageFactory.inventory(driver).visit();
 
         PageFactory.header(driver).logout();
 
-        Assertions.assertTrue(PageFactory.home(driver).isOnPage());
+        Assertions.assertFalse(app.isAuthenticated());
     }
 }

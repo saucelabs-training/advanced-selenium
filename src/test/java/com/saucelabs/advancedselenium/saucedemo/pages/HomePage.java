@@ -24,10 +24,6 @@ public class HomePage extends BasePage {
         this.pageUrl = "https://www.saucedemo.com/";
     }
 
-    public void loginSuccessfully() {
-        loginSuccessfully(User.valid());
-    }
-
     public void loginSuccessfully(User user) {
         login(user);
         try {
