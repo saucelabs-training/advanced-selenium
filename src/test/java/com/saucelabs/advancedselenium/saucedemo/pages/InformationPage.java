@@ -24,6 +24,7 @@ public class InformationPage extends BasePage {
         }
     }
 
+    // Exercise: Rewrite this to wait for expected result
     public void submitInfoSuccessfully(String firstName, String lastName, String postalCode) {
         submitForm(firstName, lastName, postalCode);
         validateSubmitSuccessful();
