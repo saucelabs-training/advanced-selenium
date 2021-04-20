@@ -1,9 +1,13 @@
 package test.java.com.saucelabs.advancedselenium.saucedemo.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import test.java.com.saucelabs.advancedselenium.resources.exceptions.PageValidationException;
 import test.java.com.saucelabs.advancedselenium.resources.pages.BasePage;
+
+import java.util.function.Function;
 
 public class InformationPage extends BasePage {
     private final By firstNameTextField = By.id("first-name");
@@ -17,17 +21,14 @@ public class InformationPage extends BasePage {
         this.pageUrl = "https://www.saucedemo.com/checkout-step-one.html";
     }
 
-    public void validateSubmitSuccessful() {
-        if (isOnPage()) {
-            String error = getElement("errorElement").getText();
-            throw new PageValidationException("Information submission was not successful: " + error);
-        }
-    }
-
-    // Exercise: Rewrite this to wait for expected result
     public void submitInfoSuccessfully(String firstName, String lastName, String postalCode) {
         submitForm(firstName, lastName, postalCode);
-        validateSubmitSuccessful();
+        try {
+            wait.until((Function<WebDriver, Object>) driver -> !isOnPage());
+        } catch (TimeoutException ex) {
+            String error = driver.findElement(errorElement).getText();
+            throw new PageValidationException("Information submission was not successful: " + error);
+        }
     }
 
     private void submitForm(String firstName, String lastName, String postalCode) {
