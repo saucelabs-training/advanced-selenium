@@ -2,6 +2,7 @@ package test.java.com.saucelabs.advancedselenium.saucedemo.tests;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import test.java.com.saucelabs.advancedselenium.resources.exceptions.PageValidationException;
 import test.java.com.saucelabs.advancedselenium.saucedemo.pages.HeaderSection;
 import test.java.com.saucelabs.advancedselenium.saucedemo.pages.HomePage;
 
@@ -13,8 +14,8 @@ public class AuthenticationTest extends BaseTest {
 
         homePage.login("locked_out_user", "secret_sauce");
 
-        Assertions.assertThrows(RuntimeException.class, homePage::isLoginSuccessful);
-        Assertions.assertTrue(homePage.getError().contains("Sorry, this user has been locked out"));
+        PageValidationException ex = Assertions.assertThrows(PageValidationException.class, homePage::validateLoginSuccessful);
+        Assertions.assertTrue(ex.getMessage().contains("Sorry, this user has been locked out"));
     }
 
     @Test
@@ -24,7 +25,7 @@ public class AuthenticationTest extends BaseTest {
 
         homePage.login("standard_user", "secret_sauce");
 
-        Assertions.assertTrue(homePage.isLoginSuccessful());
+        Assertions.assertDoesNotThrow(homePage::validateLoginSuccessful);
     }
 
     @Test
