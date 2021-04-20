@@ -18,4 +18,13 @@ public class CheckoutPage {
     public WebElement getFinishButton() {
         return driver.findElement(By.id("finish"));
     }
+
+    public boolean isOnPage() {
+        return driver.getCurrentUrl().equals("https://www.saucedemo.com/checkout-step-two.html");
+    }
+
+    public FinishPage finish() {
+        driver.findElement(By.id("finish")).click();
+        return new FinishPage(driver);
+    }
 }

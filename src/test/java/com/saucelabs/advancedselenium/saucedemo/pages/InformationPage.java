@@ -11,6 +11,14 @@ public class InformationPage {
         this.driver = driver;
     }
 
+    public CheckoutPage submitForm(String firstName, String lastName, String postalCode) {
+        driver.findElement(By.id("first-name")).sendKeys(firstName);
+        driver.findElement(By.id("last-name")).sendKeys(lastName);
+        driver.findElement(By.id("postal-code")).sendKeys(postalCode);
+        driver.findElement(By.id("continue")).click();
+        return new CheckoutPage(driver);
+    }
+
     public WebElement getFirstNameElement() {
         return driver.findElement(By.id("first-name"));
     }

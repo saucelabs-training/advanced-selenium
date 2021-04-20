@@ -18,4 +18,12 @@ public class FinishPage {
     public WebElement getCompleteElement() {
         return driver.findElement(By.className("complete-text"));
     }
+
+    public String getMessage() {
+        return driver.findElement(By.className("complete-text")).getText();
+    }
+
+    public boolean isOnPage() {
+        return driver.getCurrentUrl().equals("https://www.saucedemo.com/checkout-complete.html");
+    }
 }
