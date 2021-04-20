@@ -1,6 +1,7 @@
 package test.java.com.saucelabs.advancedselenium.saucedemo.pages;
 
 import org.openqa.selenium.By;
+import test.java.com.saucelabs.advancedselenium.resources.exceptions.PageValidationException;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import test.java.com.saucelabs.advancedselenium.resources.pages.BasePage;
 
@@ -25,11 +26,9 @@ public class HomePage extends BasePage {
         return driver.findElement(errorElement).getText();
     }
 
-    public boolean isLoginSuccessful() {
+    public void validateLoginSuccessful() {
         if (isOnPage()) {
-            throw new RuntimeException();
-        } else {
-            return true;
+            throw new PageValidationException("Login was not successful: " + getError());
         }
     }
 }
