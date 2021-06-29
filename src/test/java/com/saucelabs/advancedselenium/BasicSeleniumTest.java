@@ -8,12 +8,12 @@ import static org.junit.Assert.assertEquals;
 
 public class BasicSeleniumTest {
 
-	@Test
-	public void seleniumDemo() {
-		WebDriverManager.chromedriver().setup();
-		ChromeDriver driver = new ChromeDriver();
-		driver.navigate().to("https://www.saucedemo.com");
-		assertEquals(driver.getTitle(), "Swag Labs");
-		driver.quit();
-	}
+    @Test
+    public void seleniumDemo() {
+        WebDriverManager.chromedriver().setup();
+        ChromeDriver driver = new ChromeDriver();
+        driver.navigate().to("https://www.saucedemo.com");
+        assertEquals(driver.getTitle(), "Swag Labs");
+        driver.quit();
+    }
 }
