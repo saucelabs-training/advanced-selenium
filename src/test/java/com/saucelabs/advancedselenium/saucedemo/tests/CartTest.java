@@ -1,12 +1,10 @@
 package com.saucelabs.advancedselenium.saucedemo.tests;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 
 public class CartTest extends BaseTest {
-    @BeforeEach
     public void login() {
         driver.get("https://www.saucedemo.com/");
         driver.findElement(By.cssSelector("input[data-test='username']")).sendKeys("standard_user");
@@ -16,6 +14,7 @@ public class CartTest extends BaseTest {
 
     @Test
     public void addFromProductPage() {
+        login();
         driver.findElement(By.id("item_1_title_link")).click();
 
         driver.findElement(By.cssSelector("button[data-test='add-to-cart-sauce-labs-bolt-t-shirt']")).click();
@@ -27,6 +26,7 @@ public class CartTest extends BaseTest {
 
     @Test
     public void removeFromProductPage() {
+        login();
         driver.findElement(By.id("item_1_title_link")).click();
         driver.findElement(By.cssSelector("button[data-test='add-to-cart-sauce-labs-bolt-t-shirt']")).click();
 
@@ -38,6 +38,7 @@ public class CartTest extends BaseTest {
 
     @Test
     public void addFromInventoryPage() {
+        login();
         driver.findElement(By.cssSelector("button[data-test='add-to-cart-sauce-labs-onesie']")).click();
 
         Assertions.assertEquals("1",
@@ -46,6 +47,7 @@ public class CartTest extends BaseTest {
 
     @Test
     public void removeFromInventoryPage() {
+        login();
         driver.findElement(By.cssSelector("button[data-test='add-to-cart-sauce-labs-bike-light']")).click();
 
         driver.findElement(By.cssSelector("button[data-test='remove-sauce-labs-bike-light']")).click();
@@ -56,6 +58,7 @@ public class CartTest extends BaseTest {
 
     @Test
     public void removeFromCartPage() {
+        login();
         driver.findElement(By.cssSelector("button[data-test='add-to-cart-sauce-labs-backpack']")).click();
         driver.findElement(By.className("shopping_cart_link")).click();
 
