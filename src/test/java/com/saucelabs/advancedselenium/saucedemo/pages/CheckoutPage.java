@@ -7,7 +7,7 @@ import com.saucelabs.advancedselenium.saucedemo.elements.Button;
 
 public class CheckoutPage extends BasePage {
     public static final String URL = "https://www.saucedemo.com/checkout-step-two.html";
-    private final Button finishButton = browser.getButton(By.cssSelector("button[data-test='finish']"));
+    private final Button finishButton = browser.getButton("finish");
 
     public CheckoutPage(Browser browser) {
         super(browser);

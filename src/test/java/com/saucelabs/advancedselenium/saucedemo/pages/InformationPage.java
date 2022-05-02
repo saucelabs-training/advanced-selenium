@@ -10,11 +10,11 @@ import com.saucelabs.advancedselenium.saucedemo.elements.TextField;
 
 public class InformationPage extends BasePage {
     public static final String URL = "https://www.saucedemo.com/checkout-step-one.html";
-    private final TextField firstNameElement = browser.getTextField(By.cssSelector("input[data-test='firstName']"));
-    private final TextField lastNameElement = browser.getTextField(By.cssSelector("input[data-test='lastName']"));
-    private final TextField postalCodeElement = browser.getTextField(By.cssSelector("input[data-test='postalCode']"));
-    private final Button continueButton = browser.getButton(By.cssSelector("input[data-test='continue']"));
-    private final ElementList errorElements = browser.getElements(By.cssSelector("[data-test=error]"));
+    private final TextField firstNameElement = browser.getTextField("firstName");
+    private final TextField lastNameElement = browser.getTextField("lastName");
+    private final TextField postalCodeElement = browser.getTextField("postalCode");
+    private final Button continueButton = browser.getButton("continue");
+    private final ElementList errorElements = browser.getElements("error");
 
     public InformationPage(Browser browser) {
         super(browser);

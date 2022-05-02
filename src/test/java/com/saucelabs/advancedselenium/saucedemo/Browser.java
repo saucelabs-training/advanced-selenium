@@ -29,7 +29,17 @@ public class Browser {
         return new Button(this, locator);
     }
 
+    public Button getButton(String dataTest) {
+        By locator = By.cssSelector("*[data-test='" + dataTest + "']");
+        return new Button(this, locator);
+    }
+
     public TextField getTextField(By locator) {
+        return new TextField(this, locator);
+    }
+
+    public TextField getTextField(String dataTest) {
+        By locator = By.cssSelector("*[data-test='" + dataTest + "']");
         return new TextField(this, locator);
     }
 
@@ -41,6 +51,10 @@ public class Browser {
         return new ElementList(this, locator);
     }
 
+    public ElementList getElements(String dataTest) {
+        By locator = By.cssSelector("*[data-test='" + dataTest + "']");
+        return new ElementList(this, locator);
+    }
     public void quit() {
         driver.quit();
     }

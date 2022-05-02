@@ -7,7 +7,7 @@ import com.saucelabs.advancedselenium.saucedemo.elements.Button;
 import com.saucelabs.advancedselenium.saucedemo.elements.ElementList;
 
 public class CartPage extends BasePage {
-    private final Button checkoutButton = browser.getButton(By.cssSelector("button[data-test='checkout']"));
+    private final Button checkoutButton = browser.getButton("checkout");
     private final ElementList removeItemButtons = browser.getElements(By.cssSelector("button[data-test^='remove-']"));
 
     public CartPage(Browser browser) {

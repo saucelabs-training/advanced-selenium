@@ -10,10 +10,10 @@ import com.saucelabs.advancedselenium.saucedemo.elements.TextField;
 
 public class HomePage extends BasePage {
     public static final String URL = "https://www.saucedemo.com/";
-    private final TextField usernameTextField = browser.getTextField(By.cssSelector("input[data-test='username']"));
-    private final TextField passwordTextField = browser.getTextField(By.cssSelector("input[data-test='password']"));
-    private final Button loginButton = browser.getButton(By.cssSelector("input[data-test='login-button']"));
-    private final ElementList errorElements = browser.getElements(By.cssSelector("[data-test=error]"));
+    private final TextField usernameTextField = browser.getTextField("username");
+    private final TextField passwordTextField = browser.getTextField("password");
+    private final Button loginButton = browser.getButton("login-button");
+    private final ElementList errorElements = browser.getElements("error");
 
     public static HomePage visit(Browser browser) {
         HomePage homePage = new HomePage(browser);
