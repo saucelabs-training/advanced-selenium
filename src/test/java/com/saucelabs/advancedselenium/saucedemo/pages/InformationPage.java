@@ -5,7 +5,7 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import test.java.com.saucelabs.advancedselenium.saucedemo.data.Person;
+import com.saucelabs.advancedselenium.saucedemo.data.Person;
 
 import java.util.List;
 import java.util.function.Function;
