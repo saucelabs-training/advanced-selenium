@@ -55,8 +55,8 @@ public class HomePage extends BasePage {
     }
 
     private void login(User user) {
-        driver.findElement(usernameTextfield).sendKeys(user.getUsername());
-        driver.findElement(passwordTextfield).sendKeys(user.getPassword());
+        sendKeys(usernameTextfield, user.getUsername());
+        sendKeys(passwordTextfield, user.getPassword());
         driver.findElement(loginButton).click();
     }
 }

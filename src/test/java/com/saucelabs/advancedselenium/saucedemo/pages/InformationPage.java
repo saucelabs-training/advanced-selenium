@@ -27,9 +27,9 @@ public class InformationPage extends BasePage {
     }
 
     public void addInformationSuccessfully(Person person) {
-        driver.findElement(firstNameElement).sendKeys(person.getFirstName());
-        driver.findElement(lastNameElement).sendKeys(person.getLastName());
-        driver.findElement(postalCodeElement).sendKeys(person.getPostalCode());
+        sendKeys(firstNameElement, person.getFirstName());
+        sendKeys(lastNameElement, person.getLastName());
+        sendKeys(postalCodeElement, person.getPostalCode());
         driver.findElement(continueButton).click();
 
         try {
