@@ -1,15 +1,17 @@
 package com.saucelabs.advancedselenium.saucedemo.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
-import java.util.Objects;
+import java.util.function.Function;
 
 public class CartPage extends BasePage {
     private final By checkoutButton = By.cssSelector("button[data-test='checkout']");
 
     public CartPage(RemoteWebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
     public void checkout() {
@@ -23,10 +25,12 @@ public class CartPage extends BasePage {
 
         removeItem(product);
 
-        Integer after = headerSection.getNumberItemsInCart();
-
-        if (!Objects.equals(after, expected)) {
-            throw new PageValidationException("Removing item unsuccessful; Expected: " + expected + ", but found: " + after);
+        try {
+            wait.until((Function<WebDriver, Object>) driver -> expected.equals(headerSection.getNumberItemsInCart()));
+        } catch (TimeoutException ex) {
+            String what = "Removing item unsuccessful; ";
+            String after = headerSection.getNumberItemsInCart().toString();
+            throw new PageValidationException(what + "Expected: " + expected + ", but found: " + after);
         }
     }
 

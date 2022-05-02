@@ -8,7 +8,7 @@ public class FinishPage extends BasePage {
     private final By completeText = By.className("complete-text");
 
     public FinishPage(RemoteWebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
     public boolean isComplete() {
