@@ -21,8 +21,7 @@ public class AuthenticationTest extends BaseTest {
 
         homePage.login("standard_user", "secret_sauce");
 
-        HeaderSection headerSection = new HeaderSection(driver);
-        Assertions.assertTrue(headerSection.isLoggedIn(), "Login Not Successful");
+        Assertions.assertDoesNotThrow(homePage::validateLoggedIn);
     }
 
     @Test
@@ -33,6 +32,6 @@ public class AuthenticationTest extends BaseTest {
         HeaderSection headerSection = new HeaderSection(driver);
         headerSection.logOut();
 
-        Assertions.assertFalse(headerSection.isLoggedIn(), "Logout Not Successful");
+        Assertions.assertDoesNotThrow(headerSection::validateLoggedOut);
     }
 }

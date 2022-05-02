@@ -1,7 +1,10 @@
 package com.saucelabs.advancedselenium.saucedemo.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
+
+import java.util.List;
 
 public class HomePage extends BasePage {
     public static final String URL = "https://www.saucedemo.com/";
@@ -28,5 +31,14 @@ public class HomePage extends BasePage {
 
     public boolean isLockedOut() {
         return driver.findElement(errorElement).getText().contains("Sorry, this user has been locked out");
+    }
+
+    public void validateLoggedIn() {
+        HeaderSection headerSection = new HeaderSection(driver);
+        if (!headerSection.isLoggedIn()) {
+            List<WebElement> errors = driver.findElements(errorElement);
+            String additional = errors.isEmpty() ? "" : " found error: " + errors.get(0).getText();
+            throw new PageValidationException("User is not logged in;" + additional);
+        }
     }
 }

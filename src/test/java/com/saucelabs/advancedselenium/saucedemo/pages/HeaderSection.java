@@ -38,4 +38,10 @@ public class HeaderSection extends BasePage {
     public boolean isLoggedIn() {
         return InventoryPage.URL.equals(driver.getCurrentUrl());
     }
+
+    public void validateLoggedOut() {
+        if (isLoggedIn()) {
+            throw new PageValidationException("User is still logged in;");
+        }
+    }
 }

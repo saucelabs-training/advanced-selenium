@@ -15,7 +15,10 @@ public class CheckoutPage extends BasePage {
         driver.findElement(finishButton).click();
     }
 
-    public boolean isAddingInfoSuccessful() {
-        return URL.equals(driver.getCurrentUrl());
+    public void validateFinished() {
+        FinishPage finishPage = new FinishPage(driver);
+        if (!finishPage.isComplete()) {
+            throw new PageValidationException("Checkout unsuccessful;");
+        }
     }
 }
