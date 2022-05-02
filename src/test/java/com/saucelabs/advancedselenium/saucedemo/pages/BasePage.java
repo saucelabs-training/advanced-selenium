@@ -1,6 +1,8 @@
 package com.saucelabs.advancedselenium.saucedemo.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementNotInteractableException;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -20,15 +22,34 @@ public abstract class BasePage {
 
     public void sendKeys(By locator, String value) {
         WebElement element = (WebElement) wait.until((Function<WebDriver, Object>) d -> d.findElement(locator));
-        wait.until((Function<WebDriver, Object>) d -> element.isDisplayed());
-        wait.until((Function<WebDriver, Object>) d -> element.isEnabled());
-        element.sendKeys(value);
+        run(() -> element.sendKeys(value));
     }
 
     public void click(By locator) {
         WebElement element = (WebElement) wait.until((Function<WebDriver, Object>) d -> d.findElement(locator));
-        wait.until((Function<WebDriver, Object>) d -> element.isDisplayed());
-        wait.until((Function<WebDriver, Object>) d -> element.isEnabled());
-        driver.findElement(locator).click();
+        run(element::click);
+    }
+
+    private void run(Runnable block) {
+        long startTime = System.currentTimeMillis();
+        while (true) {
+            try {
+                block.run();
+                break;
+            } catch (NoSuchElementException | ElementNotInteractableException e) {
+                long currentTime = System.currentTimeMillis();
+                Duration duration = Duration.ofMillis(currentTime - startTime);
+
+                if (duration.compareTo(Duration.ofSeconds(20)) > 0) {
+                    throw new ElementValidationException("Unable to send keys after " + duration + " seconds", e);
+                } else {
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                }
+            }
+        }
     }
 }
