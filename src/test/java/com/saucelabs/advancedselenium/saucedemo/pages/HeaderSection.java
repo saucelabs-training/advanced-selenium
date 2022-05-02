@@ -11,8 +11,8 @@ import java.util.List;
 import java.util.function.Function;
 
 public class HeaderSection extends BasePage {
-    private final By menuButton = By.id("react-burger-menu-btn");
-    private final By logoutLink = By.id("logout_sidebar_link");
+    private final Element menuButton = new Element(driver, By.id("react-burger-menu-btn"));
+    private final Element logoutLink = new Element(driver, By.id("logout_sidebar_link"));
     private final By shoppingCartBadge = By.className("shopping_cart_badge");
 
     public HeaderSection(RemoteWebDriver driver) {
@@ -43,7 +43,7 @@ public class HeaderSection extends BasePage {
     }
 
     private void logOut() {
-        new Element(driver, menuButton).click();
-        new Element(driver, logoutLink).click();
+        menuButton.click();
+        logoutLink.click();
     }
 }

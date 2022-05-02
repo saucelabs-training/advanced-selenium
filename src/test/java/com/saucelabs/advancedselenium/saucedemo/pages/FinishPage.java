@@ -6,13 +6,13 @@ import com.saucelabs.advancedselenium.saucedemo.elements.Element;
 
 public class FinishPage extends BasePage {
     public static final String URL = "https://www.saucedemo.com/checkout-complete.html";
-    private final By completeText = By.className("complete-text");
+    private final Element completeText = new Element(driver, By.className("complete-text"));
 
     public FinishPage(RemoteWebDriver driver) {
         super(driver);
     }
 
     public boolean isComplete() {
-        return new Element(driver, completeText).isDisplayed();
+        return completeText.isDisplayed();
     }
 }

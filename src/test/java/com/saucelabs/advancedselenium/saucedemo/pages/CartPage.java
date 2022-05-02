@@ -12,7 +12,7 @@ import java.util.Random;
 import java.util.function.Function;
 
 public class CartPage extends BasePage {
-    private final By checkoutButton = By.cssSelector("button[data-test='checkout']");
+    private final Element checkoutButton = new Element(driver, By.cssSelector("button[data-test='checkout']"));
     private final By removeItemButton = By.cssSelector("button[data-test^='remove-']");
 
     public CartPage(RemoteWebDriver driver) {
@@ -20,7 +20,7 @@ public class CartPage extends BasePage {
     }
 
     public void checkout() {
-        new Element(driver, checkoutButton).click();
+        checkoutButton.click();
     }
 
     public void removeItemSuccessfully() {

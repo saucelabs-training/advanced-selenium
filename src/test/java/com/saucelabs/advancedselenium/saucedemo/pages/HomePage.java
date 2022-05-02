@@ -13,9 +13,9 @@ import java.util.function.Function;
 
 public class HomePage extends BasePage {
     public static final String URL = "https://www.saucedemo.com/";
-    private final By usernameTextfield = By.cssSelector("input[data-test='username']");
-    private final By passwordTextfield = By.cssSelector("input[data-test='password']");
-    private final By loginButton = By.cssSelector("input[data-test='login-button']");
+    private final Element usernameTextfield = new Element(driver, By.cssSelector("input[data-test='username']"));
+    private final Element passwordTextfield = new Element(driver, By.cssSelector("input[data-test='password']"));
+    private final Element loginButton = new Element(driver, By.cssSelector("input[data-test='login-button']"));
     private final By errorElement = By.cssSelector("[data-test=error]");
 
     public static HomePage visit(RemoteWebDriver driver) {
@@ -56,8 +56,8 @@ public class HomePage extends BasePage {
     }
 
     private void login(User user) {
-        new Element(driver, usernameTextfield).sendKeys(user.getUsername());
-        new Element(driver, passwordTextfield).sendKeys(user.getPassword());
-        new Element(driver, loginButton).click();
+        usernameTextfield.sendKeys(user.getUsername());
+        passwordTextfield.sendKeys(user.getPassword());
+        loginButton.click();
     }
 }
