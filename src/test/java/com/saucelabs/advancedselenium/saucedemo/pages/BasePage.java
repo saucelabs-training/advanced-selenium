@@ -26,6 +26,9 @@ public abstract class BasePage {
     }
 
     public void click(By locator) {
+        WebElement element = (WebElement) wait.until((Function<WebDriver, Object>) d -> d.findElement(locator));
+        wait.until((Function<WebDriver, Object>) d -> element.isDisplayed());
+        wait.until((Function<WebDriver, Object>) d -> element.isEnabled());
         driver.findElement(locator).click();
     }
 }
