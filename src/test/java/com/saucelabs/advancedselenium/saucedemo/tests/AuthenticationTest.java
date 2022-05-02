@@ -8,7 +8,7 @@ import com.saucelabs.advancedselenium.saucedemo.pages.InventoryPage;
 public class AuthenticationTest extends BaseTest {
     @Test
     public void signInUnsuccessful() {
-        HomePage homePage = new HomePage(driver);
+        HomePage homePage = HomePage.visit(driver);
 
         homePage.login("locked_out_user", "secret_sauce");
 
@@ -17,7 +17,7 @@ public class AuthenticationTest extends BaseTest {
 
     @Test
     public void signInSuccessful() {
-        HomePage homePage = new HomePage(driver);
+        HomePage homePage = HomePage.visit(driver);
 
         InventoryPage inventoryPage = homePage.login("standard_user", "secret_sauce");
 
@@ -26,7 +26,7 @@ public class AuthenticationTest extends BaseTest {
 
     @Test
     public void logout() {
-        HomePage homePage = new HomePage(driver);
+        HomePage homePage = HomePage.visit(driver);
         InventoryPage inventoryPage = homePage.login("standard_user", "secret_sauce");
 
         inventoryPage.logOut();

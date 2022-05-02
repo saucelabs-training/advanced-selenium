@@ -11,11 +11,14 @@ public class HomePage {
     private final By loginButton = By.cssSelector("input[data-test='login-button']");
     private final By errorElement = By.cssSelector("[data-test=error]");
 
+    public static HomePage visit(RemoteWebDriver driver) {
+        HomePage homePage = new HomePage(driver);
+        driver.get(URL);
+        return homePage;
+    }
+
     public HomePage(RemoteWebDriver driver) {
         this.driver = driver;
-        if (!isOnPage()) {
-            driver.get(URL);
-        }
     }
 
     public InventoryPage login(String username, String password) {

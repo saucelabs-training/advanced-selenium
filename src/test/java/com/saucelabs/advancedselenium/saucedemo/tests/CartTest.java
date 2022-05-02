@@ -9,9 +9,14 @@ import com.saucelabs.advancedselenium.saucedemo.pages.Product;
 import com.saucelabs.advancedselenium.saucedemo.pages.ProductPage;
 
 public class CartTest extends BaseTest {
+    public InventoryPage login() {
+        HomePage homePage = HomePage.visit(driver);
+        return homePage.login("standard_user", "secret_sauce");
+    }
+
     @Test
     public void addFromProductPage() {
-        InventoryPage inventoryPage = new InventoryPage(driver);
+        InventoryPage inventoryPage = login();
         ProductPage productPage = inventoryPage.viewBoltTShirtProduct();
 
         productPage.addItemToCart();
@@ -23,7 +28,7 @@ public class CartTest extends BaseTest {
 
     @Test
     public void removeFromProductPage() {
-        InventoryPage inventoryPage = new InventoryPage(driver);
+        InventoryPage inventoryPage = login();
         ProductPage productPage = inventoryPage.viewBoltTShirtProduct();
 
         productPage.addItemToCart();
@@ -36,7 +41,7 @@ public class CartTest extends BaseTest {
 
     @Test
     public void addFromInventoryPage() {
-        InventoryPage inventoryPage = new InventoryPage(driver);
+        InventoryPage inventoryPage = login();
         inventoryPage.addItem(Product.ONESIE);
 
         Assertions.assertEquals(1,
@@ -46,7 +51,7 @@ public class CartTest extends BaseTest {
 
     @Test
     public void removeFromInventoryPage() {
-        InventoryPage inventoryPage = new InventoryPage(driver);
+        InventoryPage inventoryPage = login();
         inventoryPage.addItem(Product.BIKE_LIGHT);
 
         inventoryPage.removeItem(Product.BIKE_LIGHT);
@@ -58,7 +63,7 @@ public class CartTest extends BaseTest {
 
     @Test
     public void removeFromCartPage() {
-        InventoryPage inventoryPage = new InventoryPage(driver);
+        InventoryPage inventoryPage = login();
         inventoryPage.addItem(Product.BACKPACK);
         CartPage cartPage = inventoryPage.goToCart();
 

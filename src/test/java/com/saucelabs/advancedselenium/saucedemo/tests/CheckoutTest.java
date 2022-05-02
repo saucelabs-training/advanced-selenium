@@ -13,7 +13,7 @@ import com.saucelabs.advancedselenium.saucedemo.pages.Product;
 public class CheckoutTest extends BaseTest {
 
     public InventoryPage login() {
-        HomePage homePage = new HomePage(driver);
+        HomePage homePage = HomePage.visit(driver);
         return homePage.login("standard_user", "secret_sauce");
     }
 
