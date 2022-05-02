@@ -23,17 +23,25 @@ public class HomePage extends BasePage {
         this.driver = driver;
     }
 
-    public void login(String username, String password) {
+    public void loginUnsuccessfully(String username, String password) {
+        login(username, password);
+        if (driver.findElements(errorElement).isEmpty()) {
+            throw new PageValidationException("Expected log in errors, but none were found");
+        }
+    }
+
+    public void loginSuccessfully(String username, String password) {
+        login(username, password);
+        validateLoggedIn();
+    }
+
+    private void login(String username, String password) {
         driver.findElement(usernameTextfield).sendKeys(username);
         driver.findElement(passwordTextfield).sendKeys(password);
         driver.findElement(loginButton).click();
     }
 
-    public boolean isLockedOut() {
-        return driver.findElement(errorElement).getText().contains("Sorry, this user has been locked out");
-    }
-
-    public void validateLoggedIn() {
+    private void validateLoggedIn() {
         HeaderSection headerSection = new HeaderSection(driver);
         if (!headerSection.isLoggedIn()) {
             List<WebElement> errors = driver.findElements(errorElement);

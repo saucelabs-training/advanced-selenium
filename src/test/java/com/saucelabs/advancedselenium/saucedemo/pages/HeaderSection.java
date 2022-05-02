@@ -24,7 +24,16 @@ public class HeaderSection extends BasePage {
         }
     }
 
-    public void logOut() {
+    public boolean isLoggedIn() {
+        return InventoryPage.URL.equals(driver.getCurrentUrl());
+    }
+
+    public void logOutSuccessfully() {
+        logOut();
+        validateLoggedOut();
+    }
+
+    private void logOut() {
         driver.findElement(menuButton).click();
         try {
             Thread.sleep(1000);
@@ -35,11 +44,7 @@ public class HeaderSection extends BasePage {
         driver.findElement(logoutLink).click();
     }
 
-    public boolean isLoggedIn() {
-        return InventoryPage.URL.equals(driver.getCurrentUrl());
-    }
-
-    public void validateLoggedOut() {
+    private void validateLoggedOut() {
         if (isLoggedIn()) {
             throw new PageValidationException("User is still logged in;");
         }

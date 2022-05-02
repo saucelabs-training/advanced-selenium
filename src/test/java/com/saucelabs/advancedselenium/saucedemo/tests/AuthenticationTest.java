@@ -10,28 +10,26 @@ public class AuthenticationTest extends BaseTest {
     public void signInUnsuccessful() {
         HomePage homePage = HomePage.visit(driver);
 
-        homePage.login("locked_out_user", "secret_sauce");
-
-        Assertions.assertTrue(homePage.isLockedOut(), "Error Not Found");
+        Assertions.assertDoesNotThrow(() ->
+                homePage.loginUnsuccessfully("locked_out_user", "secret_sauce")
+        );
     }
 
     @Test
     public void signInSuccessful() {
         HomePage homePage = HomePage.visit(driver);
 
-        homePage.login("standard_user", "secret_sauce");
-
-        Assertions.assertDoesNotThrow(homePage::validateLoggedIn);
+        Assertions.assertDoesNotThrow(() ->
+                homePage.loginSuccessfully("standard_user", "secret_sauce")
+        );
     }
 
     @Test
     public void logout() {
         HomePage homePage = HomePage.visit(driver);
-        homePage.login("standard_user", "secret_sauce");
+        homePage.loginSuccessfully("standard_user", "secret_sauce");
 
         HeaderSection headerSection = new HeaderSection(driver);
-        headerSection.logOut();
-
-        Assertions.assertDoesNotThrow(headerSection::validateLoggedOut);
+        Assertions.assertDoesNotThrow(headerSection::logOutSuccessfully);
     }
 }

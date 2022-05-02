@@ -11,8 +11,9 @@ public class CheckoutPage extends BasePage {
         this.driver = driver;
     }
 
-    public void finish() {
+    public void finishSuccessfully() {
         driver.findElement(finishButton).click();
+        validateFinished();
     }
 
     public void validateFinished() {

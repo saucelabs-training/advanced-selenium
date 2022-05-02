@@ -17,14 +17,16 @@ public class InformationPage extends BasePage {
         this.driver = driver;
     }
 
-    public void addInformation(String firstName, String lastName, String postalCode) {
+    public void addInformationSuccessfully(String firstName, String lastName, String postalCode) {
         driver.findElement(firstNameElement).sendKeys(firstName);
         driver.findElement(lastNameElement).sendKeys(lastName);
         driver.findElement(postalCodeElement).sendKeys(postalCode);
         driver.findElement(continueButton).click();
+
+        validateInformationAdded();
     }
 
-    public void validateInformationAdded() {
+    private void validateInformationAdded() {
         if (!CheckoutPage.URL.equals(driver.getCurrentUrl())) {
             List<WebElement> errors = driver.findElements(errorElement);
             String additional = errors.isEmpty() ? "" : " found error: " + errors.get(0).getText();
