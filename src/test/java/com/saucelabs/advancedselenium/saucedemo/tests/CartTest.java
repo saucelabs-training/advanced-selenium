@@ -2,8 +2,8 @@ package com.saucelabs.advancedselenium.saucedemo.tests;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import com.saucelabs.advancedselenium.saucedemo.data.User;
 import com.saucelabs.advancedselenium.saucedemo.pages.CartPage;
-import com.saucelabs.advancedselenium.saucedemo.pages.HeaderSection;
 import com.saucelabs.advancedselenium.saucedemo.pages.HomePage;
 import com.saucelabs.advancedselenium.saucedemo.pages.InventoryPage;
 import com.saucelabs.advancedselenium.saucedemo.pages.Product;
@@ -12,7 +12,11 @@ import com.saucelabs.advancedselenium.saucedemo.pages.ProductPage;
 public class CartTest extends BaseTest {
     public void login() {
         HomePage homePage = HomePage.visit(driver);
-        homePage.loginSuccessfully("standard_user", "secret_sauce");
+        User validUser = new User();
+        validUser.setUsername("standard_user");
+        validUser.setPassword("secret_sauce");
+
+        homePage.loginSuccessfully(validUser.getUsername(), validUser.getPassword());
     }
 
     @Test
