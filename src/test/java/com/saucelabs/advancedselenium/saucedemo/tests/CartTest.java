@@ -2,69 +2,81 @@ package com.saucelabs.advancedselenium.saucedemo.tests;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
+import com.saucelabs.advancedselenium.saucedemo.pages.CartPage;
+import com.saucelabs.advancedselenium.saucedemo.pages.HomePage;
+import com.saucelabs.advancedselenium.saucedemo.pages.InventoryPage;
+import com.saucelabs.advancedselenium.saucedemo.pages.ProductPage;
 
 public class CartTest extends BaseTest {
     public void login() {
-        driver.get("https://www.saucedemo.com/");
-        driver.findElement(By.cssSelector("input[data-test='username']")).sendKeys("standard_user");
-        driver.findElement(By.cssSelector("input[data-test='password']")).sendKeys("secret_sauce");
-        driver.findElement(By.cssSelector("input[data-test='login-button']")).click();
+        HomePage homePage = new HomePage(driver);
+        driver.get(HomePage.URL);
+        homePage.getUsernameElement().sendKeys("standard_user");
+        homePage.getPasswordElement().sendKeys("secret_sauce");
+        homePage.getSubmitElement().click();
     }
 
     @Test
     public void addFromProductPage() {
         login();
-        driver.findElement(By.id("item_1_title_link")).click();
+        InventoryPage inventoryPage = new InventoryPage(driver);
+        inventoryPage.getBoltTShirtLink().click();
 
-        driver.findElement(By.cssSelector("button[data-test='add-to-cart-sauce-labs-bolt-t-shirt']")).click();
+        ProductPage productPage = new ProductPage(driver);
+        productPage.getAddToCartButton().click();
 
         Assertions.assertEquals("1",
-                driver.findElement(By.className("shopping_cart_badge")).getText(),
+                productPage.getCartNumberElement().getText(),
                 "Item not correctly added to cart");
     }
 
     @Test
     public void removeFromProductPage() {
         login();
-        driver.findElement(By.id("item_1_title_link")).click();
-        driver.findElement(By.cssSelector("button[data-test='add-to-cart-sauce-labs-bolt-t-shirt']")).click();
+        InventoryPage inventoryPage = new InventoryPage(driver);
+        inventoryPage.getBoltTShirtLink().click();
+        ProductPage productPage = new ProductPage(driver);
+        productPage.getAddToCartButton().click();
 
-        driver.findElement(By.cssSelector("button[data-test='remove-sauce-labs-bolt-t-shirt']")).click();
+        productPage.getRemoveFromCartButton().click();
 
-        Assertions.assertTrue(driver.findElements(By.className("shopping_cart_badge")).isEmpty(),
+        Assertions.assertTrue(productPage.getCartNumberElements().isEmpty(),
                 "Item not correctly removed from cart");
     }
 
     @Test
     public void addFromInventoryPage() {
         login();
-        driver.findElement(By.cssSelector("button[data-test='add-to-cart-sauce-labs-onesie']")).click();
+        InventoryPage inventoryPage = new InventoryPage(driver);
+        inventoryPage.getAddOnesieButton().click();
 
         Assertions.assertEquals("1",
-                driver.findElement(By.className("shopping_cart_badge")).getText());
+                inventoryPage.getCartNumberElement().getText());
     }
 
     @Test
     public void removeFromInventoryPage() {
         login();
-        driver.findElement(By.cssSelector("button[data-test='add-to-cart-sauce-labs-bike-light']")).click();
+        InventoryPage inventoryPage = new InventoryPage(driver);
+        inventoryPage.getAddBikeLightButton().click();
 
-        driver.findElement(By.cssSelector("button[data-test='remove-sauce-labs-bike-light']")).click();
+        inventoryPage.getRemoveBikeLightButton().click();
 
-        Assertions.assertTrue(driver.findElements(By.className("shopping_cart_badge")).isEmpty(),
+        Assertions.assertTrue(inventoryPage.getCartNumberElements().isEmpty(),
                 "Shopping Cart is not empty");
     }
 
     @Test
     public void removeFromCartPage() {
         login();
-        driver.findElement(By.cssSelector("button[data-test='add-to-cart-sauce-labs-backpack']")).click();
-        driver.findElement(By.className("shopping_cart_link")).click();
+        InventoryPage inventoryPage = new InventoryPage(driver);
+        inventoryPage.getAddBackpackButton().click();
+        inventoryPage.getCartImageLink().click();
 
-        driver.findElement(By.cssSelector("button[data-test='remove-sauce-labs-backpack']")).click();
+        CartPage cartPage = new CartPage(driver);
+        cartPage.getRemoveBackPackButton().click();
 
-        Assertions.assertTrue(driver.findElements(By.className("shopping_cart_badge")).isEmpty(),
+        Assertions.assertTrue(cartPage.getCartNumberElements().isEmpty(),
                 "Shopping Cart is not empty");
     }
 }
