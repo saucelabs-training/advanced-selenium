@@ -3,6 +3,7 @@ package com.saucelabs.advancedselenium.saucedemo.elements;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -28,26 +29,32 @@ public class Element {
     }
 
     public void sendKeys(String value) {
-        locate();
         run(() -> cachedElement.sendKeys(value), "send keys to element at: " + locator);
     }
 
     public void click() {
-        locate();
         run(() -> cachedElement.click(), "click element at: " + locator);
     }
 
+    public void reset() {
+        this.cachedElement = null;
+    }
+
     private void locate() {
-        this.cachedElement = (WebElement) wait.until((Function<WebDriver, Object>) d -> d.findElement(locator));
+        if (this.cachedElement == null) {
+            this.cachedElement = (WebElement) wait.until((Function<WebDriver, Object>) d -> d.findElement(locator));
+        }
     }
 
     private void run(Runnable block, String message) {
         long startTime = System.currentTimeMillis();
         while (true) {
             try {
+                locate();
                 block.run();
                 break;
-            } catch (NoSuchElementException | ElementNotInteractableException e) {
+            } catch (NoSuchElementException | ElementNotInteractableException | StaleElementReferenceException e) {
+                reset();
                 long currentTime = System.currentTimeMillis();
                 Duration duration = Duration.ofMillis(currentTime - startTime);
 
