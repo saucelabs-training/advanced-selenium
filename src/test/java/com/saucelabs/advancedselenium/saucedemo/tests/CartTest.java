@@ -10,10 +10,7 @@ import com.saucelabs.advancedselenium.saucedemo.pages.ProductPage;
 public class CartTest extends BaseTest {
     public void login() {
         HomePage homePage = new HomePage(driver);
-        driver.get(HomePage.URL);
-        homePage.getUsernameElement().sendKeys("standard_user");
-        homePage.getPasswordElement().sendKeys("secret_sauce");
-        homePage.getSubmitElement().click();
+        homePage.login("standard_user", "secret_sauce");
     }
 
     @Test

@@ -10,6 +10,9 @@ public class HomePage {
 
     public HomePage(RemoteWebDriver driver) {
         this.driver = driver;
+        if (!isOnPage()) {
+            driver.get(URL);
+        }
     }
 
     public WebElement getUsernameElement() {
@@ -26,5 +29,21 @@ public class HomePage {
 
     public WebElement getErrorElement() {
         return driver.findElement(By.cssSelector("[data-test=error]"));
+    }
+
+    public InventoryPage login(String username, String password) {
+        getUsernameElement().sendKeys(username);
+        getPasswordElement().sendKeys(password);
+        getSubmitElement().click();
+
+        return new InventoryPage(driver);
+    }
+
+    public boolean isLockedOut() {
+        return getErrorElement().getText().contains("Sorry, this user has been locked out");
+    }
+
+    public boolean isOnPage() {
+        return URL.equals(driver.getCurrentUrl());
     }
 }

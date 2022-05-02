@@ -53,4 +53,19 @@ public class InventoryPage {
     public WebElement getCartImageLink() {
         return driver.findElement(By.className("shopping_cart_link"));
     }
+
+    public boolean isOnPage() {
+        return URL.equals(driver.getCurrentUrl());
+    }
+
+    public void logOut() {
+        getMenuButton().click();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        getLogoutLink().click();
+    }
 }
