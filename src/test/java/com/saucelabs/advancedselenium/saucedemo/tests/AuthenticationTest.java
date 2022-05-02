@@ -30,9 +30,8 @@ public class AuthenticationTest extends BaseTest {
     @Test
     public void logout() {
         HomePage homePage = HomePage.visit(driver);
-        User validUser = User.valid();
 
-        homePage.loginSuccessfully(validUser);
+        homePage.loginSuccessfully();
 
         HeaderSection headerSection = new HeaderSection(driver);
         Assertions.assertDoesNotThrow(headerSection::logOutSuccessfully);

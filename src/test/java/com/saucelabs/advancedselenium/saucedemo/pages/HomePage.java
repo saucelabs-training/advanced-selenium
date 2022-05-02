@@ -38,6 +38,10 @@ public class HomePage extends BasePage {
         }
     }
 
+    public void loginSuccessfully() {
+        loginSuccessfully(User.valid());
+    }
+
     public void loginSuccessfully(User user) {
         login(user);
 

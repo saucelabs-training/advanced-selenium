@@ -2,7 +2,6 @@ package com.saucelabs.advancedselenium.saucedemo.tests;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import com.saucelabs.advancedselenium.saucedemo.data.User;
 import com.saucelabs.advancedselenium.saucedemo.pages.CartPage;
 import com.saucelabs.advancedselenium.saucedemo.pages.HomePage;
 import com.saucelabs.advancedselenium.saucedemo.pages.InventoryPage;
@@ -12,9 +11,7 @@ import com.saucelabs.advancedselenium.saucedemo.pages.ProductPage;
 public class CartTest extends BaseTest {
     public void login() {
         HomePage homePage = HomePage.visit(driver);
-        User validUser = User.valid();
-
-        homePage.loginSuccessfully(validUser);
+        homePage.loginSuccessfully();
     }
 
     @Test
