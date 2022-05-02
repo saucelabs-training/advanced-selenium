@@ -8,7 +8,6 @@ import com.saucelabs.advancedselenium.saucedemo.pages.CheckoutPage;
 import com.saucelabs.advancedselenium.saucedemo.pages.HomePage;
 import com.saucelabs.advancedselenium.saucedemo.pages.InformationPage;
 import com.saucelabs.advancedselenium.saucedemo.pages.InventoryPage;
-import com.saucelabs.advancedselenium.saucedemo.pages.Product;
 
 public class CheckoutTest extends BaseTest {
 
@@ -20,7 +19,7 @@ public class CheckoutTest extends BaseTest {
 
     public void goToCheckoutWithItem() {
         InventoryPage inventoryPage = new InventoryPage(driver);
-        inventoryPage.addItemSuccessfully(Product.ONESIE);
+        inventoryPage.addItemSuccessfully();
         inventoryPage.goToCart();
         CartPage cartPage = new CartPage(driver);
         cartPage.checkout();

@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import com.saucelabs.advancedselenium.saucedemo.pages.CartPage;
 import com.saucelabs.advancedselenium.saucedemo.pages.HomePage;
 import com.saucelabs.advancedselenium.saucedemo.pages.InventoryPage;
-import com.saucelabs.advancedselenium.saucedemo.pages.Product;
 import com.saucelabs.advancedselenium.saucedemo.pages.ProductPage;
 
 public class CartTest extends BaseTest {
@@ -42,26 +41,26 @@ public class CartTest extends BaseTest {
         login();
         InventoryPage inventoryPage = new InventoryPage(driver);
 
-        Assertions.assertDoesNotThrow(() -> inventoryPage.addItemSuccessfully(Product.ONESIE));
+        Assertions.assertDoesNotThrow(inventoryPage::addItemSuccessfully);
     }
 
     @Test
     public void removeFromInventoryPage() {
         login();
         InventoryPage inventoryPage = new InventoryPage(driver);
-        inventoryPage.addItemSuccessfully(Product.BIKE_LIGHT);
+        inventoryPage.addItemSuccessfully();
 
-        Assertions.assertDoesNotThrow(() -> inventoryPage.removeItemSuccessfully(Product.BIKE_LIGHT));
+        Assertions.assertDoesNotThrow(inventoryPage::removeItemSuccessfully);
     }
 
     @Test
     public void removeFromCartPage() {
         login();
         InventoryPage inventoryPage = new InventoryPage(driver);
-        inventoryPage.addItemSuccessfully(Product.BACKPACK);
+        inventoryPage.addItemSuccessfully();
         inventoryPage.goToCart();
 
         CartPage cartPage = new CartPage(driver);
-        Assertions.assertDoesNotThrow(() -> cartPage.removeItemSuccessfully(Product.BACKPACK));
+        Assertions.assertDoesNotThrow(cartPage::removeItemSuccessfully);
     }
 }
