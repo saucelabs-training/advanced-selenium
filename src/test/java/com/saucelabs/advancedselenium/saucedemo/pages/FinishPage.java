@@ -15,4 +15,12 @@ public class FinishPage {
     public WebElement getCompleteElement() {
         return driver.findElement(By.className("complete-text"));
     }
+
+    public boolean isOnPage() {
+        return URL.equals(driver.getCurrentUrl());
+    }
+
+    public boolean isComplete() {
+        return getCompleteElement().isDisplayed();
+    }
 }

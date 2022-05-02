@@ -68,4 +68,33 @@ public class InventoryPage {
 
         getLogoutLink().click();
     }
+
+    public ProductPage viewBoltTShirtProduct() {
+        getBoltTShirtLink().click();
+        return new ProductPage(driver);
+    }
+
+    public void addItem(Product product) {
+        String cssSelector = "button[data-test='add-to-cart-" + product.getId() + "']";
+        driver.findElement(By.cssSelector(cssSelector)).click();
+    }
+
+    public void removeItem(Product product) {
+        String cssSelector = "button[data-test='remove-" + product.getId() + "']";
+        driver.findElement(By.cssSelector(cssSelector)).click();
+    }
+
+    public Integer getNumberItemsInCart() {
+        List<WebElement> cartNumberElements = getCartNumberElements();
+        if (cartNumberElements.isEmpty()) {
+            return 0;
+        } else {
+            return Integer.valueOf(cartNumberElements.get(0).getText());
+        }
+    }
+
+    public CartPage goToCart() {
+        getCartImageLink().click();
+        return new CartPage(driver);
+    }
 }

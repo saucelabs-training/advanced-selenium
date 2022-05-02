@@ -8,9 +8,9 @@ import com.saucelabs.advancedselenium.saucedemo.pages.InventoryPage;
 import com.saucelabs.advancedselenium.saucedemo.pages.ProductPage;
 
 public class CartTest extends BaseTest {
-    public void login() {
+    public InventoryPage login() {
         HomePage homePage = new HomePage(driver);
-        homePage.login("standard_user", "secret_sauce");
+        return homePage.login("standard_user", "secret_sauce");
     }
 
     @Test

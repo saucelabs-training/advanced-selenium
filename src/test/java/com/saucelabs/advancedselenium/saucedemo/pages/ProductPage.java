@@ -14,18 +14,31 @@ public class ProductPage {
     }
 
     public WebElement getAddToCartButton() {
-        return driver.findElement(By.cssSelector("button[data-test='add-to-cart-sauce-labs-bolt-t-shirt']"));
-    }
-
-    public WebElement getCartNumberElement() {
-        return driver.findElement(By.className("shopping_cart_badge"));
+        return driver.findElement(By.cssSelector("button[data-test='^add-to-cart-']"));
     }
 
     public WebElement getRemoveFromCartButton() {
-        return driver.findElement(By.cssSelector("button[data-test='remove-sauce-labs-bolt-t-shirt']"));
+        return driver.findElement(By.cssSelector("button[data-test='^remove']"));
     }
 
     public List<WebElement> getCartNumberElements() {
         return driver.findElements(By.className("shopping_cart_badge"));
+    }
+
+    public void addItemToCart() {
+        getAddToCartButton().click();
+    }
+
+    public Integer getNumberItemsInCart() {
+        List<WebElement> cartNumberElements = getCartNumberElements();
+        if (cartNumberElements.isEmpty()) {
+            return 0;
+        } else {
+            return Integer.valueOf(cartNumberElements.get(0).getText());
+        }
+    }
+
+    public void removeItemFromCart() {
+        getRemoveFromCartButton().click();
     }
 }

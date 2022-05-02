@@ -11,9 +11,9 @@ import com.saucelabs.advancedselenium.saucedemo.pages.InventoryPage;
 
 public class CheckoutTest extends BaseTest {
 
-    public void login() {
+    public InventoryPage login() {
         HomePage homePage = new HomePage(driver);
-        homePage.login("standard_user", "secret_sauce");
+        return homePage.login("standard_user", "secret_sauce");
     }
 
     public void goToCheckoutWithItem() {

@@ -26,4 +26,14 @@ public class InformationPage {
     public WebElement getContinueButton() {
         return driver.findElement(By.cssSelector("input[data-test='continue']"));
     }
+
+    public CheckoutPage addInformation(String firstName, String lastName, String postalCode) {
+        getFirstNameElement().sendKeys(firstName);
+        getLastNameElement().sendKeys(lastName);
+        getPostalCodeElement().sendKeys(postalCode);
+        getContinueButton().click();
+
+        return new CheckoutPage(driver);
+    }
+
 }
