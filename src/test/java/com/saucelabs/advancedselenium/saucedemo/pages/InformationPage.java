@@ -3,8 +3,7 @@ package com.saucelabs.advancedselenium.saucedemo.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
-public class InformationPage {
-    private final RemoteWebDriver driver;
+public class InformationPage extends BasePage {
     private final By firstNameElement = By.cssSelector("input[data-test='firstName']");
     private final By lastNameElement = By.cssSelector("input[data-test='lastName']");
     private final By postalCodeElement = By.cssSelector("input[data-test='postalCode']");

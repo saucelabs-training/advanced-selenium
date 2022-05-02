@@ -3,6 +3,7 @@ package com.saucelabs.advancedselenium.saucedemo.tests;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import com.saucelabs.advancedselenium.saucedemo.pages.CartPage;
+import com.saucelabs.advancedselenium.saucedemo.pages.HeaderSection;
 import com.saucelabs.advancedselenium.saucedemo.pages.HomePage;
 import com.saucelabs.advancedselenium.saucedemo.pages.InventoryPage;
 import com.saucelabs.advancedselenium.saucedemo.pages.Product;
@@ -23,8 +24,9 @@ public class CartTest extends BaseTest {
         ProductPage productPage = new ProductPage(driver);
         productPage.addItemToCart();
 
+        HeaderSection headerSection = new HeaderSection(driver);
         Assertions.assertEquals(1,
-                productPage.getNumberItemsInCart(),
+                headerSection.getNumberItemsInCart(),
                 "Item not correctly added to cart");
     }
 
@@ -38,8 +40,9 @@ public class CartTest extends BaseTest {
         productPage.addItemToCart();
         productPage.removeItemFromCart();
 
+        HeaderSection headerSection = new HeaderSection(driver);
         Assertions.assertEquals(0,
-                productPage.getNumberItemsInCart(),
+                headerSection.getNumberItemsInCart(),
                 "Item not correctly removed from cart");
     }
 
@@ -49,8 +52,9 @@ public class CartTest extends BaseTest {
         InventoryPage inventoryPage = new InventoryPage(driver);
         inventoryPage.addItem(Product.ONESIE);
 
+        HeaderSection headerSection = new HeaderSection(driver);
         Assertions.assertEquals(1,
-                inventoryPage.getNumberItemsInCart(),
+                headerSection.getNumberItemsInCart(),
                 "Item not correctly added to cart");
     }
 
@@ -62,8 +66,9 @@ public class CartTest extends BaseTest {
 
         inventoryPage.removeItem(Product.BIKE_LIGHT);
 
+        HeaderSection headerSection = new HeaderSection(driver);
         Assertions.assertEquals(0,
-                inventoryPage.getNumberItemsInCart(),
+                headerSection.getNumberItemsInCart(),
                 "Item not correctly removed from cart");
     }
 
@@ -77,8 +82,9 @@ public class CartTest extends BaseTest {
         CartPage cartPage = new CartPage(driver);
         cartPage.removeItem(Product.BACKPACK);
 
+        HeaderSection headerSection = new HeaderSection(driver);
         Assertions.assertEquals(0,
-                cartPage.getNumberItemsInCart(),
+                headerSection.getNumberItemsInCart(),
                 "Item not correctly removed from cart");
     }
 }

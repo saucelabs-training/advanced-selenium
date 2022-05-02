@@ -2,6 +2,7 @@ package com.saucelabs.advancedselenium.saucedemo.tests;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import com.saucelabs.advancedselenium.saucedemo.pages.HeaderSection;
 import com.saucelabs.advancedselenium.saucedemo.pages.HomePage;
 import com.saucelabs.advancedselenium.saucedemo.pages.InventoryPage;
 
@@ -30,8 +31,8 @@ public class AuthenticationTest extends BaseTest {
         HomePage homePage = HomePage.visit(driver);
         homePage.login("standard_user", "secret_sauce");
 
-        InventoryPage inventoryPage = new InventoryPage(driver);
-        inventoryPage.logOut();
+        HeaderSection headerSection = new HeaderSection(driver);
+        headerSection.logOut();
 
         Assertions.assertTrue(homePage.isOnPage(), "Logout Not Successful");
     }

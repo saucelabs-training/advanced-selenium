@@ -3,9 +3,8 @@ package com.saucelabs.advancedselenium.saucedemo.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
-public class HomePage {
+public class HomePage extends BasePage {
     public static final String URL = "https://www.saucedemo.com/";
-    private final RemoteWebDriver driver;
     private final By usernameTextfield = By.cssSelector("input[data-test='username']");
     private final By passwordTextfield = By.cssSelector("input[data-test='password']");
     private final By loginButton = By.cssSelector("input[data-test='login-button']");

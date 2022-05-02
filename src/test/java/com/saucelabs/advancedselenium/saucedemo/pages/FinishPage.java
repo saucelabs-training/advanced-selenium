@@ -3,9 +3,8 @@ package com.saucelabs.advancedselenium.saucedemo.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
-public class FinishPage {
+public class FinishPage extends BasePage {
     public static final String URL = "https://www.saucedemo.com/checkout-complete.html";
-    private final RemoteWebDriver driver;
     private final By completeText = By.className("complete-text");
 
     public FinishPage(RemoteWebDriver driver) {
