@@ -12,10 +12,6 @@ public class InventoryPage extends BasePage {
         this.driver = driver;
     }
 
-    public boolean isOnPage() {
-        return URL.equals(driver.getCurrentUrl());
-    }
-
     public void viewBoltTShirtProduct() {
         driver.findElement(item1Link).click();
     }

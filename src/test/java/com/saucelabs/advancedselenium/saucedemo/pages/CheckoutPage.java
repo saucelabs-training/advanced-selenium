@@ -11,11 +11,11 @@ public class CheckoutPage extends BasePage {
         this.driver = driver;
     }
 
-    public boolean isOnPage() {
-        return URL.equals(driver.getCurrentUrl());
-    }
-
     public void finish() {
         driver.findElement(finishButton).click();
+    }
+
+    public boolean isAddingInfoSuccessful() {
+        return URL.equals(driver.getCurrentUrl());
     }
 }

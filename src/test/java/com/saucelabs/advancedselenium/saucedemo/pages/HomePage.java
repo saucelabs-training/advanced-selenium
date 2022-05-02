@@ -29,8 +29,4 @@ public class HomePage extends BasePage {
     public boolean isLockedOut() {
         return driver.findElement(errorElement).getText().contains("Sorry, this user has been locked out");
     }
-
-    public boolean isOnPage() {
-        return URL.equals(driver.getCurrentUrl());
-    }
 }

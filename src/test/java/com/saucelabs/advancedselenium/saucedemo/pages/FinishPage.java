@@ -11,10 +11,6 @@ public class FinishPage extends BasePage {
         this.driver = driver;
     }
 
-    public boolean isOnPage() {
-        return URL.equals(driver.getCurrentUrl());
-    }
-
     public boolean isComplete() {
         return driver.findElement(completeText).isDisplayed();
     }
