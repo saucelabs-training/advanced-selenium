@@ -19,16 +19,18 @@ public class AuthenticationTest extends BaseTest {
     public void signInSuccessful() {
         HomePage homePage = HomePage.visit(driver);
 
-        InventoryPage inventoryPage = homePage.login("standard_user", "secret_sauce");
+        homePage.login("standard_user", "secret_sauce");
 
+        InventoryPage inventoryPage = new InventoryPage(driver);
         Assertions.assertTrue(inventoryPage.isOnPage(), "Login Not Successful");
     }
 
     @Test
     public void logout() {
         HomePage homePage = HomePage.visit(driver);
-        InventoryPage inventoryPage = homePage.login("standard_user", "secret_sauce");
+        homePage.login("standard_user", "secret_sauce");
 
+        InventoryPage inventoryPage = new InventoryPage(driver);
         inventoryPage.logOut();
 
         Assertions.assertTrue(homePage.isOnPage(), "Logout Not Successful");

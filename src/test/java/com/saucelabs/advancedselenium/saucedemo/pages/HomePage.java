@@ -21,12 +21,10 @@ public class HomePage {
         this.driver = driver;
     }
 
-    public InventoryPage login(String username, String password) {
+    public void login(String username, String password) {
         driver.findElement(usernameTextfield).sendKeys(username);
         driver.findElement(passwordTextfield).sendKeys(password);
         driver.findElement(loginButton).click();
-
-        return new InventoryPage(driver);
     }
 
     public boolean isLockedOut() {

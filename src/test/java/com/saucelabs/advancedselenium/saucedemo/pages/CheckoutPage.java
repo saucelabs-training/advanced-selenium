@@ -16,8 +16,7 @@ public class CheckoutPage {
         return URL.equals(driver.getCurrentUrl());
     }
 
-    public FinishPage finish() {
+    public void finish() {
         driver.findElement(finishButton).click();
-        return new FinishPage(driver);
     }
 }

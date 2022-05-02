@@ -12,36 +12,42 @@ import com.saucelabs.advancedselenium.saucedemo.pages.Product;
 
 public class CheckoutTest extends BaseTest {
 
-    public InventoryPage login() {
+    public void login() {
         HomePage homePage = HomePage.visit(driver);
-        return homePage.login("standard_user", "secret_sauce");
+        homePage.login("standard_user", "secret_sauce");
     }
 
-    public InformationPage goToCheckoutWithItem() {
+    public void goToCheckoutWithItem() {
         InventoryPage inventoryPage = new InventoryPage(driver);
         inventoryPage.addItem(Product.ONESIE);
-        CartPage cartPage = inventoryPage.goToCart();
-        return cartPage.checkout();
+        inventoryPage.goToCart();
+        CartPage cartPage = new CartPage(driver);
+        cartPage.checkout();
     }
 
     @Test
     public void goodInfo() {
         login();
-        InformationPage informationPage = goToCheckoutWithItem();
+        goToCheckoutWithItem();
+        InformationPage informationPage = new InformationPage(driver);
 
-        CheckoutPage checkoutPage = informationPage.addInformation("Luke", "Perry", "90210");
+        informationPage.addInformation("Luke", "Perry", "90210");
 
+        CheckoutPage checkoutPage = new CheckoutPage(driver);
         Assertions.assertTrue(checkoutPage.isOnPage(),"Information Submission Unsuccessful");
     }
 
     @Test
     public void completeCheckout() {
         login();
-        InformationPage informationPage = goToCheckoutWithItem();
-        CheckoutPage checkoutPage = informationPage.addInformation("Luke", "Perry", "90210");
+        goToCheckoutWithItem();
+        InformationPage informationPage = new InformationPage(driver);
+        informationPage.addInformation("Luke", "Perry", "90210");
 
-        FinishPage finish = checkoutPage.finish();
+        CheckoutPage checkoutPage = new CheckoutPage(driver);
+        checkoutPage.finish();
 
+        FinishPage finish = new FinishPage(driver);
         Assertions.assertTrue(finish.isOnPage());
         Assertions.assertTrue(finish.isComplete());
     }

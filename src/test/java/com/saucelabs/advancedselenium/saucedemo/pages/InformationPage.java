@@ -14,12 +14,10 @@ public class InformationPage {
         this.driver = driver;
     }
 
-    public CheckoutPage addInformation(String firstName, String lastName, String postalCode) {
+    public void addInformation(String firstName, String lastName, String postalCode) {
         driver.findElement(firstNameElement).sendKeys(firstName);
         driver.findElement(lastNameElement).sendKeys(lastName);
         driver.findElement(postalCodeElement).sendKeys(postalCode);
         driver.findElement(continueButton).click();
-
-        return new CheckoutPage(driver);
     }
 }
