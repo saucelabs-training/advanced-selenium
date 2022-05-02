@@ -9,29 +9,14 @@ import java.util.List;
 public class InventoryPage {
     public static final String URL = "https://www.saucedemo.com/inventory.html";
     private final RemoteWebDriver driver;
+    private final By menuButton = By.id("react-burger-menu-btn");
+    private final By logoutLink = By.id("logout_sidebar_link");
+    private final By item1Link = By.id("item_1_title_link");
+    private final By shoppingCartBadge = By.className("shopping_cart_badge");
+    private final By shoppingCartLink = By.className("shopping_cart_link");
 
     public InventoryPage(RemoteWebDriver driver) {
         this.driver = driver;
-    }
-
-    public WebElement getMenuButton() {
-        return driver.findElement(By.id("react-burger-menu-btn"));
-    }
-
-    public WebElement getLogoutLink() {
-        return driver.findElement(By.id("logout_sidebar_link"));
-    }
-
-    public WebElement getBoltTShirtLink() {
-        return driver.findElement(By.id("item_1_title_link"));
-    }
-
-    public List<WebElement> getCartNumberElements() {
-        return driver.findElements(By.className("shopping_cart_badge"));
-    }
-
-    public WebElement getCartImageLink() {
-        return driver.findElement(By.className("shopping_cart_link"));
     }
 
     public boolean isOnPage() {
@@ -39,18 +24,18 @@ public class InventoryPage {
     }
 
     public void logOut() {
-        getMenuButton().click();
+        driver.findElement(menuButton).click();
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
 
-        getLogoutLink().click();
+        driver.findElement(logoutLink).click();
     }
 
     public ProductPage viewBoltTShirtProduct() {
-        getBoltTShirtLink().click();
+        driver.findElement(item1Link).click();
         return new ProductPage(driver);
     }
 
@@ -65,7 +50,7 @@ public class InventoryPage {
     }
 
     public Integer getNumberItemsInCart() {
-        List<WebElement> cartNumberElements = getCartNumberElements();
+        List<WebElement> cartNumberElements = driver.findElements(shoppingCartBadge);
         if (cartNumberElements.isEmpty()) {
             return 0;
         } else {
@@ -74,7 +59,7 @@ public class InventoryPage {
     }
 
     public CartPage goToCart() {
-        getCartImageLink().click();
+        driver.findElement(shoppingCartLink).click();
         return new CartPage(driver);
     }
 }

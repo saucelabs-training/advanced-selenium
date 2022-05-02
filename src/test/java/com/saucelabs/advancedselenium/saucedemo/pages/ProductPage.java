@@ -8,29 +8,20 @@ import java.util.List;
 
 public class ProductPage {
     private final RemoteWebDriver driver;
+    private final By addToCartButton = By.cssSelector("button[data-test^='add-to-cart-']");
+    private final By removeFromCartButton = By.cssSelector("button[data-test^='remove']");
+    private final By shoppingCartBadge = By.className("shopping_cart_badge");
 
     public ProductPage(RemoteWebDriver driver) {
         this.driver = driver;
     }
 
-    public WebElement getAddToCartButton() {
-        return driver.findElement(By.cssSelector("button[data-test='^add-to-cart-']"));
-    }
-
-    public WebElement getRemoveFromCartButton() {
-        return driver.findElement(By.cssSelector("button[data-test='^remove']"));
-    }
-
-    public List<WebElement> getCartNumberElements() {
-        return driver.findElements(By.className("shopping_cart_badge"));
-    }
-
     public void addItemToCart() {
-        getAddToCartButton().click();
+        driver.findElement(addToCartButton).click();
     }
 
     public Integer getNumberItemsInCart() {
-        List<WebElement> cartNumberElements = getCartNumberElements();
+        List<WebElement> cartNumberElements = driver.findElements(shoppingCartBadge);
         if (cartNumberElements.isEmpty()) {
             return 0;
         } else {
@@ -39,6 +30,6 @@ public class ProductPage {
     }
 
     public void removeItemFromCart() {
-        getRemoveFromCartButton().click();
+        driver.findElement(removeFromCartButton).click();
     }
 }

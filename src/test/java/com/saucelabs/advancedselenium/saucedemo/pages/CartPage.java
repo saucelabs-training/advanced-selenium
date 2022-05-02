@@ -9,16 +9,11 @@ import java.util.List;
 public class CartPage {
     private final RemoteWebDriver driver;
 
+    private final By checkoutButton = By.cssSelector("button[data-test='checkout']");
+    private final By shoppingCartBadge = By.className("shopping_cart_badge");
+
     public CartPage(RemoteWebDriver driver) {
         this.driver = driver;
-    }
-
-    public WebElement getCheckoutButton() {
-        return driver.findElement(By.cssSelector("button[data-test='checkout']"));
-    }
-
-    public List<WebElement> getCartNumberElements() {
-        return driver.findElements(By.className("shopping_cart_badge"));
     }
 
     public void removeItem(Product product) {
@@ -27,12 +22,12 @@ public class CartPage {
     }
 
     public InformationPage checkout() {
-        getCheckoutButton().click();
+        driver.findElement(checkoutButton).click();
         return new InformationPage(driver);
     }
 
     public Integer getNumberItemsInCart() {
-        List<WebElement> cartNumberElements = getCartNumberElements();
+        List<WebElement> cartNumberElements = driver.findElements(shoppingCartBadge);
         if (cartNumberElements.isEmpty()) {
             return 0;
         } else {
