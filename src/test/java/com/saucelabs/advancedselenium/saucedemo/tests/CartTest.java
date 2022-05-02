@@ -14,7 +14,7 @@ public class CartTest extends BaseTest {
         HomePage homePage = HomePage.visit(driver);
         User validUser = User.valid();
 
-        homePage.loginSuccessfully(validUser.getUsername(), validUser.getPassword());
+        homePage.loginSuccessfully(validUser);
     }
 
     @Test

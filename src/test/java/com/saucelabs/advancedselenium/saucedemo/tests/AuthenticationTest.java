@@ -13,7 +13,7 @@ public class AuthenticationTest extends BaseTest {
         User lockedOutUser = User.lockedOut();
 
         Assertions.assertDoesNotThrow(() ->
-                homePage.loginUnsuccessfully(lockedOutUser.getUsername(), lockedOutUser.getPassword())
+                homePage.loginUnsuccessfully(lockedOutUser)
         );
     }
 
@@ -23,7 +23,7 @@ public class AuthenticationTest extends BaseTest {
         User validUser = User.valid();
 
         Assertions.assertDoesNotThrow(() ->
-                homePage.loginSuccessfully(validUser.getUsername(), validUser.getPassword())
+                homePage.loginSuccessfully(validUser)
         );
     }
 
@@ -32,7 +32,7 @@ public class AuthenticationTest extends BaseTest {
         HomePage homePage = HomePage.visit(driver);
         User validUser = User.valid();
 
-        homePage.loginSuccessfully(validUser.getUsername(), validUser.getPassword());
+        homePage.loginSuccessfully(validUser);
 
         HeaderSection headerSection = new HeaderSection(driver);
         Assertions.assertDoesNotThrow(headerSection::logOutSuccessfully);

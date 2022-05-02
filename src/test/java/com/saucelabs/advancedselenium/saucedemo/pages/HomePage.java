@@ -5,6 +5,7 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import com.saucelabs.advancedselenium.saucedemo.data.User;
 
 import java.util.List;
 import java.util.function.Function;
@@ -26,8 +27,8 @@ public class HomePage extends BasePage {
         super(driver);
     }
 
-    public void loginUnsuccessfully(String username, String password) {
-        login(username, password);
+    public void loginUnsuccessfully(User user) {
+        login(user);
 
         try {
             wait.until((Function<WebDriver, Object>) driver -> !driver.findElements(errorElement).isEmpty());
@@ -37,8 +38,8 @@ public class HomePage extends BasePage {
         }
     }
 
-    public void loginSuccessfully(String username, String password) {
-        login(username, password);
+    public void loginSuccessfully(User user) {
+        login(user);
 
         try {
             wait.until((Function<WebDriver, Object>) driver -> !URL.equals(driver.getCurrentUrl()));
@@ -49,9 +50,9 @@ public class HomePage extends BasePage {
         }
     }
 
-    private void login(String username, String password) {
-        driver.findElement(usernameTextfield).sendKeys(username);
-        driver.findElement(passwordTextfield).sendKeys(password);
+    private void login(User user) {
+        driver.findElement(usernameTextfield).sendKeys(user.getUsername());
+        driver.findElement(passwordTextfield).sendKeys(user.getPassword());
         driver.findElement(loginButton).click();
     }
 }
