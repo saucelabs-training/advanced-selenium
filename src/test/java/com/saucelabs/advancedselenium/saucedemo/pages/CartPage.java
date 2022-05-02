@@ -13,10 +13,6 @@ public class CartPage {
         this.driver = driver;
     }
 
-    public WebElement getRemoveBackPackButton() {
-        return driver.findElement(By.cssSelector("button[data-test='remove-sauce-labs-backpack']"));
-    }
-
     public WebElement getCheckoutButton() {
         return driver.findElement(By.cssSelector("button[data-test='checkout']"));
     }

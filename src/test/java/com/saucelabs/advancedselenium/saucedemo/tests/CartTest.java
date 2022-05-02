@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import com.saucelabs.advancedselenium.saucedemo.pages.CartPage;
 import com.saucelabs.advancedselenium.saucedemo.pages.HomePage;
 import com.saucelabs.advancedselenium.saucedemo.pages.InventoryPage;
+import com.saucelabs.advancedselenium.saucedemo.pages.Product;
 import com.saucelabs.advancedselenium.saucedemo.pages.ProductPage;
 
 public class CartTest extends BaseTest {
@@ -15,65 +16,61 @@ public class CartTest extends BaseTest {
 
     @Test
     public void addFromProductPage() {
-        login();
-        InventoryPage inventoryPage = new InventoryPage(driver);
-        inventoryPage.getBoltTShirtLink().click();
+        InventoryPage inventoryPage = login();
+        ProductPage productPage = inventoryPage.viewBoltTShirtProduct();
 
-        ProductPage productPage = new ProductPage(driver);
-        productPage.getAddToCartButton().click();
+        productPage.addItemToCart();
 
-        Assertions.assertEquals("1",
-                productPage.getCartNumberElement().getText(),
+        Assertions.assertEquals(1,
+                productPage.getNumberItemsInCart(),
                 "Item not correctly added to cart");
     }
 
     @Test
     public void removeFromProductPage() {
-        login();
-        InventoryPage inventoryPage = new InventoryPage(driver);
-        inventoryPage.getBoltTShirtLink().click();
-        ProductPage productPage = new ProductPage(driver);
-        productPage.getAddToCartButton().click();
+        InventoryPage inventoryPage = login();
+        ProductPage productPage = inventoryPage.viewBoltTShirtProduct();
 
-        productPage.getRemoveFromCartButton().click();
+        productPage.addItemToCart();
+        productPage.removeItemFromCart();
 
-        Assertions.assertTrue(productPage.getCartNumberElements().isEmpty(),
+        Assertions.assertEquals(0,
+                productPage.getNumberItemsInCart(),
                 "Item not correctly removed from cart");
     }
 
     @Test
     public void addFromInventoryPage() {
-        login();
-        InventoryPage inventoryPage = new InventoryPage(driver);
-        inventoryPage.getAddOnesieButton().click();
+        InventoryPage inventoryPage = login();
+        inventoryPage.addItem(Product.ONESIE);
 
-        Assertions.assertEquals("1",
-                inventoryPage.getCartNumberElement().getText());
+        Assertions.assertEquals(1,
+                inventoryPage.getNumberItemsInCart(),
+                "Item not correctly added to cart");
     }
 
     @Test
     public void removeFromInventoryPage() {
-        login();
-        InventoryPage inventoryPage = new InventoryPage(driver);
-        inventoryPage.getAddBikeLightButton().click();
+        InventoryPage inventoryPage = login();
+        inventoryPage.addItem(Product.BIKE_LIGHT);
 
-        inventoryPage.getRemoveBikeLightButton().click();
+        inventoryPage.removeItem(Product.BIKE_LIGHT);
 
-        Assertions.assertTrue(inventoryPage.getCartNumberElements().isEmpty(),
-                "Shopping Cart is not empty");
+        Assertions.assertEquals(0,
+                inventoryPage.getNumberItemsInCart(),
+                "Item not correctly removed from cart");
     }
 
     @Test
     public void removeFromCartPage() {
-        login();
-        InventoryPage inventoryPage = new InventoryPage(driver);
-        inventoryPage.getAddBackpackButton().click();
-        inventoryPage.getCartImageLink().click();
+        InventoryPage inventoryPage = login();
+        inventoryPage.addItem(Product.BACKPACK);
+        CartPage cartPage = inventoryPage.goToCart();
 
-        CartPage cartPage = new CartPage(driver);
-        cartPage.getRemoveBackPackButton().click();
+        cartPage.removeItem(Product.BACKPACK);
 
-        Assertions.assertTrue(cartPage.getCartNumberElements().isEmpty(),
-                "Shopping Cart is not empty");
+        Assertions.assertEquals(0,
+                cartPage.getNumberItemsInCart(),
+                "Item not correctly removed from cart");
     }
 }
