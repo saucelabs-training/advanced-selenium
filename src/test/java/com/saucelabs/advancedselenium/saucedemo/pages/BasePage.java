@@ -24,4 +24,8 @@ public abstract class BasePage {
         wait.until((Function<WebDriver, Object>) d -> element.isEnabled());
         element.sendKeys(value);
     }
+
+    public void click(By locator) {
+        driver.findElement(locator).click();
+    }
 }

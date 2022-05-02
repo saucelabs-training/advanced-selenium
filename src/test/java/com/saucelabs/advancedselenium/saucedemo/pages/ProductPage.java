@@ -21,7 +21,7 @@ public class ProductPage extends BasePage {
         Integer before = headerSection.getNumberItemsInCart();
         Integer expected = before + 1;
 
-        driver.findElement(addToCartButton).click();
+        click(addToCartButton);
 
         try {
             wait.until((Function<WebDriver, Object>) driver -> expected.equals(headerSection.getNumberItemsInCart()));
@@ -37,7 +37,7 @@ public class ProductPage extends BasePage {
         Integer before = headerSection.getNumberItemsInCart();
         Integer expected = before - 1;
 
-        driver.findElement(removeFromCartButton).click();
+        click(removeFromCartButton);
 
         try {
             wait.until((Function<WebDriver, Object>) driver -> expected.equals(headerSection.getNumberItemsInCart()));

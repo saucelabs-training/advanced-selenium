@@ -16,7 +16,7 @@ public class CheckoutPage extends BasePage {
     }
 
     public void finishSuccessfully() {
-        driver.findElement(finishButton).click();
+        click(finishButton);
         try {
             wait.until((Function<WebDriver, Object>) driver -> !URL.equals(driver.getCurrentUrl()));
         } catch (TimeoutException ex) {

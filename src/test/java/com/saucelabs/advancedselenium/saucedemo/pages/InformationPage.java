@@ -30,7 +30,7 @@ public class InformationPage extends BasePage {
         sendKeys(firstNameElement, person.getFirstName());
         sendKeys(lastNameElement, person.getLastName());
         sendKeys(postalCodeElement, person.getPostalCode());
-        driver.findElement(continueButton).click();
+        click(continueButton);
 
         try {
             wait.until((Function<WebDriver, Object>) driver -> !URL.equals(driver.getCurrentUrl()));

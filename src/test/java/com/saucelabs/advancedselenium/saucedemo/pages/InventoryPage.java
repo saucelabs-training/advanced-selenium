@@ -22,11 +22,11 @@ public class InventoryPage extends BasePage {
     }
 
     public void viewBoltTShirtProduct() {
-        driver.findElement(item1Link).click();
+        click(item1Link);
     }
 
     public void goToCart() {
-        driver.findElement(shoppingCartLink).click();
+        click(shoppingCartLink);
     }
 
     public void addItemSuccessfully() {
