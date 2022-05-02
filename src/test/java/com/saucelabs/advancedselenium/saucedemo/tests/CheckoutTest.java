@@ -2,7 +2,7 @@ package com.saucelabs.advancedselenium.saucedemo.tests;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import com.saucelabs.advancedselenium.saucedemo.data.User;
+import com.saucelabs.advancedselenium.saucedemo.data.Person;
 import com.saucelabs.advancedselenium.saucedemo.pages.CartPage;
 import com.saucelabs.advancedselenium.saucedemo.pages.CheckoutPage;
 import com.saucelabs.advancedselenium.saucedemo.pages.HomePage;
@@ -32,7 +32,8 @@ public class CheckoutTest extends BaseTest {
         goToCheckoutWithItem();
         InformationPage informationPage = new InformationPage(driver);
 
-        Assertions.assertDoesNotThrow(() -> informationPage.addInformationSuccessfully("Luke", "Perry", "90210"));
+        Person validPerson = new Person();
+        Assertions.assertDoesNotThrow(() -> informationPage.addInformationSuccessfully(validPerson));
     }
 
     @Test
@@ -40,7 +41,7 @@ public class CheckoutTest extends BaseTest {
         login();
         goToCheckoutWithItem();
         InformationPage informationPage = new InformationPage(driver);
-        informationPage.addInformationSuccessfully("Luke", "Perry", "90210");
+        informationPage.addInformationSuccessfully();
 
         CheckoutPage checkoutPage = new CheckoutPage(driver);
         Assertions.assertDoesNotThrow(checkoutPage::finishSuccessfully);
