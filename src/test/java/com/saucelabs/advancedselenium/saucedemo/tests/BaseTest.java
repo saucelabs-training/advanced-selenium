@@ -2,7 +2,9 @@ package com.saucelabs.advancedselenium.saucedemo.tests;
 
 import com.saucelabs.advancedselenium.saucedemo.Browser;
 import com.saucelabs.advancedselenium.saucedemo.SauceDemoApp;
+import com.saucelabs.saucebindings.SaucePlatform;
 import com.saucelabs.saucebindings.SauceSession;
+import com.saucelabs.saucebindings.UnhandledPromptBehavior;
 import com.saucelabs.saucebindings.options.SauceOptions;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.BeforeAll;
@@ -17,6 +19,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.io.File;
+import java.time.Duration;
 import java.util.Collections;
 import java.util.Optional;
 
@@ -30,7 +33,7 @@ public class BaseTest {
     @BeforeAll
     public static void toggleExecution() {
         // This would normally be toggled via CI tool ENV or similar
-        System.setProperty("SELENIUM_PLATFORM", "LOCAL");
+        System.setProperty("SELENIUM_PLATFORM", "SAUCE");
     }
 
     @BeforeEach
@@ -52,6 +55,9 @@ public class BaseTest {
     private RemoteWebDriver runSauce(TestInfo testinfo) {
         SauceOptions options = SauceOptions.chrome(getChromeOption())
                 .setName(testinfo.getDisplayName())
+                .setIdleTimeout(Duration.ofSeconds(30))
+                .setUnhandledPromptBehavior(UnhandledPromptBehavior.IGNORE)
+                .setScreenResolution("1280x1024")
                 .build();
         session = new SauceSession(options);
         return session.start();
