@@ -2,29 +2,26 @@ package com.saucelabs.advancedselenium.saucedemo.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.remote.RemoteWebDriver;
+import com.saucelabs.advancedselenium.saucedemo.Browser;
 import com.saucelabs.advancedselenium.saucedemo.elements.Element;
 
-import java.util.function.Function;
-
 public class ProductPage extends BasePage {
-    private final Element addToCartButton = new Element(driver, By.cssSelector("button[data-test^='add-to-cart-']"));
-    private final Element removeFromCartButton = new Element(driver, By.cssSelector("button[data-test^='remove']"));
+    private final Element addToCartButton = browser.getElement(By.cssSelector("button[data-test^='add-to-cart-']"));
+    private final Element removeFromCartButton = browser.getElement(By.cssSelector("button[data-test^='remove']"));
 
-    public ProductPage(RemoteWebDriver driver) {
-        super(driver);
+    public ProductPage(Browser browser) {
+        super(browser);
     }
 
     public void addItemToCartSuccessfully() {
-        HeaderSection headerSection = new HeaderSection(driver);
+        HeaderSection headerSection = new HeaderSection(browser);
         Integer before = headerSection.getNumberItemsInCart();
         Integer expected = before + 1;
 
         addToCartButton.click();
 
         try {
-            wait.until((Function<WebDriver, Object>) driver -> expected.equals(headerSection.getNumberItemsInCart()));
+            browser.waitUntil(() -> expected.equals(headerSection.getNumberItemsInCart()));
         } catch (TimeoutException ex) {
             String what = "Adding item unsuccessful; ";
             String after = headerSection.getNumberItemsInCart().toString();
@@ -33,14 +30,14 @@ public class ProductPage extends BasePage {
     }
 
     public void removeItemFromCartSuccessfully() {
-        HeaderSection headerSection = new HeaderSection(driver);
+        HeaderSection headerSection = new HeaderSection(browser);
         Integer before = headerSection.getNumberItemsInCart();
         Integer expected = before - 1;
 
         removeFromCartButton.click();
 
         try {
-            wait.until((Function<WebDriver, Object>) driver -> expected.equals(headerSection.getNumberItemsInCart()));
+            browser.waitUntil(() -> expected.equals(headerSection.getNumberItemsInCart()));
         } catch (TimeoutException ex) {
             String what = "Removing item unsuccessful; ";
             String after = headerSection.getNumberItemsInCart().toString();

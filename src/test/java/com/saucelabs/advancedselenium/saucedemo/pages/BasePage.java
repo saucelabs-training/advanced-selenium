@@ -1,16 +1,12 @@
 package com.saucelabs.advancedselenium.saucedemo.pages;
 
-import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
+import com.saucelabs.advancedselenium.saucedemo.Browser;
 
 public abstract class BasePage {
-    protected RemoteWebDriver driver;
-    protected WebDriverWait wait;
+    protected Browser browser;
 
-    public BasePage(RemoteWebDriver driver) {
-        this.driver = driver;
-        wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+    public BasePage(Browser browser) {
+        this.browser = browser;
     }
 }

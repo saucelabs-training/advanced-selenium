@@ -9,7 +9,7 @@ import com.saucelabs.advancedselenium.saucedemo.pages.HomePage;
 public class AuthenticationTest extends BaseTest {
     @Test
     public void signInUnsuccessful() {
-        HomePage homePage = HomePage.visit(driver);
+        HomePage homePage = HomePage.visit(browser);
         User lockedOutUser = User.lockedOut();
 
         Assertions.assertDoesNotThrow(() ->
@@ -19,7 +19,7 @@ public class AuthenticationTest extends BaseTest {
 
     @Test
     public void signInSuccessful() {
-        HomePage homePage = HomePage.visit(driver);
+        HomePage homePage = HomePage.visit(browser);
         User validUser = User.valid();
 
         Assertions.assertDoesNotThrow(() ->
@@ -29,11 +29,11 @@ public class AuthenticationTest extends BaseTest {
 
     @Test
     public void logout() {
-        HomePage homePage = HomePage.visit(driver);
+        HomePage homePage = HomePage.visit(browser);
 
         homePage.loginSuccessfully();
 
-        HeaderSection headerSection = new HeaderSection(driver);
+        HeaderSection headerSection = new HeaderSection(browser);
         Assertions.assertDoesNotThrow(headerSection::logOutSuccessfully);
     }
 }

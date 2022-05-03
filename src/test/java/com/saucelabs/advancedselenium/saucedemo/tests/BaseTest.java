@@ -8,11 +8,13 @@ import org.junit.jupiter.api.extension.TestWatcher;
 import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import test.java.com.saucelabs.advancedselenium.saucedemo.Browser;
 
 import java.util.Optional;
 
 public class BaseTest {
-    ChromeDriver driver = null;
+    protected Browser browser;
 
     @RegisterExtension
     public MyTestWatcher myTestWatcher = new MyTestWatcher();
@@ -22,7 +24,8 @@ public class BaseTest {
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
         options.setPageLoadStrategy(PageLoadStrategy.NONE);
-        driver = new ChromeDriver(options);
+        RemoteWebDriver driver = new ChromeDriver(options);
+        browser = new Browser(driver);
     }
 
     public class MyTestWatcher implements TestWatcher {
@@ -32,7 +35,7 @@ public class BaseTest {
                 System.out.println("Test Failed!");
             } catch (Exception ignored) {
             } finally {
-                driver.quit();
+                browser.quit();
             }
         }
 
@@ -42,7 +45,7 @@ public class BaseTest {
                 System.out.println("Test Passed!");
             } catch (Exception ignored) {
             } finally {
-                driver.quit();
+                browser.quit();
             }
         }
 
