@@ -1,6 +1,5 @@
 package com.saucelabs.advancedselenium.saucedemo.pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import com.saucelabs.advancedselenium.saucedemo.Browser;
 import com.saucelabs.advancedselenium.saucedemo.data.Person;
@@ -10,10 +9,10 @@ import com.saucelabs.advancedselenium.saucedemo.elements.TextField;
 
 public class InformationPage extends BasePage {
     public static final String URL = "https://www.saucedemo.com/checkout-step-one.html";
-    private final TextField firstNameElement = browser.getTextField("firstName");
-    private final TextField lastNameElement = browser.getTextField("lastName");
-    private final TextField postalCodeElement = browser.getTextField("postalCode");
-    private final Button continueButton = browser.getButton("continue");
+    private final TextField firstName = browser.getTextField("firstName");
+    private final TextField lastName = browser.getTextField("lastName");
+    private final TextField postalCode = browser.getTextField("postalCode");
+    private final Button submit = browser.getButton("continue");
     private final ElementList errorElements = browser.getElements("error");
 
     public InformationPage(Browser browser) {
@@ -25,10 +24,7 @@ public class InformationPage extends BasePage {
     }
 
     public void addInformationSuccessfully(Person person) {
-        firstNameElement.sendKeys(person.getFirstName());
-        lastNameElement.sendKeys(person.getLastName());
-        postalCodeElement.sendKeys(person.getPostalCode());
-        continueButton.click();
+        submitForm(person);
 
         try {
             browser.waitUntil(() -> !URL.equals(browser.getCurrentUrl()));

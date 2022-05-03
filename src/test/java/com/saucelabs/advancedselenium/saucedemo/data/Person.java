@@ -1,10 +1,6 @@
 package com.saucelabs.advancedselenium.saucedemo.data;
 
-
-import net.datafaker.Faker;
-
-public class Person {
-    private final Faker faker = new Faker();
+public class Person extends BaseData {
     private String firstName = faker.name().firstName();
     private String lastName = faker.name().lastName();
     private String postalCode = faker.address().zipCode();
