@@ -1,6 +1,7 @@
 package com.saucelabs.advancedselenium.saucedemo;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -77,5 +78,13 @@ public class Browser {
                 throw new RuntimeException(e);
             }
         });
+    }
+
+    public void addCookie(String name, String value) {
+        driver.manage().addCookie(new Cookie(name, value));
+    }
+
+    public Cookie getCookie(String name) {
+        return driver.manage().getCookieNamed(name);
     }
 }

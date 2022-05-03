@@ -16,8 +16,9 @@ public class InventoryPage extends BasePage {
         super(app);
     }
 
-    public void visit() {
+    public InventoryPage visit() {
         browser.get(URL);
+        return this;
     }
 
     public void viewBoltTShirtProduct() {

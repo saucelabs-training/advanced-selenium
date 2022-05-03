@@ -38,9 +38,8 @@ public class CartTest extends BaseTest {
 
     @Test
     public void removeFromInventoryPage() {
-        sauceDemoApp.loginSuccessfully();
-        InventoryPage inventoryPage = sauceDemoApp.pages().getInventoryPage();
-        inventoryPage.addItemSuccessfully();
+        sauceDemoApp.addItemToCart();
+        InventoryPage inventoryPage = sauceDemoApp.pages().getInventoryPage().visit();
 
         Assertions.assertDoesNotThrow(inventoryPage::removeItemSuccessfully);
     }

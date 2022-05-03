@@ -1,7 +1,7 @@
 package com.saucelabs.advancedselenium.saucedemo;
 
-import com.saucelabs.advancedselenium.saucedemo.pages.HeaderSection;
-import com.saucelabs.advancedselenium.saucedemo.pages.InventoryPage;
+import com.saucelabs.advancedselenium.saucedemo.apis.SauceDemoAPIFactory;
+import com.saucelabs.advancedselenium.saucedemo.pages.HomePage;
 import com.saucelabs.advancedselenium.saucedemo.pages.SauceDemoPageFactory;
 
 public class SauceDemoApp {
@@ -19,22 +19,27 @@ public class SauceDemoApp {
         return new SauceDemoPageFactory(this);
     }
 
+    public SauceDemoAPIFactory apis() {
+        return new SauceDemoAPIFactory(browser);
+    }
+
     public void loginSuccessfully() {
-        pages().getHomePage().visit().loginSuccessfully();
+        pages().getHomePage().visit();
+        browser.waitUntil(() -> HomePage.URL.equals(browser.getCurrentUrl()));
+        apis().getAuthenticateAPI().authenticate();
+        pages().getInventoryPage().visit();
     }
 
     public void addItemToCart() {
         loginSuccessfully();
-        pages().getInventoryPage().addItemSuccessfully();
+        apis().getInventoryAPI().addItemSuccessfully();
     }
 
     public Integer getNumberItemsInCart() {
-        HeaderSection headerSection = new HeaderSection(this);
-        return headerSection.getNumberItemsInCart();
+        return apis().getCartAPI().getItemCount();
     }
 
     public Boolean isAuthenticated() {
-        new InventoryPage(this).visit();
-        return InventoryPage.URL.equals(browser.getCurrentUrl());
+        return apis().getAuthenticateAPI().isAuthenticated();
     }
 }
