@@ -5,6 +5,7 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import com.saucelabs.advancedselenium.saucedemo.elements.Element;
 
 import java.util.List;
 import java.util.Random;
@@ -22,11 +23,11 @@ public class InventoryPage extends BasePage {
     }
 
     public void viewBoltTShirtProduct() {
-        click(item1Link);
+        new Element(driver, item1Link).click();
     }
 
     public void goToCart() {
-        click(shoppingCartLink);
+        new Element(driver, shoppingCartLink).click();
     }
 
     public void addItemSuccessfully() {

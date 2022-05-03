@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import com.saucelabs.advancedselenium.saucedemo.elements.Element;
 
 import java.util.function.Function;
 
@@ -16,7 +17,7 @@ public class CheckoutPage extends BasePage {
     }
 
     public void finishSuccessfully() {
-        click(finishButton);
+        new Element(driver, finishButton).click();
         try {
             wait.until((Function<WebDriver, Object>) driver -> !URL.equals(driver.getCurrentUrl()));
         } catch (TimeoutException ex) {

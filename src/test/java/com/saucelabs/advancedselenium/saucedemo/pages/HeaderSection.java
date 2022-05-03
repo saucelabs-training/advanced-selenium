@@ -5,6 +5,7 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import com.saucelabs.advancedselenium.saucedemo.elements.Element;
 
 import java.util.List;
 import java.util.function.Function;
@@ -42,7 +43,7 @@ public class HeaderSection extends BasePage {
     }
 
     private void logOut() {
-        click(menuButton);
-        click(logoutLink);
+        new Element(driver, menuButton).click();
+        new Element(driver, logoutLink).click();
     }
 }

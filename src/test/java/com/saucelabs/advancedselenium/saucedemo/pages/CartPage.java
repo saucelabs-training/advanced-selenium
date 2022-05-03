@@ -5,6 +5,7 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import com.saucelabs.advancedselenium.saucedemo.elements.Element;
 
 import java.util.List;
 import java.util.Random;
@@ -19,7 +20,7 @@ public class CartPage extends BasePage {
     }
 
     public void checkout() {
-        click(checkoutButton);
+        new Element(driver, checkoutButton).click();
     }
 
     public void removeItemSuccessfully() {

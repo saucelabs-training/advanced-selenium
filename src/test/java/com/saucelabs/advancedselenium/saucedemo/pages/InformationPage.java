@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import com.saucelabs.advancedselenium.saucedemo.data.Person;
+import com.saucelabs.advancedselenium.saucedemo.elements.Element;
 
 import java.util.List;
 import java.util.function.Function;
@@ -27,10 +28,10 @@ public class InformationPage extends BasePage {
     }
 
     public void addInformationSuccessfully(Person person) {
-        sendKeys(firstNameElement, person.getFirstName());
-        sendKeys(lastNameElement, person.getLastName());
-        sendKeys(postalCodeElement, person.getPostalCode());
-        click(continueButton);
+        new Element(driver, firstNameElement).sendKeys(person.getFirstName());
+        new Element(driver, lastNameElement).sendKeys(person.getLastName());
+        new Element(driver, postalCodeElement).sendKeys(person.getPostalCode());
+        new Element(driver, continueButton).click();
 
         try {
             wait.until((Function<WebDriver, Object>) driver -> !URL.equals(driver.getCurrentUrl()));

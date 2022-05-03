@@ -2,6 +2,7 @@ package com.saucelabs.advancedselenium.saucedemo.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import com.saucelabs.advancedselenium.saucedemo.elements.Element;
 
 public class FinishPage extends BasePage {
     public static final String URL = "https://www.saucedemo.com/checkout-complete.html";
@@ -12,6 +13,6 @@ public class FinishPage extends BasePage {
     }
 
     public boolean isComplete() {
-        return driver.findElement(completeText).isDisplayed();
+        return new Element(driver, completeText).isDisplayed();
     }
 }

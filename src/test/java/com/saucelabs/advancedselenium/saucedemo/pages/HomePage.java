@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import com.saucelabs.advancedselenium.saucedemo.data.User;
+import com.saucelabs.advancedselenium.saucedemo.elements.Element;
 
 import java.util.List;
 import java.util.function.Function;
@@ -55,8 +56,8 @@ public class HomePage extends BasePage {
     }
 
     private void login(User user) {
-        sendKeys(usernameTextfield, user.getUsername());
-        sendKeys(passwordTextfield, user.getPassword());
-        click(loginButton);
+        new Element(driver, usernameTextfield).sendKeys(user.getUsername());
+        new Element(driver, passwordTextfield).sendKeys(user.getPassword());
+        new Element(driver, loginButton).click();
     }
 }
