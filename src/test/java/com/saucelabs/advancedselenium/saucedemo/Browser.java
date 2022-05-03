@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.saucelabs.advancedselenium.saucedemo.elements.Button;
 import com.saucelabs.advancedselenium.saucedemo.elements.Element;
 import com.saucelabs.advancedselenium.saucedemo.elements.ElementList;
+import com.saucelabs.advancedselenium.saucedemo.elements.TextField;
 
 import java.time.Duration;
 import java.util.concurrent.Callable;
@@ -26,6 +27,10 @@ public class Browser {
 
     public Button getButton(By locator) {
         return new Button(this, locator);
+    }
+
+    public TextField getTextField(By locator) {
+        return new TextField(this, locator);
     }
 
     public Element getElement(By locator) {
