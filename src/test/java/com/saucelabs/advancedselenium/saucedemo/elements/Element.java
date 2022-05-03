@@ -25,10 +25,6 @@ public class Element {
         return cachedElement.isDisplayed();
     }
 
-    public void sendKeys(String value) {
-        run(() -> cachedElement.sendKeys(value), "Unable to send keys to element at: " + locator);
-    }
-
     public void click() {
         run(() -> cachedElement.click(), "Unable to click element at: " + locator);
     }
@@ -48,7 +44,7 @@ public class Element {
         }
     }
 
-    private void run(Runnable block, String message) {
+    protected void run(Runnable block, String message) {
         long startTime = System.currentTimeMillis();
         while (true) {
             try {

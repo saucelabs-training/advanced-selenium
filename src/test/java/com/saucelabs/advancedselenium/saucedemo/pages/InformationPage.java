@@ -5,14 +5,14 @@ import org.openqa.selenium.TimeoutException;
 import com.saucelabs.advancedselenium.saucedemo.Browser;
 import com.saucelabs.advancedselenium.saucedemo.data.Person;
 import com.saucelabs.advancedselenium.saucedemo.elements.Button;
-import com.saucelabs.advancedselenium.saucedemo.elements.Element;
 import com.saucelabs.advancedselenium.saucedemo.elements.ElementList;
+import com.saucelabs.advancedselenium.saucedemo.elements.TextField;
 
 public class InformationPage extends BasePage {
     public static final String URL = "https://www.saucedemo.com/checkout-step-one.html";
-    private final Element firstNameElement = browser.getElement(By.cssSelector("input[data-test='firstName']"));
-    private final Element lastNameElement = browser.getElement(By.cssSelector("input[data-test='lastName']"));
-    private final Element postalCodeElement = browser.getElement(By.cssSelector("input[data-test='postalCode']"));
+    private final TextField firstNameElement = browser.getTextField(By.cssSelector("input[data-test='firstName']"));
+    private final TextField lastNameElement = browser.getTextField(By.cssSelector("input[data-test='lastName']"));
+    private final TextField postalCodeElement = browser.getTextField(By.cssSelector("input[data-test='postalCode']"));
     private final Button continueButton = browser.getButton(By.cssSelector("input[data-test='continue']"));
     private final ElementList errorElements = browser.getElements(By.cssSelector("[data-test=error]"));
 

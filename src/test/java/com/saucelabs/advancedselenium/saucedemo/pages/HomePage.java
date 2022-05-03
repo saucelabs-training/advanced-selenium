@@ -5,13 +5,13 @@ import org.openqa.selenium.TimeoutException;
 import com.saucelabs.advancedselenium.saucedemo.Browser;
 import com.saucelabs.advancedselenium.saucedemo.data.User;
 import com.saucelabs.advancedselenium.saucedemo.elements.Button;
-import com.saucelabs.advancedselenium.saucedemo.elements.Element;
 import com.saucelabs.advancedselenium.saucedemo.elements.ElementList;
+import com.saucelabs.advancedselenium.saucedemo.elements.TextField;
 
 public class HomePage extends BasePage {
     public static final String URL = "https://www.saucedemo.com/";
-    private final Element usernameTextfield = browser.getElement(By.cssSelector("input[data-test='username']"));
-    private final Element passwordTextfield = browser.getElement(By.cssSelector("input[data-test='password']"));
+    private final TextField usernameTextField = browser.getTextField(By.cssSelector("input[data-test='username']"));
+    private final TextField passwordTextField = browser.getTextField(By.cssSelector("input[data-test='password']"));
     private final Button loginButton = browser.getButton(By.cssSelector("input[data-test='login-button']"));
     private final ElementList errorElements = browser.getElements(By.cssSelector("[data-test=error]"));
 
@@ -52,8 +52,8 @@ public class HomePage extends BasePage {
     }
 
     private void login(User user) {
-        usernameTextfield.sendKeys(user.getUsername());
-        passwordTextfield.sendKeys(user.getPassword());
+        usernameTextField.sendKeys(user.getUsername());
+        passwordTextField.sendKeys(user.getPassword());
         loginButton.click();
     }
 }
