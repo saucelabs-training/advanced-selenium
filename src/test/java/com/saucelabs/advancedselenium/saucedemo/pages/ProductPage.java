@@ -3,11 +3,11 @@ package com.saucelabs.advancedselenium.saucedemo.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import com.saucelabs.advancedselenium.saucedemo.Browser;
-import com.saucelabs.advancedselenium.saucedemo.elements.Element;
+import com.saucelabs.advancedselenium.saucedemo.elements.Button;
 
 public class ProductPage extends BasePage {
-    private final Element addToCartButton = browser.getElement(By.cssSelector("button[data-test^='add-to-cart-']"));
-    private final Element removeFromCartButton = browser.getElement(By.cssSelector("button[data-test^='remove']"));
+    private final Button addToCartButton = browser.getButton(By.cssSelector("button[data-test^='add-to-cart-']"));
+    private final Button removeFromCartButton = browser.getButton(By.cssSelector("button[data-test^='remove']"));
 
     public ProductPage(Browser browser) {
         super(browser);

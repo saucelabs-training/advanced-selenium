@@ -9,7 +9,7 @@ import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import test.java.com.saucelabs.advancedselenium.saucedemo.Browser;
+import com.saucelabs.advancedselenium.saucedemo.Browser;
 
 import java.util.Optional;
 

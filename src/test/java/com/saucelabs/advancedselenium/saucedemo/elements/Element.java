@@ -4,23 +4,20 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import com.saucelabs.advancedselenium.saucedemo.Browser;
 import com.saucelabs.advancedselenium.saucedemo.pages.ElementValidationException;
 
 import java.time.Duration;
-import java.util.function.Function;
 
 public class Element {
-    private final By locator;
-    private final WebDriverWait wait;
-    private WebElement cachedElement;
+    protected final By locator;
+    protected final Browser browser;
+    protected WebElement cachedElement;
 
-    public Element(RemoteWebDriver driver, By locator) {
+    public Element(Browser browser, By locator) {
+        this.browser = browser;
         this.locator = locator;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(20));
     }
 
     public boolean isDisplayed() {
@@ -29,20 +26,25 @@ public class Element {
     }
 
     public void sendKeys(String value) {
-        run(() -> cachedElement.sendKeys(value), "send keys to element at: " + locator);
+        run(() -> cachedElement.sendKeys(value), "Unable to send keys to element at: " + locator);
     }
 
     public void click() {
-        run(() -> cachedElement.click(), "click element at: " + locator);
+        run(() -> cachedElement.click(), "Unable to click element at: " + locator);
     }
 
     public void reset() {
         this.cachedElement = null;
     }
 
+    public void waitForEnabled() {
+        String message = "Element at " + locator + " never became enabled";
+        run(() -> browser.waitUntil(() -> cachedElement.isEnabled()), message);
+    }
+
     private void locate() {
         if (this.cachedElement == null) {
-            this.cachedElement = (WebElement) wait.until((Function<WebDriver, Object>) d -> d.findElement(locator));
+            this.cachedElement = (WebElement) browser.waitUntil(() -> browser.getDriver().findElement(locator));
         }
     }
 
@@ -59,7 +61,7 @@ public class Element {
                 Duration duration = Duration.ofMillis(currentTime - startTime);
 
                 if (duration.compareTo(Duration.ofSeconds(20)) > 0) {
-                    throw new ElementValidationException("Unable to " + message + " after " + duration + " seconds", e);
+                    throw new ElementValidationException(message + " after " + duration + " seconds", e);
                 }
             }
         }

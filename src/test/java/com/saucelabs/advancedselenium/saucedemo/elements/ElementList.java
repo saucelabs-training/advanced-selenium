@@ -1,26 +1,20 @@
 package com.saucelabs.advancedselenium.saucedemo.elements;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import com.saucelabs.advancedselenium.saucedemo.Browser;
 
-import java.time.Duration;
 import java.util.List;
 import java.util.Random;
-import java.util.function.Function;
 
 public class ElementList {
     private final By locator;
-    private final RemoteWebDriver driver;
+    private final Browser browser;
     private List<WebElement> cachedElements;
-    private final WebDriverWait wait;
 
-    public ElementList(RemoteWebDriver driver, By locator) {
+    public ElementList(Browser browser, By locator) {
         this.locator = locator;
-        this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        this.browser = browser;
     }
 
     public void reset() {
@@ -47,7 +41,7 @@ public class ElementList {
     }
 
     public void waitUntilPresent() {
-        wait.until((Function<WebDriver, Object>) d -> {
+        browser.waitUntil(() -> {
             reset();
             return !isEmpty();
         });
@@ -55,7 +49,7 @@ public class ElementList {
 
     private void locateAll() {
         if (this.cachedElements == null) {
-            this.cachedElements = driver.findElements(locator);
+            this.cachedElements = browser.getDriver().findElements(locator);
         }
     }
 }

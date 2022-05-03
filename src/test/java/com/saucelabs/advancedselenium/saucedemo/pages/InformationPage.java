@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import com.saucelabs.advancedselenium.saucedemo.Browser;
 import com.saucelabs.advancedselenium.saucedemo.data.Person;
+import com.saucelabs.advancedselenium.saucedemo.elements.Button;
 import com.saucelabs.advancedselenium.saucedemo.elements.Element;
 import com.saucelabs.advancedselenium.saucedemo.elements.ElementList;
 
@@ -12,7 +13,7 @@ public class InformationPage extends BasePage {
     private final Element firstNameElement = browser.getElement(By.cssSelector("input[data-test='firstName']"));
     private final Element lastNameElement = browser.getElement(By.cssSelector("input[data-test='lastName']"));
     private final Element postalCodeElement = browser.getElement(By.cssSelector("input[data-test='postalCode']"));
-    private final Element continueButton = browser.getElement(By.cssSelector("input[data-test='continue']"));
+    private final Button continueButton = browser.getButton(By.cssSelector("input[data-test='continue']"));
     private final ElementList errorElements = browser.getElements(By.cssSelector("[data-test=error]"));
 
     public InformationPage(Browser browser) {

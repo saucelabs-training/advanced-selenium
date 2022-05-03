@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import com.saucelabs.advancedselenium.saucedemo.elements.Button;
 import com.saucelabs.advancedselenium.saucedemo.elements.Element;
 import com.saucelabs.advancedselenium.saucedemo.elements.ElementList;
 
@@ -19,12 +20,20 @@ public class Browser {
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(20));
     }
 
+    public RemoteWebDriver getDriver() {
+        return this.driver;
+    }
+
+    public Button getButton(By locator) {
+        return new Button(this, locator);
+    }
+
     public Element getElement(By locator) {
-        return new Element(driver, locator);
+        return new Element(this, locator);
     }
 
     public ElementList getElements(By locator) {
-        return new ElementList(driver, locator);
+        return new ElementList(this, locator);
     }
 
     public void quit() {
