@@ -14,10 +14,9 @@ public class HomePage extends BasePage {
     private final Button submit = browser.getButton("login-button");
     private final ElementList errorElements = browser.getElements("error");
 
-    public static HomePage visit(Browser browser) {
-        HomePage homePage = new HomePage(browser);
+    public HomePage visit() {
         browser.get(URL);
-        return homePage;
+        return this;
     }
 
     public HomePage(Browser browser) {

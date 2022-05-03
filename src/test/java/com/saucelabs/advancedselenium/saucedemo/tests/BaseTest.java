@@ -10,11 +10,13 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import com.saucelabs.advancedselenium.saucedemo.Browser;
+import com.saucelabs.advancedselenium.saucedemo.SauceDemoApp;
 
 import java.util.Optional;
 
 public class BaseTest {
     protected Browser browser;
+    protected SauceDemoApp sauceDemoApp;
 
     @RegisterExtension
     public MyTestWatcher myTestWatcher = new MyTestWatcher();
@@ -26,6 +28,7 @@ public class BaseTest {
         options.setPageLoadStrategy(PageLoadStrategy.NONE);
         RemoteWebDriver driver = new ChromeDriver(options);
         browser = new Browser(driver);
+        sauceDemoApp = new SauceDemoApp(browser);
     }
 
     public class MyTestWatcher implements TestWatcher {

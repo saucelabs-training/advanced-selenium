@@ -9,7 +9,6 @@ import com.saucelabs.advancedselenium.saucedemo.elements.ElementList;
 public class InventoryPage extends BasePage {
     public static final String URL = "https://www.saucedemo.com/inventory.html";
     private final Element item1Link = browser.getElement(By.id("item_1_title_link"));
-    private final Element shoppingCartLink = browser.getElement(By.className("shopping_cart_link"));
     private final ElementList addItemButtons = browser.getElements(By.cssSelector("button[data-test^='add-to-cart-']"));
     private final ElementList removeItemButtons = browser.getElements(By.cssSelector("button[data-test^='remove-']"));
 
@@ -19,10 +18,6 @@ public class InventoryPage extends BasePage {
 
     public void viewBoltTShirtProduct() {
         item1Link.click();
-    }
-
-    public void goToCart() {
-        shoppingCartLink.click();
     }
 
     public void addItemSuccessfully() {

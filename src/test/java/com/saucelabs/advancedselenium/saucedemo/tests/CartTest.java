@@ -3,34 +3,26 @@ package com.saucelabs.advancedselenium.saucedemo.tests;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import com.saucelabs.advancedselenium.saucedemo.pages.CartPage;
-import com.saucelabs.advancedselenium.saucedemo.pages.HomePage;
 import com.saucelabs.advancedselenium.saucedemo.pages.InventoryPage;
 import com.saucelabs.advancedselenium.saucedemo.pages.ProductPage;
 
 public class CartTest extends BaseTest {
-    public void login() {
-        HomePage homePage = HomePage.visit(browser);
-        homePage.loginSuccessfully();
-    }
-
     @Test
     public void addFromProductPage() {
-        login();
-        InventoryPage inventoryPage = new InventoryPage(browser);
+        sauceDemoApp.loginSuccessfully();
+        InventoryPage inventoryPage = sauceDemoApp.pages().getInventoryPage();
         inventoryPage.viewBoltTShirtProduct();
 
-        ProductPage productPage = new ProductPage(browser);
-
+        ProductPage productPage = sauceDemoApp.pages().getProductPage();
         Assertions.assertDoesNotThrow(productPage::addItemToCartSuccessfully);
     }
 
     @Test
     public void removeFromProductPage() {
-        login();
-        InventoryPage inventoryPage = new InventoryPage(browser);
+        sauceDemoApp.loginSuccessfully();
+        InventoryPage inventoryPage = sauceDemoApp.pages().getInventoryPage();
         inventoryPage.viewBoltTShirtProduct();
-
-        ProductPage productPage = new ProductPage(browser);
+        ProductPage productPage = sauceDemoApp.pages().getProductPage();
         productPage.addItemToCartSuccessfully();
 
         Assertions.assertDoesNotThrow(productPage::removeItemFromCartSuccessfully);
@@ -38,16 +30,16 @@ public class CartTest extends BaseTest {
 
     @Test
     public void addFromInventoryPage() {
-        login();
-        InventoryPage inventoryPage = new InventoryPage(browser);
+        sauceDemoApp.loginSuccessfully();
 
+        InventoryPage inventoryPage = sauceDemoApp.pages().getInventoryPage();
         Assertions.assertDoesNotThrow(inventoryPage::addItemSuccessfully);
     }
 
     @Test
     public void removeFromInventoryPage() {
-        login();
-        InventoryPage inventoryPage = new InventoryPage(browser);
+        sauceDemoApp.loginSuccessfully();
+        InventoryPage inventoryPage = sauceDemoApp.pages().getInventoryPage();
         inventoryPage.addItemSuccessfully();
 
         Assertions.assertDoesNotThrow(inventoryPage::removeItemSuccessfully);
@@ -55,12 +47,9 @@ public class CartTest extends BaseTest {
 
     @Test
     public void removeFromCartPage() {
-        login();
-        InventoryPage inventoryPage = new InventoryPage(browser);
-        inventoryPage.addItemSuccessfully();
-        inventoryPage.goToCart();
+        sauceDemoApp.addItemToCart();
+        CartPage cartPage = sauceDemoApp.pages().getCartPage().visit();
 
-        CartPage cartPage = new CartPage(browser);
         Assertions.assertDoesNotThrow(cartPage::removeItemSuccessfully);
     }
 }

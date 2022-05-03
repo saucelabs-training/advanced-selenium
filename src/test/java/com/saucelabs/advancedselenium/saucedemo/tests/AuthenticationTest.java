@@ -9,31 +9,27 @@ import com.saucelabs.advancedselenium.saucedemo.pages.HomePage;
 public class AuthenticationTest extends BaseTest {
     @Test
     public void signInUnsuccessful() {
-        HomePage homePage = HomePage.visit(browser);
-        User lockedOutUser = User.lockedOut();
+        HomePage homePage = sauceDemoApp.pages().getHomePage().visit();
 
         Assertions.assertDoesNotThrow(() ->
-                homePage.loginUnsuccessfully(lockedOutUser)
+                homePage.loginUnsuccessfully(User.lockedOut())
         );
     }
 
     @Test
     public void signInSuccessful() {
-        HomePage homePage = HomePage.visit(browser);
-        User validUser = User.valid();
+        HomePage homePage = sauceDemoApp.pages().getHomePage().visit();
 
         Assertions.assertDoesNotThrow(() ->
-                homePage.loginSuccessfully(validUser)
+                homePage.loginSuccessfully(User.valid())
         );
     }
 
     @Test
     public void logout() {
-        HomePage homePage = HomePage.visit(browser);
+        sauceDemoApp.loginSuccessfully();
 
-        homePage.loginSuccessfully();
-
-        HeaderSection headerSection = new HeaderSection(browser);
+        HeaderSection headerSection = sauceDemoApp.pages().getHeaderSection();
         Assertions.assertDoesNotThrow(headerSection::logOutSuccessfully);
     }
 }

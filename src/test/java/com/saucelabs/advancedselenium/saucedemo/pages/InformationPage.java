@@ -33,4 +33,9 @@ public class InformationPage extends BasePage {
             throw new PageValidationException("Information not submitted;" + additional);
         }
     }
+
+    public InformationPage visit() {
+        browser.get(URL);
+        return this;
+    }
 }
