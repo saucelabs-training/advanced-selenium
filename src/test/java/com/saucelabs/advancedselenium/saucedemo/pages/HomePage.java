@@ -1,7 +1,7 @@
 package com.saucelabs.advancedselenium.saucedemo.pages;
 
+import com.saucelabs.advancedselenium.saucedemo.SauceDemoApp;
 import org.openqa.selenium.TimeoutException;
-import com.saucelabs.advancedselenium.saucedemo.Browser;
 import com.saucelabs.advancedselenium.saucedemo.data.User;
 import com.saucelabs.advancedselenium.saucedemo.elements.Button;
 import com.saucelabs.advancedselenium.saucedemo.elements.ElementList;
@@ -19,8 +19,8 @@ public class HomePage extends BasePage {
         return this;
     }
 
-    public HomePage(Browser browser) {
-        super(browser);
+    public HomePage(SauceDemoApp app) {
+        super(app);
     }
 
     public void loginUnsuccessfully(User user) {

@@ -1,16 +1,15 @@
 package com.saucelabs.advancedselenium.saucedemo.pages;
 
-import org.openqa.selenium.By;
+import com.saucelabs.advancedselenium.saucedemo.SauceDemoApp;
 import org.openqa.selenium.TimeoutException;
-import com.saucelabs.advancedselenium.saucedemo.Browser;
 import com.saucelabs.advancedselenium.saucedemo.elements.Button;
 
 public class CheckoutPage extends BasePage {
     public static final String URL = "https://www.saucedemo.com/checkout-step-two.html";
     private final Button finishButton = browser.getButton("finish");
 
-    public CheckoutPage(Browser browser) {
-        super(browser);
+    public CheckoutPage(SauceDemoApp app) {
+        super(app);
     }
 
     public void finishSuccessfully() {
@@ -18,7 +17,7 @@ public class CheckoutPage extends BasePage {
         try {
             browser.waitUntil(() -> !URL.equals(browser.getCurrentUrl()));
         } catch (TimeoutException ex) {
-            FinishPage finishPage = new FinishPage(browser);
+            FinishPage finishPage = new FinishPage(app);
             if (!finishPage.isComplete()) {
                 throw new PageValidationException("Checkout unsuccessful;");
             }

@@ -1,7 +1,7 @@
 package com.saucelabs.advancedselenium.saucedemo.pages;
 
+import com.saucelabs.advancedselenium.saucedemo.SauceDemoApp;
 import org.openqa.selenium.TimeoutException;
-import com.saucelabs.advancedselenium.saucedemo.Browser;
 import com.saucelabs.advancedselenium.saucedemo.data.Person;
 import com.saucelabs.advancedselenium.saucedemo.elements.Button;
 import com.saucelabs.advancedselenium.saucedemo.elements.ElementList;
@@ -15,8 +15,8 @@ public class InformationPage extends BasePage {
     private final Button submit = browser.getButton("continue");
     private final ElementList errorElements = browser.getElements("error");
 
-    public InformationPage(Browser browser) {
-        super(browser);
+    public InformationPage(SauceDemoApp app) {
+        super(app);
     }
 
     public void addInformationSuccessfully() {

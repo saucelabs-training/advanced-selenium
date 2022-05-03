@@ -2,6 +2,7 @@ package com.saucelabs.advancedselenium.saucedemo.pages;
 
 
 import com.saucelabs.advancedselenium.saucedemo.Browser;
+import com.saucelabs.advancedselenium.saucedemo.SauceDemoApp;
 import com.saucelabs.advancedselenium.saucedemo.data.BaseData;
 import com.saucelabs.advancedselenium.saucedemo.elements.Element;
 import com.saucelabs.advancedselenium.saucedemo.elements.TextField;
@@ -13,10 +14,12 @@ import java.util.Set;
 
 public abstract class BasePage {
     protected Browser browser;
+    protected SauceDemoApp app;
     private final Set<Field> elements = new HashSet<>();
 
-    public BasePage(Browser browser) {
-        this.browser = browser;
+    public BasePage(SauceDemoApp app) {
+        this.browser = app.getBrowser();
+        this.app = app;
 
         for (Field field : this.getClass().getDeclaredFields()) {
             if (Element.class.isAssignableFrom(field.getType())) {

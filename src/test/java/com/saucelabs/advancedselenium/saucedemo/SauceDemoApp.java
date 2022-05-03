@@ -1,5 +1,7 @@
 package com.saucelabs.advancedselenium.saucedemo;
 
+import com.saucelabs.advancedselenium.saucedemo.pages.HeaderSection;
+import com.saucelabs.advancedselenium.saucedemo.pages.InventoryPage;
 import com.saucelabs.advancedselenium.saucedemo.pages.SauceDemoPageFactory;
 
 public class SauceDemoApp {
@@ -14,7 +16,7 @@ public class SauceDemoApp {
     }
 
     public SauceDemoPageFactory pages() {
-        return new SauceDemoPageFactory(browser);
+        return new SauceDemoPageFactory(this);
     }
 
     public void loginSuccessfully() {
@@ -24,5 +26,15 @@ public class SauceDemoApp {
     public void addItemToCart() {
         loginSuccessfully();
         pages().getInventoryPage().addItemSuccessfully();
+    }
+
+    public Integer getNumberItemsInCart() {
+        HeaderSection headerSection = new HeaderSection(this);
+        return headerSection.getNumberItemsInCart();
+    }
+
+    public Boolean isAuthenticated() {
+        new InventoryPage(this).visit();
+        return InventoryPage.URL.equals(browser.getCurrentUrl());
     }
 }
