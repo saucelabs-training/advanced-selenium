@@ -2,7 +2,6 @@ package com.saucelabs.advancedselenium.saucedemo.tests;
 
 import com.saucelabs.advancedselenium.saucedemo.Browser;
 import com.saucelabs.advancedselenium.saucedemo.SauceDemoApp;
-import com.saucelabs.saucebindings.PageLoadStrategy;
 import com.saucelabs.saucebindings.SauceSession;
 import com.saucelabs.saucebindings.options.SauceOptions;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -12,10 +11,13 @@ import org.junit.jupiter.api.TestInfo;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.junit.jupiter.api.extension.TestWatcher;
+import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
+import java.io.File;
+import java.util.Collections;
 import java.util.Optional;
 
 public class BaseTest {
@@ -28,7 +30,7 @@ public class BaseTest {
     @BeforeAll
     public static void toggleExecution() {
         // This would normally be toggled via CI tool ENV or similar
-        System.setProperty("SELENIUM_PLATFORM", "SAUCE");
+        System.setProperty("SELENIUM_PLATFORM", "LOCAL");
     }
 
     @BeforeEach
@@ -44,18 +46,35 @@ public class BaseTest {
 
     private RemoteWebDriver runLocal() {
         WebDriverManager.chromedriver().setup();
-        ChromeOptions options = new ChromeOptions();
-        options.setPageLoadStrategy(org.openqa.selenium.PageLoadStrategy.NONE);
-        return new ChromeDriver(options);
+        return new ChromeDriver(getChromeOption());
     }
 
     private RemoteWebDriver runSauce(TestInfo testinfo) {
-        SauceOptions options = SauceOptions.chrome()
+        SauceOptions options = SauceOptions.chrome(getChromeOption())
                 .setName(testinfo.getDisplayName())
-                .setPageLoadStrategy(PageLoadStrategy.NONE)
                 .build();
         session = new SauceSession(options);
         return session.start();
+    }
+
+    private ChromeOptions getChromeOption() {
+        ChromeOptions chromeOptions = new ChromeOptions();
+
+        // Ensure robust handling of race conditions
+        chromeOptions.setPageLoadStrategy(PageLoadStrategy.NONE);
+
+        // Start Full Screen
+        chromeOptions.addArguments("start-fullscreen");
+
+        // Add Extension
+        File ext = new File("src/test/resources/ninja-saucebot.crx");
+        chromeOptions.addExtensions(ext);
+
+        // Restore Popup Blocking
+        chromeOptions.setExperimentalOption("excludeSwitches",
+                Collections.singletonList("disable-popup-blocking"));
+
+        return chromeOptions;
     }
 
     public class MyTestWatcher implements TestWatcher {
