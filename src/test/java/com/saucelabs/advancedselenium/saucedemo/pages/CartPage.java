@@ -3,17 +3,15 @@ package com.saucelabs.advancedselenium.saucedemo.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import com.saucelabs.advancedselenium.saucedemo.elements.Element;
+import com.saucelabs.advancedselenium.saucedemo.elements.ElementList;
 
-import java.util.List;
-import java.util.Random;
 import java.util.function.Function;
 
 public class CartPage extends BasePage {
     private final Element checkoutButton = new Element(driver, By.cssSelector("button[data-test='checkout']"));
-    private final By removeItemButton = By.cssSelector("button[data-test^='remove-']");
+    private final ElementList removeItemButtons = new ElementList(driver, By.cssSelector("button[data-test^='remove-']"));
 
     public CartPage(RemoteWebDriver driver) {
         super(driver);
@@ -23,12 +21,17 @@ public class CartPage extends BasePage {
         checkoutButton.click();
     }
 
+    public CartPage visit() {
+        browser.get(URL);
+        return this;
+    }
+
     public void removeItemSuccessfully() {
         HeaderSection headerSection = new HeaderSection(driver);
         Integer before = headerSection.getNumberItemsInCart();
         Integer expected = before - 1;
 
-        removeItem();
+        removeItemButtons.getRandom().click();
 
         try {
             wait.until((Function<WebDriver, Object>) driver -> expected.equals(headerSection.getNumberItemsInCart()));
@@ -37,10 +40,5 @@ public class CartPage extends BasePage {
             String after = headerSection.getNumberItemsInCart().toString();
             throw new PageValidationException(what + "Expected: " + expected + ", but found: " + after);
         }
-    }
-
-    private void removeItem() {
-        List<WebElement> items = driver.findElements(removeItemButton);
-        items.get(new Random().nextInt(items.size())).click();
     }
 }

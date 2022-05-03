@@ -3,12 +3,11 @@ package com.saucelabs.advancedselenium.saucedemo.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import com.saucelabs.advancedselenium.saucedemo.data.User;
 import com.saucelabs.advancedselenium.saucedemo.elements.Element;
+import com.saucelabs.advancedselenium.saucedemo.elements.ElementList;
 
-import java.util.List;
 import java.util.function.Function;
 
 public class HomePage extends BasePage {
@@ -16,7 +15,7 @@ public class HomePage extends BasePage {
     private final Element usernameTextfield = new Element(driver, By.cssSelector("input[data-test='username']"));
     private final Element passwordTextfield = new Element(driver, By.cssSelector("input[data-test='password']"));
     private final Element loginButton = new Element(driver, By.cssSelector("input[data-test='login-button']"));
-    private final By errorElement = By.cssSelector("[data-test=error]");
+    private final ElementList errorElements = new ElementList(driver, By.cssSelector("[data-test=error]"));
 
     public static HomePage visit(RemoteWebDriver driver) {
         HomePage homePage = new HomePage(driver);
@@ -32,7 +31,7 @@ public class HomePage extends BasePage {
         login(user);
 
         try {
-            wait.until((Function<WebDriver, Object>) driver -> !driver.findElements(errorElement).isEmpty());
+            errorElements.waitUntilPresent();
         } catch (TimeoutException ex) {
             String url = driver.getCurrentUrl();
             throw new PageValidationException("Expected login errors, but none were found; current URL: " + url);
@@ -49,8 +48,7 @@ public class HomePage extends BasePage {
         try {
             wait.until((Function<WebDriver, Object>) driver -> !URL.equals(driver.getCurrentUrl()));
         } catch (TimeoutException ex) {
-            List<WebElement> errors = driver.findElements(errorElement);
-            String additional = errors.isEmpty() ? "" : " found error: " + errors.get(0).getText();
+            String additional = errorElements.isEmpty() ? "" : " found error: " + errorElements.getFirst().getText();
             throw new PageValidationException("User is not logged in;" + additional);
         }
     }
