@@ -1,0 +1,27 @@
+firefox_windows:
+  browserName: 'firefox'
+  acceptInsecureCerts: true
+  pageLoadStrategy: 'eager'
+  unhandledPromptBehavior: 'ignore'
+  timeouts:
+    implicit: 1
+    pageLoad: 59000
+    script: 29000
+  sauce:
+    idleTimeout: 67
+    jobVisibility: 'public'
+    seleniumVersion: '4.0'
+    timeZone: 'Honolulu'
+safari_mojave:
+  browserName: 'safari'
+  platformName: 'macOS 10.13'
+  unhandledPromptBehavior: 'ignore'
+  timeouts:
+    implicit: 1
+    pageLoad: 59000
+    script: 29000
+  sauce:
+    idleTimeout: 67
+    jobVisibility: 'public'
+    seleniumVersion: '4.0'
+    timeZone: 'Honolulu'
